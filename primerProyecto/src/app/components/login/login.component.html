@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <button class="w-50 btn btn-lg btn-primary d-block mx-auto" (click)="login()">Iniciar Sesion</button>
+    <button class="w-50 btn btn-lg btn-primary d-block mx-auto" (click)="loginValidate()" [disabled]="loginForm.invalid">Iniciar Sesion</button>
 
 
   </form>

@@ -1,1 +1,15 @@
-<p>movies works!</p>
+<div class="conteiner">
+  <h1 class="pb-3" style="text-align: center;">Cartelera</h1>
+
+  <div class="movie-container d-flex ">
+    <div *ngFor="let movie of movies" class="card p-1" style="width: 18rem;" >
+      <img [src]="movie.image" class="card-img-top" style="height: 350px;" alt="">
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text" style="height: 150px;">{{ movie.description }}</p>
+        <a class="btn btn-primary">Ver Detalle</a>
+      </div>
+    </div>
+  </div>
+  <hr class="my-5" style= " color:violet; height: 10px;">
+</div>

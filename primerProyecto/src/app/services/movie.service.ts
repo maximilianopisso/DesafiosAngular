@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Movie } from '../models/movie.model';
-import { movieMock } from './movie.mock';
+import { moviesMock } from './movies.mock';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,8 @@ export class MovieService {
 
   constructor() { }
 
-
   getList(): Observable<Movie[]>{
-    return of(movieMock);
+    return of(moviesMock);
   }
 
 }

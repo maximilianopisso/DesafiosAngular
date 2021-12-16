@@ -1,6 +1,9 @@
+
 export interface Movie {
-  titulo: string
-  caterogria: string
-  descripcion:string
-  popularidad: number
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+  actors: string;
+  rating: number;
 }

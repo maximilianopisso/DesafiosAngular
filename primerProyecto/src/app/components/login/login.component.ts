@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
     const valido = this.loginService.validarUser(this.emailControl.value, this.passwordControl.value)
 
     if (valido) {
-      console.log("valido")
+      console.log("Usuario y Contraseña son validos -> Ingresa")
     }
     else {
-      console.log("invalido")
+      console.log("No se le permite el ingreso -> No valido")
     };
   }
 }

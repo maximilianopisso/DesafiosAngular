@@ -1,0 +1,39 @@
+footer {
+  background-color: rgb(14, 2, 65) !important;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-top: 5vh;
+  padding: 2vh 0vw;
+  border-top: 10px wheat solid;
+
+  #logo {
+    width: 50px;
+    height: 50px;
+    margin: 0px 1vw 0px 2vw;
+  }
+
+  .nombre-brand {
+    font-size: 1.2rem;
+    color: aliceblue !important;
+    font-weight: 500;
+  }
+  .text-muted {
+    color: wheat !important;
+  }
+
+  ul {
+    padding-right: 4vw;
+    li {
+      a {
+        color: wheat;
+        text-decoration: none;
+        font-size: 30px;
+        padding-right: 2vw;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+}

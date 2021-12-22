@@ -12,7 +12,7 @@ export class MovieService {
 
   getDetail (id:string): Observable<Movie | undefined>  {
 
-    return of(moviesMock.find(movie => movie.id = id))
+    return of(moviesMock.find(movie => movie.id === id))
 
   }
   getList(): Observable<Movie[]>{

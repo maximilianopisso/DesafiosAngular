@@ -25,10 +25,6 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'info',
-    component: InfoComponent
-  },
-  {
     path: 'carrito',
     component: CartComponent
   },

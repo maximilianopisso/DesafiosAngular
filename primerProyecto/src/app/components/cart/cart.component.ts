@@ -14,9 +14,9 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("CART_COMPONENT - INIT - CHECKED ");
   }
   ngAfterViewInit(): void {
-    console.log("CART_COMPONENT - INIT - CHECKED ");
+    console.log("CART_COMPONENT - AFTER VIEW INIT - CHECKED ");
   }
   ngOnDestroy(): void {
-    console.log("CART_COMPONENT - INIT - CHECKED ");
+    console.log("CART_COMPONENT - DESTROY - CHECKED ");
   }
 }

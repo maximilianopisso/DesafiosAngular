@@ -9,15 +9,12 @@ import { User } from '../models/user.model'
 export class LoginService {
 
   private url:string = "https://61bcb895d8542f00178249b1.mockapi.io/api/";
-  private users:User[] = [];
-
-
+  users:User[] = [];
 
   constructor(private httpClient : HttpClient) {
-    this.httpClient.get<User[]>(`${this.url}persons`).subscribe( persona => this.users = persona);
-    console.log(`CONSTUCCION USERS ${this.users}`);
+    this.httpClient.get<User[]>(`${this.url}persons`).subscribe( user => this.users = user);
+    console.log(`CONSTRUCCION USERS ${this.users}`);
   }
-
 
 
   validarUser(email:string,password:string): boolean {

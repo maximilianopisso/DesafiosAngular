@@ -7,7 +7,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor() { }
+  constructor() {
+    console.log("CART_COMPONENT - CONSTRUCTOR - CHECKED ");
+   }
   ngOnInit(): void {
     console.log("CART_COMPONENT - INIT - CHECKED ");
   }

@@ -11,11 +11,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
-
-  constructor() { }
-  // private userService: UserService | undefined;
-  //   { }
   private users: User[] = [];
+
+  constructor() {
+    console.log("REGISTER_COMPONENT - CONSTRUCTOR - CHECKED ");
+  }
 
 
   ngOnInit(): void {

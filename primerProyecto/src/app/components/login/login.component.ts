@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -9,19 +10,21 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  users: User[] = [];
   constructor(
     private loginService: LoginService,
-  ) { }
+  ) {
+    console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
+  }
 
-
-   ngOnInit(): void {
-   //this.loginService.getUser().subscribe((users: User[]) => this.users = users);
+  ngOnInit(): void {
     console.log("LOGIN_COMPONENT - INIT - CHECKED ");
   }
 
   ngAfterViewInit(): void {
     console.log("LOGIN_COMPONENT - AFTER VIEW INIT - CHECKED ");
   }
+
   ngOnDestroy(): void {
     console.log("LOGIN_COMPONENT - DESTROY - CHECKED ");
   }

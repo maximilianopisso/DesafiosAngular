@@ -15,21 +15,20 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private moviesService: MovieService,
-  ) { }
+  ) {console.log("INFO_COMPONENT - CONSTRUCTOR - CHECKED "); }
 
   ngOnInit(): void {
-    this.moviesService.getDetail(this.activateRoute.snapshot.params['id'])  //obtiene el id desde la ruta cartelera/id
-    .subscribe(movie => this.movie = movie);
-    console.log(this.movie);  //conultar esta linea
-    console.log("LOGIN_COMPONENT - INIT - CHECKED ");
+    this.moviesService.getDetail(this.activateRoute.snapshot.params['id'])  //obtiene el id desde la ruta url a la llamada al componente
+    .subscribe(movie => this.movie = movie); // obtiene el detalle de la pelicula y la carga en el campo movie del componente local.
+    console.log("INFO_COMPONENT - INIT - CHECKED ");
   }
 
    ngAfterViewInit(): void {
-    console.log("LOGIN_COMPONENT - AFTER VIEW INIT - CHECKED ");
+    console.log("INFO_COMPONENT - AFTER VIEW INIT - CHECKED ");
 
   }
    ngOnDestroy(): void {
-    console.log("LOGIN_COMPONENT - DESTROY - CHECKED ");
+    console.log("INFO_COMPONENT - DESTROY - CHECKED ");
   }
 
 }

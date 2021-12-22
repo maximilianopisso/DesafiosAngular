@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -7,13 +7,23 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor(private loginService: LoginService,
+  constructor(
+    private loginService: LoginService,
   ) { }
 
-  ngOnInit(): void {
 
+   ngOnInit(): void {
+   //this.loginService.getUser().subscribe((users: User[]) => this.users = users);
+    console.log("LOGIN_COMPONENT - INIT - CHECKED ");
+  }
+
+  ngAfterViewInit(): void {
+    console.log("LOGIN_COMPONENT - AFTER VIEW INIT - CHECKED ");
+  }
+  ngOnDestroy(): void {
+    console.log("LOGIN_COMPONENT - DESTROY - CHECKED ");
   }
 
   loginForm = new FormGroup({

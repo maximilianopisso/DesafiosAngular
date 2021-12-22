@@ -12,7 +12,7 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
-  private subcripcion: Subscription | undefined;
+  private subcripcionMovie: Subscription | undefined;
   movies: Movie[] = [];
 
 
@@ -25,18 +25,17 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
-      this.subcripcion=this.movieService.getList().subscribe( movies => this.movies = movies);
+      this.subcripcionMovie=this.movieService.getList().subscribe( movies => this.movies = movies);
     }
 
     ngAfterViewInit(): void {
       console.log("MOVIES_COMPONENT - AFTER VIEW INIT - CHECKED ");
-
-      throw new Error('Method not implemented.');
+      const lastElement: any = document.querySelector('.ultima-movie');
+      lastElement?.scrollIntoView();
     }
     ngOnDestroy(): void {
-      this.subcripcion?.unsubscribe();
+      this.subcripcionMovie?.unsubscribe();
       console.log("MOVIES_COMPONENT - DESTROY - CHECKED ");
-      throw new Error('Method not implemented.');
     }
 
     navigatetoDetail(id: string) {

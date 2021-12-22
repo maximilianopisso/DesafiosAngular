@@ -30,6 +30,7 @@
     id: string;
     image: MovieImage;
     runningTimeInMinutes: number;
+    category:string;
     title: string;
     titleType: string;
     year: number;

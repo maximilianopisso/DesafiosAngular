@@ -1,4 +1,4 @@
-<div class="container">
+<div id=#info class="container">
   <h1 class="my-5">Info Section</h1>
 
 
@@ -6,15 +6,19 @@
     <div class="container my-3">
         <div class="row gx-5 align-items-center">
             <div class="col-md-6">
-              <img style="width: 80%;" class="card-img-top mb-5 mb-md-0" src="https://m.media-amazon.com/images/M/MV5BYzk3MTI3NWMtZWFiMi00YmIyLTg2ODQtNjUzZDA0MGYyNWY2XkEyXkFqcGdeQXVyMzk4OTI2MjM@._V1_.jpg" alt="#Imagen" />
+              <img style=" display:block; width: 60%; margin: 0px auto;" class="card-img-top mb-5 mb-md-0" src={{movie.image.url}} alt="#Imagen" />
             </div>
             <div class="col-md-6">
-                <h1 class="display-5 fw-bolder">#Título</h1>
-                <div class="fs-5 mb-5">
-                    <span>Categoria: #Categoria</span>
+                <h1 class="display-5 fw-bolder">{{movie.title}}</h1>
+                <div class="fs-5 mb-3">
+                    <span>Categoria: {{movie.category}}</span>
                 </div>
-                <h3>Descripcion</h3>
-                <p class="">(#Descripcion) Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi</p>
+                <h4>Descripcion</h4>
+                <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi</p>
+                <h4>Duracion</h4>
+                <p class="">{{movie.runningTimeInMinutes}} minutos</p>
+                <h4>Año</h4>
+                <p class="">{{movie.year}}</p>
                 <div class="d-flex">
                     <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
                     <button class="btn btn-outline-dark flex-shrink-0" type="button">
@@ -27,4 +31,4 @@
     </div>
 </section>
 </div>
-<hr class="my-5" style=" color:violet; height: 10px;">
+<!-- <hr class="my-5" style=" color:violet; height: 10px;"> -->

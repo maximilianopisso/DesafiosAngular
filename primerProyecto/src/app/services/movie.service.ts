@@ -10,6 +10,11 @@ export class MovieService {
 
   constructor() { }
 
+  getDetail (id:string): Observable<Movie | undefined>  {
+
+    return of(moviesMock.find(movie => movie.id = id))
+
+  }
   getList(): Observable<Movie[]>{
     return of(moviesMock);
   }

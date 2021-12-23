@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
   <div class="container-fluid ">
-    <a class="navbar-brand d-flex align-items-center" href="#login">
+    <a class="navbar-brand d-flex align-items-center" routerLink = "/">
       <img id="logo"src="/assets/movie.png" alt="Logo institucional de Serieteka" class="d-inline-block align-text-top">
      <span class="nombre-brand">Peliteka</span>
     </a>
@@ -9,9 +9,10 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#login">Inicio</a>
-        <a class="nav-link" href="#login">Login</a>
-        <a class="nav-link" href="#cartelera">Cartelera</a>
+        <a class="nav-link" routerLinkActive = "active" routerLink="/cartelera">Cartelera</a>
+        <a class="nav-link" routerLinkActive = "active" routerLink="/login">Login</a>
+        <a class="nav-link" routerLinkActive = "active" routerLink="/registro">Registrarse</a>
+        <a class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a>
       </div>
     </div>
   </div>

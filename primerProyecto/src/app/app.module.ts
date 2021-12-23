@@ -10,7 +10,9 @@ import { MoviesComponent } from './components/movies/movies.component';
 import { InfoComponent } from './components/info/info.component';
 import { CartComponent } from './components/cart/cart.component';
 import { MenuNavComponent } from './components/menu-nav/menu-nav.component';
-import { FooterComponent } from './components/footer/footer.component'
+import { FooterComponent } from './components/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http'
+
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { FooterComponent } from './components/footer/footer.component'
     CartComponent,
     MenuNavComponent,
     FooterComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

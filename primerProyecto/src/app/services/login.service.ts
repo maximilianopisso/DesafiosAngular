@@ -17,7 +17,7 @@ export class LoginService {
   }
 
 
-  validarUser(email:string,password:string): boolean {
+  validateLogin(email:string,password:string): boolean {
 
     console.log(this.users);
     var respuesta: boolean = false;

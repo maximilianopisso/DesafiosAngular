@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   passwordControl = this.loginForm.controls['password'];
 
   loginValidate() {
-    const valido = this.loginService.validarUser(this.emailControl.value, this.passwordControl.value)
+    const valido = this.loginService.validateLogin(this.emailControl.value, this.passwordControl.value)
 
     if (valido) {
       console.log("Usuario y Contraseña son validos -> Ingresa")

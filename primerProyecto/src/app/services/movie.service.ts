@@ -11,7 +11,6 @@ export class MovieService {
   constructor() { }
 
   getDetail (id:string): Observable<Movie | undefined>  {
-
     return of(moviesMock.find(movie => movie.id === id))
 
   }
@@ -19,4 +18,7 @@ export class MovieService {
     return of(moviesMock);
   }
 
+  getMovieByTitle(title:string): Observable<Movie | undefined>  {
+    return of(moviesMock.find(movie => movie.title === title))
+  }
 }

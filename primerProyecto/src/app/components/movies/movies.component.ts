@@ -38,7 +38,7 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log("MOVIES_COMPONENT - DESTROY - CHECKED ");
     }
 
-    navigatetoDetail(id: string) {
+    navigateToDetail(id: string) {
       this.router.navigate(['cartelera', id]);
   }
 

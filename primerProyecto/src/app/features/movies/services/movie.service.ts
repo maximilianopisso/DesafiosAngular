@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Movie } from 'src/app/models/movie.model';
-import { MovieAPI } from 'src/app/models/movieAPI.model';
+import { MovieAPI, MoviesAPI } from 'src/app/models/movieAPI.model';
 import { environment } from 'src/environments/environment.prod';
 import { MoviesModule } from '../movies.module';
 import { moviesMock } from './movies.mock';
@@ -22,8 +22,8 @@ export class MovieService {
     return of(moviesMock);
   }
 
-  getListAPI(): Observable<MovieAPI[]>{
-    return this.httpClient.get<MovieAPI[]>(this.url);
+  getListAPI(): Observable<MoviesAPI>{
+    return this.httpClient.get<MoviesAPI>(this.url);
   }
 
   // getMovieByTitle(title:string): Observable<Movie | undefined>  {

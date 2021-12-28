@@ -16,8 +16,8 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private subcripcionMovie: Subscription | undefined;
   movies: Movie[] = [];
-  moviesApi : MovieAPI[] = []
-  respuesta : any[] =[];
+  //moviesApi : MovieAPI[] = []
+  respuesta : MovieAPI[] =[];
 
   constructor(
     private movieService: MovieService,
@@ -30,7 +30,7 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
       this.subcripcionMovie=this.movieService.getList().subscribe( movies => this.movies = movies);
       this.movieService.getListAPI().subscribe(response => {
-        this.respuesta = response;
+        this.respuesta = response.results;
         console.log(this.respuesta)
       });
 

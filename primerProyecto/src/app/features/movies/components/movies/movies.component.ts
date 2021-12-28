@@ -2,7 +2,8 @@ import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/models/movie.model';
-import { MovieService } from 'src/app/services/movie.service';
+import { MovieService } from '../../services/movie.service';
+//import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-movies',

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Movie } from '../models/movie.model';
+import { Movie } from 'src/app/models/movie.model';
+import { MoviesModule } from '../movies.module';
+// import { Movie } from '../models/movie.model';
 import { moviesMock } from './movies.mock';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class MovieService {
 
   constructor() { }

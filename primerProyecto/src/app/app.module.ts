@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { MoviesComponent } from './components/movies/movies.component';
-import { InfoComponent } from './components/info/info.component';
+// import { MoviesComponent } from './features/movies/components/movies/movies.component';
+// import { InfoComponent } from './features/movies/components/info/info.component';
 import { CartComponent } from './components/cart/cart.component';
 import { MenuNavComponent } from './components/menu-nav/menu-nav.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -20,8 +20,8 @@ import { MaterialModule } from './material/material.module';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MoviesComponent,
-    InfoComponent,
+    // MoviesComponent,
+    // InfoComponent,
     CartComponent,
     MenuNavComponent,
     FooterComponent,

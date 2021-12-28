@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -8,10 +10,9 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  private url:string = "https://61bcb895d8542f00178249b1.mockapi.io/api/";
 
+  private url = environment.urlUsersAPI;
   private users: User[] = [];
-
   constructor(private httpClient : HttpClient) {}
 
 
@@ -19,7 +20,9 @@ export class UserService {
       return this.httpClient.get<User[]>(`${this.url}persons`);
   }
 
-  // addUser(){}
+  addUser(user : User){
+      this.httpClient.post(`${this.url}addperson`,JSON.stringify(user));
+  }
 
   // getUser(id:number){}
 

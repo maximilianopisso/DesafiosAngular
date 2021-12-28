@@ -1,21 +1,18 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './components/cart/cart.component';
-import { InfoComponent } from './components/info/info.component';
+// import { InfoComponent } from './features/movies/components/info/info.component';
 import { LoginComponent } from './components/login/login.component';
-import { MoviesComponent } from './components/movies/movies.component';
+//import { MoviesComponent } from './features/movies/components/movies/movies.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  {
-    path: 'cartelera/:id',
-    component: InfoComponent
-  },
 
   {
     path: 'cartelera',
-    component: MoviesComponent
+    loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule)
   },
+
   {
     path: 'login',
     component: LoginComponent

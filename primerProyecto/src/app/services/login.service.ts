@@ -1,27 +1,27 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model'
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private url:string = "https://61bcb895d8542f00178249b1.mockapi.io/api/";
-  users:User[] = [];
+  // private url:string = "https://61bcb895d8542f00178249b1.mockapi.io/api/";
 
-  constructor(private httpClient : HttpClient) {
-    this.httpClient.get<User[]>(`${this.url}persons`).subscribe( user => this.users = user);
-    console.log(`CONSTRUCCION USERS ${this.users}`);
+  users: User[] = [];
+
+  constructor(private userService: UserService) {
+    this.userService.getUsers().subscribe(response => this.users = response);
   }
 
+  getUsers(): User[] {
+    return this.users;
+  }
 
-  validarUser(email:string,password:string): boolean {
-
-    console.log(this.users);
+  validateLogin(email: string, password: string): boolean {
     var respuesta: boolean = false;
-
     this.users.forEach(usuario => {
       if (usuario.email === email && usuario.password === password) {
         respuesta = true;

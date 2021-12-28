@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-register',
@@ -11,15 +11,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  private users: User[] = [];
+  //private users: User[] = [];
 
-  constructor() {
+  constructor(private userService: UserService) {
     console.log("REGISTER_COMPONENT - CONSTRUCTOR - CHECKED ");
   }
 
 
   ngOnInit(): void {
-    //this.userService.getUser().subscribe(users => this.users = users);
     console.log("REGISTER_COMPONENT - INIT - CHECKED ");
   }
 
@@ -45,7 +44,18 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   passwordControl = this.registroForm.controls['password'];
 
   registroUser() {
-    console.log(this.registroForm.value);
+    let newUser: User =
+    {
+      id: '100',
+      nombre: this.nombreControl.value,
+      apellido: this.apellidoControl.value,
+      direccion: '  ',
+      movil: this.movilControl.value,
+      email: this.emailControl.value,
+      password: this.passwordControl.value,
+    }
+
+    this.userService.addUser(newUser);
   }
 
 }

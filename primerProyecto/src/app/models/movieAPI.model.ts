@@ -14,4 +14,11 @@ export interface MovieAPI {
     video: boolean;
     vote_average: number;
     vote_count: number;
+  }
+
+export interface MoviesAPI {
+page: number;
+results: MovieAPI[];
+total_pages: number;
+total_results: number;
 }

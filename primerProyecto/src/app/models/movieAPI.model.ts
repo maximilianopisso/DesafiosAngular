@@ -3,6 +3,7 @@ export interface MovieAPI {
     adult: boolean;
     backdrop_path: string;
     id: number;
+    genre_ids: number[],
     original_language: string;
     original_title: string;
     overview: string;

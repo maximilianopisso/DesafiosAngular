@@ -29,23 +29,12 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
-      this.subcripcionMovie=this.movieService.getList().subscribe( movies => this.movies = movies);
-      this.movieService.getListAPI().subscribe(response => {
-        this.moviesAPI = response.results;
-        console.log(this.moviesAPI)
-
-       // this.moviesAPI.forEach(movie => { movie.poster_path = this.urlPath+movie.poster_path
-          // let aux:string;
-          // aux = this.urlPath+movie.poster_path;
-          // movie.poster_path = aux;
-       // })
-       // console.log(this.moviesAPI)
-
-
-
+      this.subcripcionMovie = this.movieService.getListAPI().subscribe(response => {       // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
+          this.moviesAPI = response.results
+          console.log(this.moviesAPI)
       });
 
-
+      // this.subcripcionMovie=this.movieService.getList().subscribe(movies => this.movies = movies);   esto era la carga de pelis desde el mock de peliculas
     }
 
     ngAfterViewInit(): void {

@@ -15,7 +15,7 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
   cartMovies: MovieAPI[]|any = [];
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
-
+  precio :number= 100;
   constructor(
     private movieService : MovieService,
     private cartService : CartService,

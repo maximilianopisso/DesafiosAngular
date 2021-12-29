@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, ObservedValueOf, of } from 'rxjs';
 import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI, MoviesAPI } from 'src/app/models/movieAPI.model';
 import { environment } from 'src/environments/environment.prod';
@@ -10,21 +10,28 @@ import { moviesMock } from './movies.mock';
 @Injectable()
 
 export class MovieService {
-  private url = environment.urlMovieAPI;
+  private urlAllMovies = environment.urlMovieAPI;
+  private urlFirstPart = environment.urlAPI;
+  private urlLastPart = environment.keyAPI
+
   constructor(private httpClient : HttpClient) { }
 
-
-  getDetail (id:string): Observable<Movie | undefined>  {
-    return of (moviesMock.find( movie => movie.id === id))
+  getListAPI(): Observable<MoviesAPI>{                           //Metodo que me devuelve el Observable que me trae la respuesta de la API con todas las peliculas
+    return this.httpClient.get<MoviesAPI>(this.urlAllMovies);
   }
 
-  getList(): Observable<Movie[]>{
-    return of(moviesMock);
+  getDetailAPI(id:string): Observable<MovieAPI> {                // Metodo que me devuelve el Observable  con la pelicula que coincide con el ID pasado como parametro
+    return this.httpClient.get<MovieAPI>(`${this.urlFirstPart}${id}${this.urlLastPart}`);
   }
 
-  getListAPI(): Observable<MoviesAPI>{
-    return this.httpClient.get<MoviesAPI>(this.url);
-  }
+
+  // getDetail (id:string): Observable<Movie | undefined>  {
+  //   return of (moviesMock.find( movie => movie.id === id))
+  // }
+
+  // getList(): Observable<Movie[]>{
+  //   return of(moviesMock);
+  // }
 
   // getMovieByTitle(title:string): Observable<Movie | undefined>  {
   //   return of(moviesMock.find(movie => movie.title === title))

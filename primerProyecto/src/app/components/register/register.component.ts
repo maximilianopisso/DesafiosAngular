@@ -46,16 +46,19 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   registroUser() {
     let newUser: User =
     {
-      id: '100',
+      id: '60',
       nombre: this.nombreControl.value,
       apellido: this.apellidoControl.value,
-      direccion: '  ',
+      direccion: 'Falta tomar direccion',
       movil: this.movilControl.value,
       email: this.emailControl.value,
       password: this.passwordControl.value,
     }
 
-    this.userService.addUser(newUser);
+    console.log("Datos de Usuario a Registrar");
+    console.table(newUser);
+    this.userService.addUser(newUser).subscribe(response => console.log(response));
+    this.registroForm.reset();
   }
 
 }

@@ -1,10 +1,11 @@
+import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface';
 import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { MovieService } from '../../services/movie.service';
-//import { MovieService } from 'src/app/services/movie.service';
+
 
 @Component({
   selector: 'app-movies',
@@ -15,9 +16,9 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   private subcripcionMovie: Subscription | undefined;
-  movies: Movie[] = [];
-  //moviesApi : MovieAPI[] = []
-  respuesta : MovieAPI[] =[];
+   movies: Movie[] = [];
+   moviesAPI : MovieAPI[] =[];
+   urlPath: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(
     private movieService: MovieService,
@@ -28,13 +29,12 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
-      this.subcripcionMovie=this.movieService.getList().subscribe( movies => this.movies = movies);
-      this.movieService.getListAPI().subscribe(response => {
-        this.respuesta = response.results;
-        console.log(this.respuesta)
+      this.subcripcionMovie = this.movieService.getListAPI().subscribe(response => {       // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
+          this.moviesAPI = response.results
+          console.log(this.moviesAPI)
       });
 
-
+      // this.subcripcionMovie=this.movieService.getList().subscribe(movies => this.movies = movies);   esto era la carga de pelis desde el mock de peliculas
     }
 
     ngAfterViewInit(): void {
@@ -47,7 +47,7 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log("MOVIES_COMPONENT - DESTROY - CHECKED ");
     }
 
-    navigateToDetail(id: string) {
+    navigateToDetail(id: number) {
       this.router.navigate(['cartelera', id]);
   }
 

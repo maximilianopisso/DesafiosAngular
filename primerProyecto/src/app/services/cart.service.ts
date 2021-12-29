@@ -20,7 +20,7 @@ export class CartService {
     if(!this.listMovie.find(element => element.id === movie.id)){
       this.listMovie.push(movie)
     }else{
-      alert("YA LA AGREGASTE PELOTUDO!!")
+      alert("YA LA AGREGASTE")
     }
 
 

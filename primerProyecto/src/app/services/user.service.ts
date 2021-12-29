@@ -10,21 +10,21 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-
   private url = environment.urlUsersAPI;
   private users: User[] = [];
   constructor(private httpClient : HttpClient) {}
 
-
   getUsers(): Observable<User[]> {
-      return this.httpClient.get<User[]>(`${this.url}persons`);
+      return this.httpClient.get<User[]>(`${this.url}`);    //Metodo para obtener los usuarios de la API
   }
 
-  addUser(user : User){
-      this.httpClient.post(`${this.url}addperson`,JSON.stringify(user));
+  addUser(user : User): Observable<User>{
+      return this.httpClient.post<User>(`${this.url}`,user);   //Metodo para setear un nuevo usuario en la API (Registrar Usuario)
   }
 
-  // getUser(id:number){}
+  getUserById(id:number): Observable<User | undefined> {      //Metodo obtener un usuario desde la API indicando su id.
+    return this.httpClient.get<User>(`${this.url}/${id}`);
+  }
 
 }
 

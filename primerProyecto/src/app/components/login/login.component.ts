@@ -12,23 +12,24 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
-  max_user : number = 10;
-  muestra : User[] =[];
+
   users: User[] = [];
 
-  constructor(private loginService: LoginService) {
-    console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
-  }
+  constructor(
+    private loginService: LoginService,
+    private userService : UserService
+    ){
+      console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
+    }
 
   ngOnInit(): void {
     console.log("LOGIN_COMPONENT - INIT - CHECKED ");
-    console.log("ESTOS SON LOS USARIOS VALIDOS");
-    this.users = this.loginService.getUsers();
+    // this.users = this.loginService.getUsers();
+    // console.table(this.users);
+    console.log("USUARIOS DESDE LA API");
+    this.userService.getUsers().subscribe(response => console.table(response));
 
-    for (let i=0;i<this.max_user;i++){
-      this.muestra.push(this.users[i])
-    }
-    console.table(this.muestra);
+
   }
 
   ngAfterViewInit(): void {

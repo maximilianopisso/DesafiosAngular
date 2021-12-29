@@ -14,10 +14,6 @@ export class LoginService {
     this.userService.getUsers().subscribe(response => this.users = response);
   }
 
-  // getUsers(): User[] {
-  //   return this.users;
-  // }
-
   validateLogin(email: string, password: string): boolean {           //metodo para validar el login pasando el email y password como argumentos
     var respuesta: boolean = false;
     this.users.forEach(usuario => {

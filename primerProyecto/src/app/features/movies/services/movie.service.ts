@@ -10,7 +10,7 @@ import { moviesMock } from './movies.mock';
 @Injectable()
 
 export class MovieService {
-  
+
   private urlAllMovies = environment.urlMovieAPI;
   private urlFirstPart = environment.urlAPI;
   private urlLastPart = environment.keyAPI
@@ -24,6 +24,8 @@ export class MovieService {
   getDetailAPI(id:string): Observable<MovieAPI> {                // Metodo que me devuelve el Observable  con la pelicula que coincide con el ID pasado como parametro
     return this.httpClient.get<MovieAPI>(`${this.urlFirstPart}${id}${this.urlLastPart}`);
   }
+
+  
 
 
   // getDetail (id:string): Observable<Movie | undefined>  {

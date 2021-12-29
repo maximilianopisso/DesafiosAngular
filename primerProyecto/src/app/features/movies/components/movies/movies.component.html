@@ -2,16 +2,16 @@
   <h1 class="pb-3" style="text-align: center;">Cartelera</h1>
   <div class="movie-container d-flex flex-wrap justify-content-center">
     <mat-card class="example-card m-5" *ngFor="let movie of moviesAPI"  style="width: 18rem;">
-      <mat-card-header>
-        <h5 class="card-title">{{movie.title}}</h5>
+      <mat-card-header style="display: flex; justify-content: center;align-items: center;height: 50px; text-align: center;">
+        <h3 class="card-title" style="font-weight: bolder;">{{movie.title}}</h3>
       </mat-card-header>
       <img mat-card-image [src]= "urlPath+movie.poster_path" alt="" style="height: 400px;">
+      <mat-card-actions>
+        <button  mat-raised-button color="primary" style="display:block; margin: 0px auto; width: 95%;" (click)="navigateToDetail(movie.id)">+ Info</button>
+      </mat-card-actions>
       <mat-card-content>
         <p class="card-text">{{movie.overview}}</p>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="navigateToDetail(movie.id)">+ Info</button>
-      </mat-card-actions>
     </mat-card>
   </div>
 

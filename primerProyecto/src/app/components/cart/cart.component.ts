@@ -1,4 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { MovieService } from 'src/app/features/movies/services/movie.service';
+
+import { MovieAPI } from 'src/app/models/movieAPI.model';
+
 
 @Component({
   selector: 'app-cart',
@@ -7,10 +11,14 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor() {
+  movies: MovieAPI[] = [];
+
+  constructor(private movieService : MovieService) {
     console.log("CART_COMPONENT - CONSTRUCTOR - CHECKED ");
+
    }
   ngOnInit(): void {
+    this.movieService.getListAPI().subscribe(response => this.movies = response.results)
     console.log("CART_COMPONENT - INIT - CHECKED ");
   }
   ngAfterViewInit(): void {

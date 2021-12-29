@@ -10,6 +10,7 @@ import { moviesMock } from './movies.mock';
 @Injectable()
 
 export class MovieService {
+  
   private urlAllMovies = environment.urlMovieAPI;
   private urlFirstPart = environment.urlAPI;
   private urlLastPart = environment.keyAPI

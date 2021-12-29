@@ -44,9 +44,10 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   passwordControl = this.registroForm.controls['password'];
 
   registroUser() {
+
     let newUser: User =
     {
-      id: '60',
+      id: '',
       nombre: this.nombreControl.value,
       apellido: this.apellidoControl.value,
       direccion: 'Falta tomar direccion',
@@ -57,7 +58,10 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
     console.log("Datos de Usuario a Registrar");
     console.table(newUser);
-    this.userService.addUser(newUser).subscribe(response => console.log(response));
+    this.userService.addUser(newUser).subscribe(response => {alert(`Se cargo usuario correctamente`)
+      console.log(response);
+
+    });
     this.registroForm.reset();
   }
 

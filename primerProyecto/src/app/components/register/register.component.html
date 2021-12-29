@@ -1,5 +1,4 @@
-
-<div id="register"class="container d-flex align align-items-center flex-column mt-5">
+<div id="register" class="container d-flex align align-items-center flex-column mt-5">
 
 
   <img class="mb-4" src="../assets/movie.png" alt="" width="100" height="100">
@@ -22,7 +21,8 @@
     <div class="item-form my-4">
       <label for="apellido">Apellido:</label>
       <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido">
-      <div *ngIf="apellidoControl.invalid && (apellidoControl.dirty || apellidoControl.touched)" class="alert alert-danger">
+      <div *ngIf="apellidoControl.invalid && (apellidoControl.dirty || apellidoControl.touched)"
+        class="alert alert-danger">
         <div *ngIf="apellidoControl.hasError('required')">
           El apellido es requerido.
         </div>
@@ -37,11 +37,11 @@
       <input type="text" id="movil" placeholder="+54 341 123456" class="form-control" formControlName="movil">
       <div *ngIf="movilControl.invalid && (movilControl.dirty || movilControl.touched)" class="alert alert-danger">
         <div *ngIf="movilControl.hasError('required')">
-          El movilControl es requerido.
+          El movil es requerido.
         </div>
-        <!-- <div *ngIf="movilControl.hasError('maxlength')">
-          La cantidad de caracteres no puede ser mayor que 25.
-        </div> -->
+        <div *ngIf="movilControl.hasError('pattern')">
+          El numero ingresado no es un numero valido
+        </div>
       </div>
     </div>
 
@@ -60,7 +60,8 @@
 
     <div class="item-form my-4">
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" class="form-control" placeholder="Password" formControlName="password">
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+        formControlName="password">
       <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)"
         class="alert alert-danger">
         <div *ngIf="passwordControl.hasError('required')">
@@ -72,7 +73,23 @@
       </div>
     </div>
 
-    <button class="w-50 btn btn-lg btn-secondary d-block mx-auto" [disabled]="registroForm.invalid" (click)="registroUser()">Registrarme</button>
+    <!-- <div class="item-form my-4">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" formControlName="password2">
+        <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched) && (passwordControl.value === passwordControl.value)"
+          class="alert alert-danger">
+          <div *ngIf="passwordControl.hasError('required')">
+            La contraseña es requerida
+          </div>
+          <div *ngIf="passwordControl.hasError('minlength')">
+            La contraseña debe tener al menos 8 caracteres
+          </div>
+      </div>
+
+    </div> -->
+
+    <button class="w-50 btn btn-lg btn-primary d-block mx-auto" [disabled]="registroForm.invalid"
+      (click)="registroUser()">Registrarme</button>
 
 
   </form>

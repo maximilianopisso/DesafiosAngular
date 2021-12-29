@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
+import { CartService } from 'src/app/services/cart.service';
 import { MovieService } from '../../services/movie.service';
 //import { MovieService } from 'src/app/services/movie.service';
 
@@ -16,13 +17,16 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
 
 
+
   constructor(
     private activateRoute: ActivatedRoute,
     private moviesService: MovieService,
+    private cartService : CartService,
+    private router: Router,
   )
     {
       console.log("INFO_COMPONENT - CONSTRUCTOR - CHECKED ");
-     
+
     }
 
   ngOnInit(): void {
@@ -44,4 +48,9 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("INFO_COMPONENT - DESTROY - CHECKED ");
   }
 
+  addMovie(movie: MovieAPI){
+    this.cartService.addMovie(movie)
+    this.router.navigate(['carrito']);
+
+  }
 }

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
-//import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,7 +17,9 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private loginService: LoginService,
-    private userService : UserService
+    private userService : UserService,
+    private router :Router
+
     ){
       console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
     }
@@ -54,9 +56,11 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (valido) {
       console.log("Usuario y Contraseña son validos -> Ingresa")
+      this.router.navigate(['cartelera']);
     }
     else {
       console.log("No se le permite el ingreso -> No Valido")
+      alert("USUARIO O CONTRASEÑA INCORRECTA")
     };
   }
 }

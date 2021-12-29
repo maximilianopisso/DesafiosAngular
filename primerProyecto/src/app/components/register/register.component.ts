@@ -32,9 +32,10 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   registroForm = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.maxLength(25)]),
     apellido: new FormControl('', [Validators.required, Validators.maxLength(25)]),
-    movil: new FormControl('', [Validators.required]),
+    movil: new FormControl('', [Validators.required, Validators.pattern ('[+0-9 ]{10,20}')]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+   // password2: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
   nombreControl = this.registroForm.controls['nombre'];
@@ -42,11 +43,13 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   movilControl = this.registroForm.controls['movil'];
   emailControl = this.registroForm.controls['email'];
   passwordControl = this.registroForm.controls['password'];
+  //password2Control = this.registroForm.controls['password2'];
 
   registroUser() {
+
     let newUser: User =
     {
-      id: '60',
+      id: '',
       nombre: this.nombreControl.value,
       apellido: this.apellidoControl.value,
       direccion: 'Falta tomar direccion',
@@ -57,7 +60,10 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
     console.log("Datos de Usuario a Registrar");
     console.table(newUser);
-    this.userService.addUser(newUser).subscribe(response => console.log(response));
+    this.userService.addUser(newUser).subscribe(response => {alert(`Se cargo usuario correctamente`)
+      console.log(response);
+
+    });
     this.registroForm.reset();
   }
 

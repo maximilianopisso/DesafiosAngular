@@ -17,14 +17,16 @@
   <tbody>
     <tr *ngFor="let movie of cartMovies">
       <th scope="row">{{movie.id}}</th>
-      <td><img [src]="urlPath+movie.poster_path" alt="" style="height: 120px;">></td>
+      <td><img [src]="urlPath+movie.poster_path" alt="" style="height: 120px;"></td>
       <td><h2>{{movie.title}}</h2></td>
       <td><input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"></td>
       <td>{{precio}}</td>
       <td><button button type="button" class="btn btn-danger" (click)="removeItem(movie)">Borrar</button></td>
   </tr>
 </table>
-<button type="button" class="btn btn-success m-5" style="font-size: 1.5rem; width: 20%; height: 100px;" (click)="volverCartelera()">Volver a Cartelera</button>
-<button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem; width: 20%; height: 100px;" (click)="vaciarCarrito()">Vaciar Carrito</button>
+<div class="d-flex justify-content-around">
+  <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem; width: 20%; height: 100px;" (click)="volverCartelera()">Volver a Cartelera</button>
+  <button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem; width: 20%; height: 100px;" (click)="vaciarCarrito()">Vaciar Carrito</button>
+</div>
 </div>
 

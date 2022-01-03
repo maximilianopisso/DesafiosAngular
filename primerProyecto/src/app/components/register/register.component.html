@@ -46,6 +46,20 @@
     </div>
 
     <div class="item-form my-4">
+      <label for="address">Direccion:</label>
+      <input type="text" id="address" placeholder="Calle 1234" class="form-control" formControlName="address">
+      <div *ngIf="addressControl.invalid && (addressControl.dirty || addressControl.touched)"
+        class="alert alert-danger">
+        <div *ngIf="addressControl.hasError('required')">
+          La direccion es requerida.
+        </div>
+        <div *ngIf="addressControl.hasError('pattern')">
+          La direccion ingresada no es una direccion válida.
+        </div>
+      </div>
+    </div>
+
+    <div class="item-form my-4">
       <label for="email">Email:</label>
       <input type="text" id="email" placeholder="example@dominio.com" class="form-control" formControlName="email">
       <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)" class="alert alert-danger">
@@ -74,18 +88,23 @@
     </div>
 
     <!-- <div class="item-form my-4">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" class="form-control" placeholder="Password" formControlName="password2">
-        <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched) && (passwordControl.value === passwordControl.value)"
-          class="alert alert-danger">
-          <div *ngIf="passwordControl.hasError('required')">
+      <label for="passwordConfirm">Password2:</label>
+
+      <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control"
+        placeholder="Confirmar Password" formControlName="passwordConfirm">
+
+      <div *ngIf="passwordConfirmControl.invalid && (passwordConfirmControl.dirty || passwordConfirmControl.touched)"
+        class="alert alert-danger">
+          <div *ngIf="passwordConfirmControl.hasError('required')">
             La contraseña es requerida
           </div>
-          <div *ngIf="passwordControl.hasError('minlength')">
+          <div *ngIf="passwordConfirmControl.hasError('minlength')">
             La contraseña debe tener al menos 8 caracteres
           </div>
+          <div *ngIf="(passwordConfirmControl.value !== passwordConfirmControl.value)">
+            La contraseñas no coinciden
+          </div>
       </div>
-
     </div> -->
 
     <button class="w-50 btn btn-lg btn-primary d-block mx-auto" [disabled]="registroForm.invalid"

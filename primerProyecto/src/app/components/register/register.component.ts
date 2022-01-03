@@ -35,7 +35,8 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     movil: new FormControl('', [Validators.required, Validators.pattern ('[+0-9 ]{10,20}')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-   // password2: new FormControl('', [Validators.required, Validators.minLength(8)])
+    address : new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 ]* [0-9]{1,4}')]),
+   // passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
   nombreControl = this.registroForm.controls['nombre'];
@@ -43,7 +44,8 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   movilControl = this.registroForm.controls['movil'];
   emailControl = this.registroForm.controls['email'];
   passwordControl = this.registroForm.controls['password'];
-  //password2Control = this.registroForm.controls['password2'];
+  addressControl = this.registroForm.controls['address'];
+  //passwordConfirmControl = this.registroForm.controls['passwordConfirm'];
 
   registroUser() {
 
@@ -52,7 +54,7 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
       id: '',
       nombre: this.nombreControl.value,
       apellido: this.apellidoControl.value,
-      direccion: 'Falta tomar direccion',
+      direccion: this.addressControl.value,
       movil: this.movilControl.value,
       email: this.emailControl.value,
       password: this.passwordControl.value,

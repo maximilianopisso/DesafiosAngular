@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ObservedValueOf, of } from 'rxjs';
 import { Movie } from 'src/app/models/movie.model';
-import { MovieAPI, MoviesAPI } from 'src/app/models/movieAPI.model';
+import { MovieAPI} from 'src/app/models/movieAPI.model';
 import { environment } from 'src/environments/environment.prod';
 import { MoviesModule } from '../movies.module';
 import { moviesMock } from './movies.mock';
@@ -12,20 +12,21 @@ import { moviesMock } from './movies.mock';
 export class MovieService {
 
   private urlAllMovies = environment.urlMovieAPI;
+
   private urlFirstPart = environment.urlAPI;
   private urlLastPart = environment.keyAPI
 
   constructor(private httpClient : HttpClient) { }
 
-  getListAPI(): Observable<MoviesAPI>{                           //Metodo que me devuelve el Observable que me trae la respuesta de la API con todas las peliculas
-    return this.httpClient.get<MoviesAPI>(this.urlAllMovies);
+  getListAPI(): Observable<MovieAPI[]>{                           //Metodo que me devuelve el Observable que me trae la respuesta de la API con todas las peliculas
+    return this.httpClient.get<MovieAPI[]>(this.urlAllMovies);
   }
 
   getDetailAPI(id:string): Observable<MovieAPI> {                // Metodo que me devuelve el Observable  con la pelicula que coincide con el ID pasado como parametro
     return this.httpClient.get<MovieAPI>(`${this.urlFirstPart}${id}${this.urlLastPart}`);
   }
 
-  
+
 
 
   // getDetail (id:string): Observable<Movie | undefined>  {

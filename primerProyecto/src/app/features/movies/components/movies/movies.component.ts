@@ -2,7 +2,6 @@ import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface
 import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { MovieService } from '../../services/movie.service';
 
@@ -16,7 +15,6 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   private subcripcionMovie: Subscription | undefined;
-   movies: Movie[] = [];
    moviesAPI : MovieAPI[] =[];
    urlPath: string = 'https://image.tmdb.org/t/p/w500';
 
@@ -30,7 +28,9 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
     ngOnInit(): void {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
       this.subcripcionMovie = this.movieService.getListAPI().subscribe(response => {       // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
-          this.moviesAPI = response.results
+          //this.moviesAPI = response.results
+          this.moviesAPI = response,
+          console.log(response)
           console.log(this.moviesAPI)
       });
 

@@ -24,6 +24,8 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log("REGISTER_COMPONENT - AFTER VIEW INIT - CHECKED ");
+    const lastElement: any = document.querySelector('.logo');
+    lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
   }
   ngOnDestroy(): void {
     console.log("REGISTER_COMPONENT - DESTROY - CHECKED ");

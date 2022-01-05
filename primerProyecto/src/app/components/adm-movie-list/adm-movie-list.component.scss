@@ -1,8 +1,39 @@
-
 // :host{
 //   padding-top: 20vh;
 // }
 
- #lista{
- padding: 20vh 0px 20vh 5vw
+#lista {
+  padding: 20vh 0px 20vh 5vw;
+
+  .abm-container {
+    display: block;
+    text-align: center;
+    justify-content: center;
+
+    .form-container {
+      display: block;
+      padding: 0px auto;
+      width: 100%;
+
+      mat-form-field {
+        width: 70%;
+        display: block;
+        margin: 10px auto;
+        font-size: 1.3rem;
+        font-weight: bold;
+
+        input{
+          font-size: 1.5rem;
+          font-weight: 500;
+        }
+
+        #overview{
+          height: 150px;
+        }
+
+
+
+      }
+    }
+  }
 }

@@ -38,7 +38,7 @@ import { AdmMovieItemComponent } from './components/adm-movie-item/adm-movie-ite
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

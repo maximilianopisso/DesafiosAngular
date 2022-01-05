@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,  } from '@angular/core';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 
@@ -9,6 +9,7 @@ import { MovieAPI } from 'src/app/models/movieAPI.model';
 })
 export class AdmMovieListComponent implements OnInit {
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
+
 
   @Input() movies: MovieAPI[] = [];
 

@@ -4,10 +4,9 @@
 
     <div class="col-4" id="list-movies">
       <h2 class="pb-4">Listado de Peliculas</h2>
-      <app-adm-movie-item [movie]="movieempty">
-
+      <app-adm-movie-item [movie]="movieempty" [index]="0">
       </app-adm-movie-item>
-      <app-adm-movie-item *ngFor="let movie of movies; let i = index" [movie]=movie>
+      <app-adm-movie-item *ngFor="let movie of movies; let i = index" [movie]=movie [index]=i+1>
       </app-adm-movie-item>
     </div>
 
@@ -48,7 +47,7 @@
               <mat-label for="nombre">Popularidad</mat-label>
               <input matInput autocomplete="off" type="text" id="vote_average" name="popularity" placeholder="Popularidad"
                 class="form-control">
-            </mat-form-field>vote_average
+            </mat-form-field>
           </div>
 
           <div class="item-form my-3">

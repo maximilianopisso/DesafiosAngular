@@ -8,7 +8,7 @@ import { MovieAPI } from 'src/app/models/movieAPI.model';
   styleUrls: ['./adm-movie-item.component.scss']
 })
 export class AdmMovieItemComponent implements OnInit {
-  
+  @Input() index:number | any;
   @Input() movie: MovieAPI = {
     title: '', poster_path: '',
     adult: false,

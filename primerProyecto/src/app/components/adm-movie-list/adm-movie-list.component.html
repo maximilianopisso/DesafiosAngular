@@ -20,10 +20,10 @@
           <div class="item-form my-3">
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Id</mat-label>
-              <input matInput autocomplete="off" class="data-entry" type="text" id="id" name="id"
-                placeholder="id" class="form-control">
-              <!-- <input matInput disabled autocomplete="off" value="ACA IRIA EL ID" type="text" id="id" name="id"
+              <!-- <input matInput autocomplete="off" class="data-entry" type="text" id="id" name="id"
                 placeholder="id" class="form-control"> -->
+              <input matInput disabled autocomplete="off" value="autocomplete" type="text" id="id" name="id"
+                placeholder="id" class="form-control">
             </mat-form-field>
           </div>
 
@@ -46,15 +46,15 @@
           <div class="item-form my-3">
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Popularidad</mat-label>
-              <input matInput autocomplete="off" type="text" id="popularity" name="popularity" placeholder="Popularidad"
+              <input matInput autocomplete="off" type="text" id="vote_average" name="popularity" placeholder="Popularidad"
                 class="form-control">
-            </mat-form-field>
+            </mat-form-field>vote_average
           </div>
 
           <div class="item-form my-3">
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Fecha Lanzamiento</mat-label>
-              <input matInput autocomplete="off" type="date" id="popularity"  name="popularity" placeholder=""
+              <input matInput autocomplete="off" type="date" id="release_date"  name="release_date" placeholder=""
                 class="form-control">
               </mat-form-field>
           </div>
@@ -81,16 +81,16 @@
 
 
   <!-- adult: boolean;
-  backdrop_path: string;
-  id: number;
+  backdrop_path: string;          USADOS EN EL DETAIL
+                                  id: number;
   genre_ids: number[],
   original_language: string;
   original_title: string;
-  overview: string;
+                                  overview: string;
   popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
+                                  poster_path: string;
+                                  release_date: string;
+                                  title: string;
   video: boolean;
-  vote_average: number;
+                                  vote_average: number;
   vote_count: number; -->

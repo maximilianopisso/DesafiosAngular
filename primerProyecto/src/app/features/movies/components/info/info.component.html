@@ -13,8 +13,12 @@
                 <h3>Descripcion</h3>
                 <p class="">{{movie.overview}}</p>
                 <h3>Popularidad</h3>
-                <p>{{movie.vote_average}} pts</p>
-                <h3>Fecha Lanzamiento</h3>
+
+            <!-- <span ngFor = "popularidad"><i>{{movie.vote_average}} pts</i></span> -->
+                <span *ngFor="let i of popularidad"><img class="star" src="../../../../../assets/estrella2.png" width="30px" height="30px"></span>
+
+
+                <h3 class="mt-3">Fecha Lanzamiento</h3>
                 <p class="">{{movie.release_date}}</p>
                 <div class="d-flex mt-5">
                     <!-- <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" /> -->

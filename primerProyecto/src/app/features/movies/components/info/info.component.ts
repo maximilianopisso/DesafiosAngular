@@ -15,8 +15,8 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   movie: MovieAPI | any;
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
-
-
+  popularidad : number[] =[];
+  indexpopular:number =0;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -30,11 +30,21 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
   ngOnInit(): void {
+
     console.log("INFO_COMPONENT - INIT - CHECKED ");
 
     this.moviesService.getDetailAPI(this.activateRoute.snapshot.params['id'])  //obtiene el id desde la ruta url a la llamada al componente
     .subscribe(respose => {this.movie = respose
       console.log(this.movie);
+
+      this.indexpopular = Math.round((this.movie.vote_average)/2);
+      console.log(this.indexpopular);
+
+      for(let i=1; i<this.indexpopular; i++){
+        this.popularidad.push(1);
+      }
+
+
 
    }); // obtiene el detalle de la pelicula y la carga en el campo movie del componente local.
   }

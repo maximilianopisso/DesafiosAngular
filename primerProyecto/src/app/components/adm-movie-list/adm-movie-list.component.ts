@@ -24,7 +24,7 @@ export class AdmMovieListComponent implements OnInit {
     popularity: 0,
     poster_path: '../../../assets/addition.png',
     release_date: '',
-    title: 'Agregar Nueva',
+    title: 'Agregar Nueva Pelicula',
     video: false,
     vote_average: 0,
     vote_count: 0

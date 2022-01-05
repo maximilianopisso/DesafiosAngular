@@ -4,16 +4,48 @@
 
     <div class="col-4" id="list-movies">
       <h2 class="pb-4">Listado de Peliculas</h2>
+      <app-adm-movie-item [movie]="movieempty">
+
+      </app-adm-movie-item>
       <app-adm-movie-item
       *ngFor="let movie of movies; let i = index"
       [movie]=movie>
-    </app-adm-movie-item>
+      </app-adm-movie-item>
     </div>
 
     <div class="col-8">
       <h2>Seccion Administracion de Peliculas - ABM</h2>
+      <form class="m-3 col-lg-6">
 
+        <div class="item-form my-3">
+          <mat-form-field class="inputs" appearance="fill">
+            <mat-label for="nombre">Nombre</mat-label>
+            <input matInput autocomplete="off" type="text" id="nombre" name="nombre" placeholder="Nombre"
+              class="form-control">
+          </mat-form-field>
+        </div>
+        <div class="item-form my-3">
+          <mat-form-field class="inputs" appearance="fill">
+            <mat-label for="nombre">Nombre</mat-label>
+            <input matInput autocomplete="off" type="text" id="nombre" name="nombre" placeholder="Nombre"
+              class="form-control">
+          </mat-form-field>
+        </div>
+        <div class="item-form my-3">
+          <mat-form-field class="inputs" appearance="fill">
+            <mat-label for="nombre">Nombre</mat-label>
+            <input matInput autocomplete="off" type="text" id="nombre" name="nombre" placeholder="Nombre"
+              class="form-control">
+          </mat-form-field>
+        </div>
+
+        <div class="d-flex justify-content-around">
+          <button type="button" class="btn btn-success m-5"
+            style="font-size: 1.5rem; ">Guardar</button>
+          <button type="button" class="btn btn-danger m-5 "
+            style="font-size: 1.5rem; ">Eliminar</button>
+        </div>
+      </form>
     </div>
-  </div>
 
-</div>
+  </div>

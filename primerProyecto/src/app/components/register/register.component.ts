@@ -60,6 +60,7 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
       movil: this.movilControl.value,
       email: this.emailControl.value,
       password: this.passwordControl.value,
+      admin: false
     }
 
     console.log("Datos de Usuario a Registrar");

@@ -49,10 +49,10 @@
       </mat-form-field>
       <div *ngIf="movilControl.invalid && (movilControl.dirty || movilControl.touched)" class="alert alert-danger">
         <div *ngIf="movilControl.hasError('required')">
-          El movil es requerido.
+          El numero del movil es requerido.
         </div>
         <div *ngIf="movilControl.hasError('pattern')">
-          El numero ingresado no es un numero valido
+          El numero del movil ingresado no tiene un formato valido. (ej: +xx xxx xxxxx).
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
           La direccion es requerida.
         </div>
         <div *ngIf="addressControl.hasError('pattern')">
-          La direccion ingresada no es una direccion válida.
+          La direccion ingresada no tiene un formato valido (ej: Sarmiento 1245)
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdmMovieListComponent } from './components/adm-movie-list/adm-movie-list.component';
 import { CartComponent } from './components/cart/cart.component';
 // import { InfoComponent } from './features/movies/components/info/info.component';
 import { LoginComponent } from './components/login/login.component';
@@ -11,6 +12,12 @@ const routes: Routes = [
   {
     path: 'cartelera',
     loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule)
+  },
+
+  {
+    path: '',
+    redirectTo: 'cartelera',
+    pathMatch: 'full'
   },
 
   {
@@ -27,10 +34,9 @@ const routes: Routes = [
   },
 
   {
-    path: '',
-    redirectTo: 'cartelera',
-    pathMatch: 'full'
-  }
+    path:'admin',
+    component: AdmMovieListComponent
+  },
 
 
 ];

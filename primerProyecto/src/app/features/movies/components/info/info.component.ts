@@ -17,7 +17,8 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
   popularidad_full_star : number[] =[];
   popularidad_half_star : number[] =[];
-  indexpopular:number =0;
+  fullStar:number =0;
+  halfStar:number =0;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -37,18 +38,18 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.moviesService.getDetailAPI(this.activateRoute.snapshot.params['id'])  //obtiene el id desde la ruta url a la llamada al componente
     .subscribe(respose => {this.movie = respose
       console.log(this.movie);
-      console.log("valoracion original",this.movie.vote_average);
+      //console.log("valoracion original",this.movie.vote_average);
 
-      this.indexpopular = Math.round((this.movie.vote_average)/2);
-      console.log("valoracion redondeada",this.indexpopular);
+      this.fullStar = Math.floor(Math.round(this.movie.vote_average)/2);
+      this.halfStar = this.fullStar%2;
 
-      for(let i=1; i<this.indexpopular; i++){
+      console.log(` Valoracion Original: ${this.movie.vote_average} \n Valoracion Redondeada : ${Math.round((this.movie.vote_average))} \n Cantidad Estrellas Completas:  ${this.fullStar} \n Cantidad Mitad-Estrellas : ${this.halfStar}`);
+
+      for(let i=1; i<=this.fullStar; i++){
         this.popularidad_full_star.push(1);
       }
 
-      this.indexpopular = (Math.round((this.movie.vote_average)/2))%2;
-      console.log("media estrella?",this.indexpopular);
-      if (this.indexpopular === 1){
+      if (this.halfStar === 1){
         this.popularidad_half_star.push(1);
       }
 

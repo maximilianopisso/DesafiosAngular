@@ -2,4 +2,30 @@
   padding: 15vh 0px;
 
 
+  .logo{
+    width:150px;
+    height: 150px;
+  }
+
+  mat-form-field {
+    width: 80%;
+    display: block;
+    margin: 10px auto;
+    font-size: 1rem;
+    font-weight: bold;
+
+    input{
+
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  }
+
+  .btn-sesion{
+    width: 350px;
+    height: 70px;
+    display: block;
+    margin: 0px auto;
+    font-size: 1.5rem;
+  }
 }

@@ -15,8 +15,10 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   movie: MovieAPI | any;
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
-
-
+  popularidad_full_star : number[] =[];
+  popularidad_half_star : number[] =[];
+  fullStar:number =0;
+  halfStar:number =0;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -30,11 +32,26 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
   ngOnInit(): void {
+
     console.log("INFO_COMPONENT - INIT - CHECKED ");
 
     this.moviesService.getDetailAPI(this.activateRoute.snapshot.params['id'])  //obtiene el id desde la ruta url a la llamada al componente
     .subscribe(respose => {this.movie = respose
       console.log(this.movie);
+      //console.log("valoracion original",this.movie.vote_average);
+
+      this.fullStar = Math.floor(Math.round(this.movie.vote_average)/2);
+      this.halfStar = this.fullStar%2;
+
+      console.log(` Valoracion Original: ${this.movie.vote_average} \n Valoracion Redondeada : ${Math.round((this.movie.vote_average))} \n Cantidad Estrellas Completas:  ${this.fullStar} \n Cantidad Mitad-Estrellas : ${this.halfStar}`);
+
+      for(let i=1; i<=this.fullStar; i++){
+        this.popularidad_full_star.push(1);
+      }
+
+      if (this.halfStar === 1){
+        this.popularidad_half_star.push(1);
+      }
 
    }); // obtiene el detalle de la pelicula y la carga en el campo movie del componente local.
   }

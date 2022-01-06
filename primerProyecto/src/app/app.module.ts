@@ -13,6 +13,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './material/material.module';
+import { AdmMovieListComponent } from './components/adm-movie-list/adm-movie-list.component';
+import { AdmMovieItemComponent } from './components/adm-movie-item/adm-movie-item.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { MaterialModule } from './material/material.module';
     CartComponent,
     MenuNavComponent,
     FooterComponent,
+    AdmMovieListComponent,
+    AdmMovieItemComponent,
 
 
   ],
@@ -34,7 +38,7 @@ import { MaterialModule } from './material/material.module';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

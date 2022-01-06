@@ -6,4 +6,5 @@ export interface User {
   movil:number;
   email: string;
   password: string;
+  admin: boolean;
 }

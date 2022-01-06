@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { InfoComponent } from './components/info/info.component';
 import { MoviesComponent } from './components/movies/movies.component';
+import { AdmMovieListComponent } from 'src/app/components/adm-movie-list/adm-movie-list.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
     path:'',
     component: MoviesComponent
   },
+
 ]
 
 @NgModule({

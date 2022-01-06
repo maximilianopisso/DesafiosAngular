@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log("LOGIN_COMPONENT - AFTER VIEW INIT - CHECKED ");
+    const lastElement: any = document.querySelector('.inputs');
+    lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
   }
 
   ngOnDestroy(): void {

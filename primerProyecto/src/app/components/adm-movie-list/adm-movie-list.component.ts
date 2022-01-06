@@ -122,7 +122,11 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
       vote_count: 0
     }
 
-    this.movieService.addMovie(newMovie).subscribe(response => console.log(response));
+    this.movieService.addMovie(newMovie).subscribe(response => {console.log(response)
+      this.movieService.getListAPI().subscribe(response => {
+      this.movies = response });
+      //this.movieEditForm.reset();
+    });
   }
 
   deleteMovie() {
@@ -130,9 +134,12 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
     this.movieService.removeMovie(this.idValue).subscribe(response =>
     {
       console.log(response);
+      alert("Se borro la Movie");
       this.movieService.getListAPI().subscribe(response => {
       this.movies = response });
+     // this.movieEditForm.reset();
     });
+
   }
 
   updateMovie(){
@@ -155,9 +162,12 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
     this.movieService.updateMovie(updateMovie).subscribe(response =>
       {
         console.log(response);
+        alert("Se Modifico la Movie");
         this.movieService.getListAPI().subscribe(response => {
         this.movies = response });
+        //this.movieEditForm.reset();
       });
+
 
   }
 }

@@ -3,7 +3,13 @@
 // }
 
 
+#control-up{
+  display: block;
+  position: fixed;
+  bottom: 5;
+  right: 5;
 
+}
 .selected {
   border: 5px wheat solid;
   background-color: var(--colorback);

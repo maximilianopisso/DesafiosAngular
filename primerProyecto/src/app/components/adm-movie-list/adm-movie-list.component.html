@@ -2,7 +2,7 @@
 
   <div class="row">
 
-    <div class="col-4" id="list-movies">
+    <div class="col-5" id="list-movies">
       <h2 class="pb-4">Listado de Peliculas</h2>
       <!-- <mat-label style="font-size: 1.5rem;"></mat-label> -->
       <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem;" (click)= "newMovie()">Agregar Nueva Pelicula</button>
@@ -19,9 +19,9 @@
 
     </div>
 
-    <div class="col-8 abm-container">
+    <div id="inicioform" class="col-7 abm-container">
       <h2>Seccion Administracion de Peliculas - ABM</h2>
-
+      <!-- <a href="#"><img id="control-up" src="../../../assets/palomitas-de-maiz.png" width="50px"></a> -->
       <div class="form-container pt-5">
 
         <form [formGroup]="movieEditForm" class="">
@@ -73,9 +73,9 @@
           </div>
 
           <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem;"  (click)="addMovie()">Agregar</button>
-            <button type="button" class="btn btn-secondary m-5" style="font-size: 1.5rem;" (click)="updateMovie()">Modificar</button>
-            <button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem;" (click)="deleteMovie()">Eliminar</button>
+            <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem; width: 20%; height:70px;"  (click)="addMovie()">Agregar</button>
+            <button type="button" class="btn btn-secondary m-5" style="font-size: 1.5rem;width: 20%; height:70px;" (click)="updateMovie()">Modificar</button>
+            <button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem;width: 20%;height: 70px;" (click)="deleteMovie()">Eliminar</button>
           </div>
 
         </form>

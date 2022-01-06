@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 
@@ -8,26 +8,21 @@ import { MovieAPI } from 'src/app/models/movieAPI.model';
   styleUrls: ['./adm-movie-item.component.scss']
 })
 export class AdmMovieItemComponent implements OnInit {
+  urlPath: string = 'https://image.tmdb.org/t/p/w500';
   @Input() index:number | any;
-  @Input() movie: MovieAPI = {
-    title: '', poster_path: '',
-    adult: false,
-    backdrop_path: '',
-    id: 0,
-    genre_ids: [],
-    original_language: '',
-    original_title: '',
-    overview: '',
-    popularity: 0,
-    release_date: '',
-    video: false,
-    vote_average: 0,
-    vote_count: 0
-  };
+  @Input() movie: MovieAPI |any
+  @Output() selected = new EventEmitter<MovieAPI>();
+
+
+
+
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
+
 
 }

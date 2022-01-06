@@ -2,6 +2,13 @@
 //   padding-top: 20vh;
 // }
 
+
+
+.selected {
+  border: 5px wheat solid;
+  background-color: var(--colorback);
+  color: wheat;
+}
 #lista {
   padding: 20vh 0px 20vh 5vw;
 
@@ -22,17 +29,14 @@
         font-size: 1.3rem;
         font-weight: bold;
 
-        input{
+        input {
           font-size: 1.5rem;
           font-weight: 500;
         }
 
-        #overview{
+        #overview {
           height: 150px;
         }
-
-
-
       }
     }
   }

@@ -1,19 +1,19 @@
 
 export interface MovieAPI {
-  adult: boolean;
-  backdrop_path: string;
+        adult?: boolean;
+        backdrop_path?: string;
   id: number;
-  genre_ids: number[],
-  original_language: string;
-  original_title: string;
+        genre_ids?: number[],
+        original_language?: string;
+        original_title?: string;
   overview: string;
-  popularity: number;
+         popularity?: number;
   poster_path: string;
   release_date: string;
   title: string;
-  video: boolean;
+          video?: boolean;
   vote_average: number;
-  vote_count: number;
+          vote_count?: number;
 }
 
 // export interface MoviesAPI {

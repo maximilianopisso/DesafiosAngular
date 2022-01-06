@@ -4,14 +4,19 @@
 
     <div class="col-4" id="list-movies">
       <h2 class="pb-4">Listado de Peliculas</h2>
-      <mat-label style="font-size: 1.5rem;">Opcion 2:</mat-label>
-      <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem; ">Agregar Nueva Pelicula</button>
+      <!-- <mat-label style="font-size: 1.5rem;"></mat-label> -->
+      <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem;" (click)= "newMovie()">Agregar Nueva Pelicula</button>
 
-      <mat-label style="font-size: 1.5rem; display: block; ">Opcion 1:</mat-label>
+      <!-- <mat-label style="font-size: 1.5rem; display: block; ">Opcion 1:</mat-label>
       <app-adm-movie-item [movie]="movieempty" [index]="0">
+      </app-adm-movie-item> -->
+
+      <app-adm-movie-item *ngFor="let movie of movies; let i = index"
+      [movie]=movie [index]=i+1
+      [class.selected]="isSelected(movie)"
+      (click)= "clickMovie(movie)">
       </app-adm-movie-item>
-      <app-adm-movie-item *ngFor="let movie of movies; let i = index" [movie]=movie [index]=i+1>
-      </app-adm-movie-item>
+
     </div>
 
     <div class="col-8 abm-container">
@@ -19,14 +24,12 @@
 
       <div class="form-container pt-5">
 
-        <form class="">
-          <div class="item-form my-3">
+        <form [formGroup]="movieEditForm" class="">
+
+         <div class="item-form my-3">
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Id</mat-label>
-              <!-- <input matInput autocomplete="off" class="data-entry" type="text" id="id" name="id"
-                placeholder="id" class="form-control"> -->
-              <input matInput disabled autocomplete="off" value="autocomplete" type="text" id="id" name="id"
-                placeholder="id" class="form-control">
+              <input matInput disabled autocomplete="off"  type="text" [value]="idValue" id="id" name="id" placeholder="" class="form-control" >
             </mat-form-field>
           </div>
 
@@ -34,7 +37,7 @@
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Titulo</mat-label>
               <input matInput autocomplete="off" type="text" id="title" name="title" placeholder="Titulo"
-                class="form-control">
+                class="form-control" formControlName="title">
             </mat-form-field>
           </div>
 
@@ -42,7 +45,7 @@
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Poster Path</mat-label>
               <input matInput autocomplete="off" type="text" id="poster_path" name="poster_path"
-                placeholder="Poster Path" class="form-control">
+                placeholder="Poster Path" class="form-control" formControlName="poster_path">
             </mat-form-field>
           </div>
 
@@ -50,7 +53,7 @@
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Popularidad</mat-label>
               <input matInput autocomplete="off" type="text" id="vote_average" name="popularity" placeholder="Popularidad"
-                class="form-control">
+                class="form-control" formControlName="vote_average">
             </mat-form-field>
           </div>
 
@@ -58,24 +61,25 @@
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Fecha Lanzamiento</mat-label>
               <input matInput autocomplete="off" type="date" id="release_date"  name="release_date" placeholder=""
-                class="form-control">
+                class="form-control" formControlName="release_date">
               </mat-form-field>
           </div>
 
           <div class="item-form my-3">
             <mat-form-field class="inputs" appearance="fill">
               <textarea matInput autocomplete="off" id="overview" name="overview" placeholder="Descripcion"
-                class="form-control"></textarea>
+                class="form-control" formControlName="overview"></textarea>
             </mat-form-field>
           </div>
 
           <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem; ">Agregar</button>
-            <button type="button" class="btn btn-secondary m-5" style="font-size: 1.5rem; ">Modificar</button>
-            <button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem; ">Eliminar</button>
+            <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem;"  (click)="addMovie()">Agregar</button>
+            <button type="button" class="btn btn-secondary m-5" style="font-size: 1.5rem;" (click)="updateMovie()">Modificar</button>
+            <button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem;" (click)="deleteMovie()">Eliminar</button>
           </div>
 
         </form>
+
       </div>
     </div>
 

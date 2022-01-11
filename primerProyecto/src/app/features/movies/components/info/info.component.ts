@@ -65,9 +65,23 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("INFO_COMPONENT - DESTROY - CHECKED ");
   }
 
+  // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
+
   addMovie(movie: MovieAPI){
-    this.cartService.addMovie(movie)
-    this.router.navigate(['carrito']);
+    this.cartService.addMovie(movie).subscribe(response =>{
+
+      console.log(response);
+      if (response.status !== 'OK'){
+        alert (`NO SE PUDO AGREGAR PELICULA\n LA PELICULA YA SE ENCUENTA EN EL CARRITO`)
+      }else{
+        this.router.navigate(['carrito']);
+      }
+    });
 
   }
+
+  returnToMovies(){
+    this.router.navigate(['cartelera']);
+  }
+
 }

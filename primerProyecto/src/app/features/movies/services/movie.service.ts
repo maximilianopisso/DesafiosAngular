@@ -53,15 +53,5 @@ export class MovieService {
     return this.httpClient.delete<MovieAPI>(`${this.urlMockApiMovies}/${id}`);
   }
 
-  // getDetail (id:string): Observable<Movie | undefined>  {
-  //   return of (moviesMock.find( movie => movie.id === id))
-  // }
-
-  // getList(): Observable<Movie[]>{
-  //   return of(moviesMock);
-  // }
-
-  // getMovieByTitle(title:string): Observable<Movie | undefined>  {
-  //   return of(moviesMock.find(movie => movie.title === title))
-  // }
 }
+

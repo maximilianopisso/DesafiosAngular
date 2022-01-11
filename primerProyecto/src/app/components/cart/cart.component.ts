@@ -25,10 +25,7 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
    }
   ngOnInit(): void {
-    // this.movieService.getListAPI().subscribe(response => {this.cartMovies = response.results
-    // this.cartService.setList(this.cartMovies);
-    // })
-    this.cartMovies=this.cartService.getList();
+    this.cartService.getCart().subscribe(response => this.cartMovies = response);
     console.log("CART_COMPONENT - INIT - CHECKED ");
   }
   ngAfterViewInit(): void {
@@ -38,20 +35,33 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("CART_COMPONENT - DESTROY - CHECKED ");
   }
 
-  vaciarCarrito(){
-    this.cartMovies= this.cartService.clear();
+  vaciarCarrito(){    //OK
+    this.cartService.clearCart().subscribe(response =>{
+      console.log(response);
+      this.cartService.getCart().subscribe(response => this.cartMovies = response);
+    });
+
   }
 
-  removeItem(movie : MovieAPI){
-    console.log(movie);
-    console.table(this.cartMovies);
-
-    this.cartMovies=this.cartService.remove(movie);
+  removeMovieFromCart(movie : MovieAPI){
+    this.cartService.removeMovie(movie).subscribe(response => {
+      console.log(response);
+      if (response.status !== 'OK'){
+        alert ("NO SE PUDO BORRAR LA PELICULA SELECCIONADA")
+      }else{
+        this.cartService.getCart().subscribe(response => this.cartMovies = response);
+      }
+    });
 
   }
 
   volverCartelera(){
     this.router.navigate(['cartelera']);
+  }
+
+  returnToDetailMovie(movie: MovieAPI){
+    this.router.navigate(['cartelera', movie.id]);
+
   }
 }
 

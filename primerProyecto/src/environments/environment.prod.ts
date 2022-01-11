@@ -7,6 +7,7 @@ export const environment = {
   //url para API USUARIOS
   urlUsersAPI: 'https://61bcb895d8542f00178249b1.mockapi.io/api/persons',
 
-  urlLocalCart :'http://localhost:3000/api/cart'
+  urlLocalCart :'http://localhost:3000/api/cart',
+  urlLocalLogin :'http://localhost:3000/api/login'
 
 };

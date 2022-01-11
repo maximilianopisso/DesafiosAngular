@@ -54,19 +54,30 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loginValidate() {
 
-    const valido = this.loginService.validateLogin(this.emailControl.value, this.passwordControl.value)
-
-    if (valido) {
-      console.log("Usuario y Contraseña son validos -> Ingresa")
-      this.router.navigate(['cartelera']);
-    }
-
-    else {
-      console.log("No se le permite el ingreso -> No Valido")
-      alert("USUARIO O CONTRASEÑA INCORRECTA")
-    };
+    this.loginService.validateCredentials(this.emailControl.value, this.passwordControl.value )
+    .subscribe(valid => {
+      if (valid) {
+        this.router.navigate(['cartelera']);
+      } else {
+        alert('User or Password invalid');
+      }
+    });
   }
 }
+
+  //   const valido = this.loginService.validateLogin(this.emailControl.value, this.passwordControl.value)
+
+  //   if (valido) {
+  //     console.log("Usuario y Contraseña son validos -> Ingresa")
+  //     this.router.navigate(['cartelera']);
+  //   }
+
+  //   else {
+  //     console.log("No se le permite el ingreso -> No Valido")
+  //     alert("USUARIO O CONTRASEÑA INCORRECTA")
+  //   };
+  // }
+
 
 
 

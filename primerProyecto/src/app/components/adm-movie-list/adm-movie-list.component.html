@@ -4,12 +4,8 @@
 
     <div class="col-5" id="list-movies">
       <h2 class="pb-4">Listado de Peliculas</h2>
-      <!-- <mat-label style="font-size: 1.5rem;"></mat-label> -->
-      <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem;" (click)= "newMovie()">Agregar Nueva Pelicula</button>
 
-      <!-- <mat-label style="font-size: 1.5rem; display: block; ">Opcion 1:</mat-label>
-      <app-adm-movie-item [movie]="movieempty" [index]="0">
-      </app-adm-movie-item> -->
+      <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem;" (click)= "newMovie()">Agregar Nueva Pelicula</button>
 
       <app-adm-movie-item *ngFor="let movie of movies; let i = index"
       [movie]=movie [index]=i+1
@@ -20,8 +16,11 @@
     </div>
 
     <div id="inicioform" class="col-7 abm-container">
+
       <h2>Seccion Administracion de Peliculas - ABM</h2>
       <!-- <a href="#"><img id="control-up" src="../../../assets/palomitas-de-maiz.png" width="50px"></a> -->
+
+      <!-- ME FALTA AGREGAR TODAS LAS VALIDACIONES A LOS CAMPOS DE MOFICIACION DE UNA PELICULA -->
       <div class="form-container pt-5">
 
         <form [formGroup]="movieEditForm" class="">

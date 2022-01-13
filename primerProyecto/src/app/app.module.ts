@@ -10,11 +10,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { MenuNavComponent } from './components/menu-nav/menu-nav.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './material/material.module';
 import { AdmMovieListComponent } from './components/adm-movie-list/adm-movie-list.component';
 import { AdmMovieItemComponent } from './components/adm-movie-item/adm-movie-item.component';
+import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 
 
 @NgModule({
@@ -40,7 +41,15 @@ import { AdmMovieItemComponent } from './components/adm-movie-item/adm-movie-ite
     BrowserAnimationsModule,
     MaterialModule,
   ],
-  providers: [],
+
+ providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

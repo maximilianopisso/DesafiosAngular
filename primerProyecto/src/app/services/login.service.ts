@@ -23,7 +23,7 @@ export class LoginService {
     private userService: UserService,
     private httpClient: HttpClient
   ) {
-    this.userService.getUsers().subscribe(response => this.users = response);
+
   }
 
   validateLogin(email: string, password: string): boolean {           //metodo para validar el login pasando el email y password como argumentos
@@ -37,8 +37,8 @@ export class LoginService {
   }
 
 
-  validateCredentials(user: string, password: string): Observable<boolean> {
-    return this.httpClient.post<any>(this.url, { user, password })
+  validateCredentials(email: string, password: string): Observable<boolean> {
+    return this.httpClient.post<any>(`${this.url}/validate`, {email,password})
       .pipe(
         map(response => {
           if (response.status === 'OK') {
@@ -68,8 +68,7 @@ export class LoginService {
     return {
       user: this.user,
       userName: this.userName,
-      role:"user",
-      //role: this.role,
+      role: this.role,
       token: this.token
     }
   }

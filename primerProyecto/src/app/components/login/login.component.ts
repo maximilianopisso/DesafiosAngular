@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("USUARIOS DESDE LA API");
     this.userService.getUsers().subscribe(response => console.table(response));
 
-
   }
 
   ngAfterViewInit(): void {

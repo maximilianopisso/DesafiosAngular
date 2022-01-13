@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
+import { LoginService } from 'src/app/services/login.service';
 import { MovieService } from '../../services/movie.service';
 //import { MovieService } from 'src/app/services/movie.service';
 
@@ -68,6 +69,7 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
 
   addMovie(movie: MovieAPI){
+
     this.cartService.addMovie(movie).subscribe(response =>{
 
       console.log(response);

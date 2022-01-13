@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ObservedValueOf, of } from 'rxjs';
-import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { environment } from 'src/environments/environment.prod';
-import { MoviesModule } from '../movies.module';
-import { moviesMock } from './movies.mock';
+
 
 @Injectable()
 

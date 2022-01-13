@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 
 @Component({
@@ -9,20 +8,13 @@ import { MovieAPI } from 'src/app/models/movieAPI.model';
 })
 export class AdmMovieItemComponent implements OnInit {
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
-  @Input() index:number | any;
-  @Input() movie: MovieAPI |any
+  @Input() index: number | any;
+  @Input() movie: MovieAPI | any
   @Output() selected = new EventEmitter<MovieAPI>();
-
-
-
 
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-
-
+  ngOnInit(): void { }
 
 }

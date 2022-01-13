@@ -32,17 +32,15 @@ export class CartService {
     return this.httpClient.post<any>(this.urlCart, movie)
   }
 
-  // // METODO PARA VACIAR EL CARRITO DE COMPRAS (DESDE LA API)
+  // METODO PARA VACIAR EL CARRITO DE COMPRAS (DESDE LA API)
   clearCart(): Observable<MovieAPI[]> {
     return this.httpClient.delete<MovieAPI[]>(`${this.urlCart}/clear`);
   }
-
+  // METODO ELIMINAR UNA PELICULA DEL CARRITO (DESDE LA API)
   removeMovie(movie: MovieAPI): Observable<any> {
     return this.httpClient.delete<any>(`${this.urlCart}/?id=${movie.id}`)
   }
-  // setList(listMovie: MovieAPI[]) {
-  //   this.listMovie = listMovie;
-  // }
+
 }
 
 

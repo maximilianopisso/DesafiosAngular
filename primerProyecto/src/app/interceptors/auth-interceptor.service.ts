@@ -13,7 +13,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   constructor(
     private loginService: LoginService,
-    //private router : Router
+    private router : Router
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -21,30 +21,20 @@ export class AuthInterceptorService implements HttpInterceptor {
     const token = this.loginService.getToken()
     const apiLocal = request.url.startsWith(environment.urlLocalCart)
 
-    console.log("TOKEN",token);
-    console.log("APILOCAL",apiLocal);
-
-    if(token && apiLocal){
-      console.log("ENTRA A COLOCAR HEADER");
-
+    if(token && apiLocal){          // SI EXISTE UN TOKEN EN LOGINSERVICE Y LA RUTA ES AL CARRO, ENTONCES COLOCA CABECERA
         request = request.clone ({
             setHeaders: {Authorization: `Bearer ${token}`}
         });
     }
 
-    console.log("REQUEST",request)
-
     return next.handle(request)
     .pipe(
       catchError((err: HttpErrorResponse) => {
-
         if (err.status === 401) {
           console.log("Error 401");
-          //this.router.navigateByUrl('/login');
+          this.router.navigate(['login']);
         }
-
         return throwError(()=>err);
-
       })
     );
 }

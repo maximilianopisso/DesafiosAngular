@@ -7,6 +7,8 @@ import { LoginService } from '../services/login.service';
   providedIn: 'root'
 })
 
+// GUARDA PARA LOS USUARIOS CON PERFIL ADMINISTADORES
+
 export class AdminRoleGuard implements CanActivate {
 
   constructor(

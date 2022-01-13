@@ -27,26 +27,26 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
-      this.subcripcionMovie = this.movieService.getListAPI().subscribe(response => {       // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
-          //this.moviesAPI = response.results
+
+      //SE ARMA LISTADO COMPLETO DE PELICULAS TRAYENDO LAS PELICULAS DESDE LA CONSULTA A LA API DE PELICULAS
+      this.subcripcionMovie = this.movieService.getListAPI().subscribe(response => {
           this.moviesAPI = response,
           console.log(response)
           console.log(this.moviesAPI)
       });
 
-      // this.subcripcionMovie=this.movieService.getList().subscribe(movies => this.movies = movies);   esto era la carga de pelis desde el mock de peliculas
     }
 
     ngAfterViewInit(): void {
       console.log("MOVIES_COMPONENT - AFTER VIEW INIT - CHECKED ");
-      //const lastElement: any = document.querySelector('.ultima-movie');
-      //lastElement?.scrollIntoView();
     }
+
     ngOnDestroy(): void {
       this.subcripcionMovie?.unsubscribe();
       console.log("MOVIES_COMPONENT - DESTROY - CHECKED ");
     }
 
+    // METODO QUE ME PERMITE NAVEGAR A LA INFORMACION DE LA PELICULA SELECCIONADA
     navigateToDetail(id: number) {
       this.router.navigate(['cartelera', id]);
   }

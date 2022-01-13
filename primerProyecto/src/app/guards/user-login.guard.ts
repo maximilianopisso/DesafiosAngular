@@ -6,6 +6,9 @@ import { LoginService } from '../services/login.service';
 @Injectable({
   providedIn: 'root'
 })
+
+// GUARDA PARA LOS USUARIOS QUE HAYAN INICIADO SU SESION
+
 export class UserLoginGuard implements CanActivate {
 
   constructor(

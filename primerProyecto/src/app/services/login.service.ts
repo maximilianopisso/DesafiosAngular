@@ -25,8 +25,8 @@ export class LoginService {
   ) {
 
   }
-
-  validateCredentials(email: string, password: string): Observable<boolean> {    //METODO QUE VALIDA SOBRE LA API DE USUARIOS
+//METODO QUE VALIDA A LOS USARIOS QUE SE LOGEAN PASANDO EMAIL Y PASSWORD CONTRA LA API DE USUARIOS.
+  validateCredentials(email: string, password: string): Observable<boolean> {
     return this.httpClient.post<any>(`${this.url}/validate`, {email,password})
       .pipe(
         map(response => {
@@ -44,16 +44,16 @@ export class LoginService {
         })
       )
   }
-
-  getToken(): any {              // METODO QUE DEVUELVE EL TOKEN DEL USUARIO -> INTERCEPTOR
+// METODO QUE DEVUELVE EL TOKEN DEL USUARIO -> INTERCEPTOR
+  getToken(): any {
     return this.token;
   }
-
-  isUserLoggedIn():boolean {    //  METODO QUE DEVUELVE SI HAY UN USUARIO LOGEADO -> GUARDS
+//  METODO QUE DEVUELVE SI HAY UN USUARIO LOGEADO -> GUARDS
+  isUserLoggedIn():boolean {
     return this.email !== '';
   }
-
-  getUserInfo(): any {          //  METODO QUE DEVUELVE LA INFORMACION DEL USUARIO LOGEADO -> GUARDS ADMIN
+ //  METODO QUE DEVUELVE LA INFORMACION DEL USUARIO LOGEADO -> GUARDS ADMIN
+  getUserInfo(): any {
     return {
       user: this.email,
       userName: this.nombre,
@@ -61,16 +61,6 @@ export class LoginService {
       token: this.token
     }
   }
-
-  // validateLogin(email: string, password: string): boolean {           //metodo para validar el login pasando el email y password como argumentos
-  //   var respuesta: boolean = false;
-  //   this.users.forEach(usuario => {
-  //     if (usuario.email === email && usuario.password === password) {
-  //       respuesta = true;
-  //     }
-  //   });
-  //   return respuesta;
-  // }
 }
 
 

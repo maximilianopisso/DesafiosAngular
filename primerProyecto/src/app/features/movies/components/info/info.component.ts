@@ -72,6 +72,7 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
       console.log(response);
       if (response.status !== 'OK'){
+        //SWEET
         alert (`NO SE PUDO AGREGAR PELICULA\n LA PELICULA YA SE ENCUENTA EN EL CARRITO`)
       }else{
         this.router.navigate(['carrito']);

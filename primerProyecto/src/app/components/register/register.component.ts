@@ -64,11 +64,11 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     console.log("Datos de Usuario a Registrar");
+    //SWEET
     console.table(newUser);
     this.userService.addUser(newUser).subscribe(response => {alert(`Se cargo usuario correctamente`)
     console.log("Datos Registrados:");
     console.log(response);
-
     });
     this.registroForm.reset();
   }

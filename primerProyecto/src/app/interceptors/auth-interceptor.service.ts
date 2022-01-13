@@ -9,6 +9,10 @@ import { LoginService } from '../services/login.service';
 @Injectable({
   providedIn: 'root'
 })
+
+
+// INTERCEPTOR DE HTTP, PARA AUTORIZAR OPERACIONES SOBRE EL CARRITO DE COMPRAS (SOLO USUARIOS LOGEADOS PUEDEN OPERAR EN EL)
+
 export class AuthInterceptorService implements HttpInterceptor {
 
   constructor(

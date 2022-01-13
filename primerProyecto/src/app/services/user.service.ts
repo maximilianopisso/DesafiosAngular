@@ -4,7 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { User } from '../models/user.model';
-import jwt from "jsonwebtoken";
+//import jwt from "jsonwebtoken";
+//import jwtDecode from 'jwt-decode';
 
 
 @Injectable({
@@ -24,11 +25,14 @@ export class UserService {
 
   addUser(user : User): Observable<User>{
      // return this.httpClient.post<User>(`${this.urlMockApi}`,user);   //Metodo para setear un nuevo usuario en la API (Registrar Usuario)
-    const SECURE_KEY_APP = "clave_app_2022"
-    const token = jwt.sign(user, SECURE_KEY_APP);
 
-    return this.httpClient.post<User>(`${this.urlLocalUserApi}`,token);
-     //return this.httpClient.post<User>(`${this.urlLocalUserApi}`,user);
+
+    // const SECURE_KEY_APP = "clave_app_2022"   // QUERIAMOS HACER
+    // console.log("USER CODIFICADO:",token);
+    // return this.httpClient.post<User>(`${this.urlLocalUserApi}`,token);
+
+
+     return this.httpClient.post<User>(`${this.urlLocalUserApi}`,user);
   }
 
   // getUserById(id:number): Observable<User | undefined> {      //Metodo obtener un usuario desde la API indicando su id.

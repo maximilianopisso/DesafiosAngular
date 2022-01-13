@@ -13,8 +13,8 @@ export class LoginService {
 
   users: User[] = [];
   private token: any = null;
-  private user = '';
-  private userName = '';
+  private email = '';
+  private nombre = '';
   private role ='';
   url = environment.urlLocalLogin
 
@@ -44,8 +44,8 @@ export class LoginService {
           if (response.status === 'OK') {
             this.token = response.token;
             const decodedToken: any = jwt_decode(this.token);
-            this.user = decodedToken?.user;
-            this.userName = decodedToken?.userName;
+            this.email = decodedToken?.mail;
+            this.nombre = decodedToken?.nombre;
             this.role = decodedToken?.role;
             return true;
           } else {
@@ -61,13 +61,13 @@ export class LoginService {
   }
 
   isUserLoggedIn():boolean {
-    return this.user !== '';
+    return this.email !== '';
   }
 
   getUserInfo(): any {
     return {
-      user: this.user,
-      userName: this.userName,
+      user: this.email,
+      userName: this.nombre,
       role: this.role,
       token: this.token
     }

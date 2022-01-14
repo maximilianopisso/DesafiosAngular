@@ -6,17 +6,21 @@ import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
 //import { MoviesComponent } from './features/movies/components/movies/movies.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminRoleGuard } from './guards/admin-role.guard';
+import { UserLoginGuard } from './guards/user-login.guard';
 
 const routes: Routes = [
 
   {
     path: 'cartelera',
+    canActivate: [UserLoginGuard],
     loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule)
   },
 
   {
     path: '',
-    redirectTo: 'cartelera',
+    //redirectTo: 'cartelera',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
 
@@ -30,11 +34,13 @@ const routes: Routes = [
   },
   {
     path: 'carrito',
+    canActivate: [UserLoginGuard],
     component: CartComponent
   },
 
   {
     path:'admin',
+    canActivate: [AdminRoleGuard],
     component: AdmMovieListComponent
   },
 

@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Movie } from 'src/app/models/movie.model';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
+import Swal from 'sweetalert2';
 import { MovieService } from '../../services/movie.service';
-//import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-info',
@@ -65,9 +64,25 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("INFO_COMPONENT - DESTROY - CHECKED ");
   }
 
+  // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
+
   addMovie(movie: MovieAPI){
-    this.cartService.addMovie(movie)
-    this.router.navigate(['carrito']);
+
+    this.cartService.addMovie(movie).subscribe(response =>{
+
+      console.log(response);
+      if (response.status !== 'OK'){
+        Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
+      }else{
+        Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
+        this.router.navigate(['carrito']);
+      }
+    });
 
   }
+
+  returnToMovies(){
+    this.router.navigate(['cartelera']);
+  }
+
 }

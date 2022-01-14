@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adm-movie-list',
@@ -17,7 +18,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
   movies: MovieAPI[] = [];
   emptyMovie: MovieAPI = {
     title: 'Agregar Titulo Pelicula',
-    poster_path: '/:enpoint',
+    poster_path: '/endpoint',
     adult: false,
     backdrop_path: '',
     id: 0,
@@ -58,16 +59,24 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
   });
 
 
+  titleControl = this.movieEditForm.controls['title'];
+  poster_pathControl = this.movieEditForm.controls['poster_path'];
+  vote_averageControl = this.movieEditForm.controls['vote_average'];
+  release_dateControl = this.movieEditForm.controls['release_date'];
+  overviewControl = this.movieEditForm.controls['overview'];
+
+
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
     // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
     this.movieService.getListAPI().subscribe(response => {
-      this.movies = response, console.log(response)
+      this.movies = response// console.log(response)
 
-      // this.movies.forEach(movie => {
-      //   movie.poster_path = this.urlPath + movie.poster_path;
-      // })
+      //  this.movies.forEach(movie => {
+      //    movie.poster_path = this.urlPath + movie.poster_path;    //  ESTO LO HAGO PARA COMPLETAR EN CADA PELICULA LA RUTA COMPLETA ->
+      //                                                             //  ->PARA CARGAR LAS IMAGENES Y PARA MOSTRAR EL ENLACE COMPLETO EN LA EDICION TAMBIEN
+      //  })
 
     });
 
@@ -78,8 +87,6 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
 
   clickMovie(movie: MovieAPI) {
     this.selectedMovie.id = movie.id
-    console.log(`Pelicula Seleccionada:\n ,${JSON.stringify(movie)}`);
-    console.log("Fecha", movie.release_date);
     this.idValue = movie.id;
     this.movieEditForm.controls['title'].setValue(movie.title);
     this.movieEditForm.controls['poster_path'].setValue(movie.poster_path);
@@ -90,7 +97,6 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
   }
 
   newMovie() {
-    //this.movieEditForm.controls['id'].setValue()
     this.idValue = this.emptyMovie.id;
     this.movieEditForm.controls['title'].setValue(this.emptyMovie.title)
     this.movieEditForm.controls['poster_path'].setValue(this.emptyMovie.poster_path)
@@ -122,7 +128,9 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
       vote_count: 0
     }
 
-    this.movieService.addMovie(newMovie).subscribe(response => {console.log(response)
+
+
+    this.movieService.addMovie(newMovie).subscribe(response => {
       this.movieService.getListAPI().subscribe(response => {
       this.movies = response });
       //this.movieEditForm.reset();
@@ -131,12 +139,10 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
 
   deleteMovie() {
 
-    this.movieService.removeMovie(this.idValue).subscribe(response =>
-    {
-      console.log(response);
-      alert("Se borro la Movie");
+    this.movieService.removeMovie(this.idValue).subscribe(response =>{
       this.movieService.getListAPI().subscribe(response => {
-      this.movies = response });
+        this.movies = response });
+        Swal.fire("PELICULA ELIMINADA", "La pelicula ha sido eliminada de la cartelera", "success");
      // this.movieEditForm.reset();
     });
 
@@ -152,22 +158,19 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
       original_title: '',
       overview:  this.movieEditForm.controls['overview'].value,
       popularity: 0,
-      poster_path:   this.movieEditForm.controls['poster_path'].value,   //recortar string
+      poster_path:   this.movieEditForm.controls['poster_path'].value,
       release_date: this.movieEditForm.controls['release_date'].value,
       title:  this.movieEditForm.controls['title'].value,
       video: false,
       vote_average:  this.movieEditForm.controls['vote_average'].value,
       vote_count: 0
     }
-    this.movieService.updateMovie(updateMovie).subscribe(response =>
-      {
-        console.log(response);
-        alert("Se Modifico la Movie");
+
+    this.movieService.updateMovie(updateMovie).subscribe(response => {
         this.movieService.getListAPI().subscribe(response => {
-        this.movies = response });
-        //this.movieEditForm.reset();
+          this.movies = response });
+          Swal.fire("PELICULA MODIFICADA", "La pelicula seleccionada ha sido modificada", "info");
+          //this.movieEditForm.reset();
       });
-
-
   }
 }

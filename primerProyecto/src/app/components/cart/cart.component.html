@@ -8,8 +8,8 @@
       <th style="font-size: 2rem;" scope="col">#</th>
       <th style="font-size: 2rem;" scope="col">Poster</th>
       <th style="font-size: 2rem;" scope="col">Titulo</th>
-      <th style="font-size: 2rem;" scope="col">Cantidad</th>
-      <th style="font-size: 2rem;" scope="col">Precio</th>
+      <th style="font-size: 2rem;" scope="col">Operaciones</th>
+      <!-- <th style="font-size: 2rem;" scope="col">Precio</th> -->
 
     </tr>
 
@@ -19,9 +19,12 @@
       <th scope="row">{{movie.id}}</th>
       <td><img [src]="urlPath+movie.poster_path" alt="" style="height: 120px;"></td>
       <td><h2>{{movie.title}}</h2></td>
-      <td><input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"></td>
-      <td>{{precio}}</td>
-      <td><button button type="button" class="btn btn-danger" (click)="removeItem(movie)">Borrar</button></td>
+      <!-- <td><input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"></td>
+      <td>{{precio}}</td> -->
+      <td>
+        <button button type="button" class="btn btn-danger mx-2" (click)="removeMovieFromCart(movie)">Borrar</button>
+        <button button type="button" class="btn btn-primary mx-2" (click)="returnToDetailMovie(movie)">Ver Info</button>
+      </td>
   </tr>
 </table>
 <div class="d-flex justify-content-around">

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -31,7 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("USUARIOS DESDE LA API");
     this.userService.getUsers().subscribe(response => console.table(response));
 
-
   }
 
   ngAfterViewInit(): void {
@@ -54,19 +54,24 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loginValidate() {
 
-    const valido = this.loginService.validateLogin(this.emailControl.value, this.passwordControl.value)
+    this.loginService.validateCredentials(this.emailControl.value, this.passwordControl.value )
+    .subscribe(valid => {
 
-    if (valido) {
-      console.log("Usuario y Contraseña son validos -> Ingresa")
-      this.router.navigate(['cartelera']);
-    }
 
-    else {
-      console.log("No se le permite el ingreso -> No Valido")
-      alert("USUARIO O CONTRASEÑA INCORRECTA")
-    };
+      if (valid) {
+      //  Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success"); // ACA ME TRAE EL NOMBRE UNDEFINED
+        Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success");
+        this.router.navigate(['cartelera']);
+
+      } else {
+        Swal.fire("ERROR", "El nombre email o la password son incorecctas", "error");
+      }
+    });
+
+
   }
 }
+
 
 
 

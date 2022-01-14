@@ -5,25 +5,25 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { User } from '../models/user.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private url = environment.urlUsersAPI;
+  private urlMockApi = environment.urlUsersAPI;
+  private urlLocalUserApi = environment.urlLocalLogin;
   private users: User[] = [];
   constructor(private httpClient : HttpClient) {}
 
+  //METODO PARA OBTENER DESDE LA API DE USUARIO, EL LISTADO DE USUARIOS EN ELLA.
   getUsers(): Observable<User[]> {
-      return this.httpClient.get<User[]>(`${this.url}`);    //Metodo para obtener los usuarios de la API
+      return this.httpClient.get<User[]>(`${this.urlLocalUserApi}`);
   }
 
-  addUser(user : User): Observable<User>{
-      return this.httpClient.post<User>(`${this.url}`,user);   //Metodo para setear un nuevo usuario en la API (Registrar Usuario)
-  }
-
-  getUserById(id:number): Observable<User | undefined> {      //Metodo obtener un usuario desde la API indicando su id.
-    return this.httpClient.get<User>(`${this.url}/${id}`);
+  //METODO PARA REGISTRAR UN NUEVO USUARIO -> PARA ELLOS SE REGISTRA NUEVO USUARIO SOBRE API
+  addUser(user : User): Observable<any>{
+    return this.httpClient.post<User>(`${this.urlLocalUserApi}`,user);
   }
 
 }

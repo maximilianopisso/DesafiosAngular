@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -38,7 +40,7 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     address : new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 ]* [0-9]{1,4}')]),
-   // passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(8)])
+
   });
 
   nombreControl = this.registroForm.controls['nombre'];
@@ -47,29 +49,42 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   emailControl = this.registroForm.controls['email'];
   passwordControl = this.registroForm.controls['password'];
   addressControl = this.registroForm.controls['address'];
-  //passwordConfirmControl = this.registroForm.controls['passwordConfirm'];
+
 
   registroUser() {
 
     let newUser: User =
     {
-      id: '',
+      id:  undefined,
       nombre: this.nombreControl.value,
       apellido: this.apellidoControl.value,
       direccion: this.addressControl.value,
       movil: this.movilControl.value,
       email: this.emailControl.value,
       password: this.passwordControl.value,
-      admin: false
+      role: "user"
     }
+
 
     console.log("Datos de Usuario a Registrar");
     console.table(newUser);
-    this.userService.addUser(newUser).subscribe(response => {alert(`Se cargo usuario correctamente`)
-      console.log(response);
 
+    this.userService.addUser(newUser).subscribe(response => {
+      console.log("Datos Registrados:");
+      console.log(response);
+      console.log(response.status);
+
+      if(response.status === "OK"){
+      Swal.fire("NUEVO USUARIO", "Se registro existosamente un nuevo usuario", "success");
+      this.registroForm.reset();
+     }else{
+      Swal.fire("ERROR", "No se pudo registrar nuevo usuario", "error");   //"warning", "error", "success" and "info".
+     }
     });
-    this.registroForm.reset();
+
+
   }
 
 }
+
+

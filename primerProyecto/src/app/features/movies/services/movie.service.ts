@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, ObservedValueOf, of } from 'rxjs';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { environment } from 'src/environments/environment.prod';
+import Swal from 'sweetalert2';
 
 
 @Injectable()
@@ -34,14 +35,13 @@ export class MovieService {
 // NETODO PARA INCORPORAR UNA NUEVA PELICULA A CARTELERA -> PARA ELLO SE AGREGA LA PELICULA PASADA POR PARAMETRO A LA API UTILIZADA, SE VALIDA QUE YA NO EXISTE EL TITULO PREVIAMENTE
   addMovie(movie: MovieAPI): Observable<MovieAPI|String> {
     if (!this.moviesAPI.find((element) => element.title === movie.title)) {
-      //SWEET
-      alert("Se Agrego Movie");
+
+      Swal.fire("NUEVA PELICULA", "La pelicula ha sido ingresada a la cartelera", "success");
       return this.httpClient.post<MovieAPI>(this.urlMockApiMovies, movie);
 
     } else {
 
-      //SWEET
-      alert('ya existe esa pelicula');
+      Swal.fire("ERROR", "El titulo de la pelicula a ingresar ya existe en cartelera", "error");
       return of("ya existe la pelicula");
     }
 

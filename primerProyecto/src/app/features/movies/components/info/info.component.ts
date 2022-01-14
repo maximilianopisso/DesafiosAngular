@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
-import { LoginService } from 'src/app/services/login.service';
+import Swal from 'sweetalert2';
 import { MovieService } from '../../services/movie.service';
 
 @Component({
@@ -72,9 +72,9 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
       console.log(response);
       if (response.status !== 'OK'){
-        //SWEET
-        alert (`NO SE PUDO AGREGAR PELICULA\n LA PELICULA YA SE ENCUENTA EN EL CARRITO`)
+        Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
       }else{
+        Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
         this.router.navigate(['carrito']);
       }
     });

@@ -25,9 +25,8 @@ export class UserLoginGuard implements CanActivate {
 
     if (!userLogin) {
       this.router.navigate(['login']);
-      console.log(userLogin)
     }
-    console.log(userLogin)
+
     return true;
 
   }

@@ -33,7 +33,7 @@ export class LoginService {
           if (response.status === 'OK') {
             this.token = response.token;
             const decodedToken: any = jwt_decode(this.token);
-            this.email = decodedToken?.mail;
+            this.email = decodedToken?.email;
             this.nombre = decodedToken?.nombre;
             this.role = decodedToken?.role;
             return true;
@@ -55,12 +55,15 @@ export class LoginService {
  //  METODO QUE DEVUELVE LA INFORMACION DEL USUARIO LOGEADO -> GUARDS ADMIN
   getUserInfo(): any {
     return {
-      user: this.email,
-      userName: this.nombre,
+      email: this.email,
+      nombre: this.nombre,
       role: this.role,
       token: this.token
     }
   }
+  getUserName(): string {
+    return this.nombre
+    }
 }
 
 

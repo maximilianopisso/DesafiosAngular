@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -63,14 +65,26 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
       role: "user"
     }
 
+
     console.log("Datos de Usuario a Registrar");
-    //SWEET
     console.table(newUser);
-    this.userService.addUser(newUser).subscribe(response => {alert(`Se cargo usuario correctamente`)
-    console.log("Datos Registrados:");
-    console.log(response);
+
+    this.userService.addUser(newUser).subscribe(response => {
+      console.log("Datos Registrados:");
+      console.log(response);
+      console.log(response.status);
+
+      if(response.status === "OK"){
+      Swal.fire("NUEVO USUARIO", "Se registro existosamente un nuevo usuario", "success");
+      this.registroForm.reset();
+     }else{
+      Swal.fire("ERROR", "No se pudo registrar nuevo usuario", "error");   //"warning", "error", "success" and "info".
+     }
     });
-    this.registroForm.reset();
+
+
   }
 
 }
+
+

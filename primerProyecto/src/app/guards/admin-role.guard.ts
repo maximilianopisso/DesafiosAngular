@@ -25,9 +25,8 @@ export class AdminRoleGuard implements CanActivate {
 
     if (userInfo.role !== 'admin') {
       this.router.navigate(['login']);
-      console.log(userInfo)
     }
-    console.log(userInfo)
+
     return true;
 
   }

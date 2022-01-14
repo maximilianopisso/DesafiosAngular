@@ -30,9 +30,9 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
       //SE ARMA LISTADO COMPLETO DE PELICULAS TRAYENDO LAS PELICULAS DESDE LA CONSULTA A LA API DE PELICULAS
       this.subcripcionMovie = this.movieService.getListAPI().subscribe(response => {
-          this.moviesAPI = response,
-          console.log(response)
-          console.log(this.moviesAPI)
+          this.moviesAPI = response
+          // console.log(response)
+          // console.log(this.moviesAPI)
       });
 
     }

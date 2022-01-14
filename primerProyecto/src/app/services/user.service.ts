@@ -22,7 +22,7 @@ export class UserService {
   }
 
   //METODO PARA REGISTRAR UN NUEVO USUARIO -> PARA ELLOS SE REGISTRA NUEVO USUARIO SOBRE API
-  addUser(user : User): Observable<User>{
+  addUser(user : User): Observable<any>{
     return this.httpClient.post<User>(`${this.urlLocalUserApi}`,user);
   }
 

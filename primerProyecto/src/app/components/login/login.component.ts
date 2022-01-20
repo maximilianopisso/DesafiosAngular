@@ -76,13 +76,19 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         //  Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success"); // ACA ME TRAE EL NOMBRE UNDEFINED
         Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success");
 
+        console.log(this.loginService.getUserInfo);
+
         this.userLogedIn= this.loginService.getUserInfo();
 
         //PARA PRESENTAR EN MENU
+        console.log(this.userLogedIn);
+
         localStorage.setItem('nombre', JSON.stringify(this.userLogedIn.nombre));
-        localStorage.setItem('apellido', JSON.stringify(this.userLogedIn.nombre));
-        localStorage.setItem('role', JSON.stringify(this.userLogedIn.nombre));
+        localStorage.setItem('apellido', JSON.stringify(this.userLogedIn.apellido));
+        localStorage.setItem('role', JSON.stringify(this.userLogedIn.role));
         localStorage.setItem('login', JSON.stringify('true'));
+
+        // ESTO ES PARA QUE MANDE LOS ESTADOS AL LOCALSTORE Y PUEDA TOMAR LOS DATOS DESDE EL MENU. COMO PAR PROBAR QUE LOS IFS DEL MENU FUNCIONAN
 
           // this.store.dispatch(
           //   showUser(this.userLogedIn)
@@ -92,6 +98,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
       } else {
         this.login = false;   //SOLO PARA TEST UNITARIO
+        localStorage.setItem('login', JSON.stringify('false'));
         Swal.fire("ERROR", "El nombre email o la password son incorecctas", "error");
       }
     });

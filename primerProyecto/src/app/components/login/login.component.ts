@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     private loginService: LoginService,
     private userService : UserService,
     private cartService : CartService,
-    private router :Router,
-    private store: Store
+    private router :Router
+    //private store: Store
 
     ){
       console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
@@ -84,9 +84,9 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         localStorage.setItem('role', JSON.stringify(this.userLogedIn.nombre));
         localStorage.setItem('login', JSON.stringify('true'));
 
-          this.store.dispatch(
-            showUser(this.userLogedIn)
-          )
+          // this.store.dispatch(
+          //   showUser(this.userLogedIn)
+          // )
 
         this.router.navigate(['cartelera']);
 

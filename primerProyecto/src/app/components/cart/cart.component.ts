@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
-
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
-import { LoginService } from 'src/app/services/login.service';
+
 
 
 @Component({
@@ -18,7 +17,7 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
   precio :number= 100;
   constructor(
-   
+
     private movieService : MovieService,
     private cartService : CartService,
     private router : Router

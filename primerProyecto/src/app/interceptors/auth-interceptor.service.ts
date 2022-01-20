@@ -31,6 +31,9 @@ export class AuthInterceptorService implements HttpInterceptor {
         });
     }
 
+    console.log("PETICION HTTP INTERCEPTOR");
+    console.log(request);
+
     return next.handle(request)
     .pipe(
       catchError((err: HttpErrorResponse) => {

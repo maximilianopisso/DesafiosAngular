@@ -18,7 +18,7 @@
 
         <!-- <a class="nav-link" routerLinkActive = "active" routerLink="/admin">Admin</a> -->
 
-        <a *ngIf="user.role=='user'" class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a>
+        <a *ngIf="user.role!=''" class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a>
 
         <!-- <a  class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a> -->
 

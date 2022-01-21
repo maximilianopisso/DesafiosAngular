@@ -3,7 +3,7 @@ import { showUser } from "./login.actions";
 import { userState } from "./login.state";
 
 export const userIntialState: userState = {
-  user : { email: "",
+  user: { email: "",
   apellido: "",
   nombre: "",
   role: "",

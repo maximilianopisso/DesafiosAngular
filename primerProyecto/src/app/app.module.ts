@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+
 import { RegisterComponent } from './components/register/register.component';
 // import { MoviesComponent } from './features/movies/components/movies/movies.component';
 // import { InfoComponent } from './features/movies/components/info/info.component';
@@ -19,13 +19,12 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { LoginModule } from './features/login-redux/login.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     RegisterComponent,
     // MoviesComponent,
     // InfoComponent,
@@ -44,7 +43,6 @@ import { LoginModule } from './features/login-redux/login.module';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    LoginModule,                        //?
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],

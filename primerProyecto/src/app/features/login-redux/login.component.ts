@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     private loginService: LoginService,
     private userService : UserService,
     private cartService : CartService,
-    private router :Router
-    //private store: Store
+    private router :Router,
+    private store: Store
 
     ){
       console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
@@ -83,16 +83,16 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         //PARA PRESENTAR EN MENU
         console.log(this.userLogedIn);
 
-        localStorage.setItem('nombre', JSON.stringify(this.userLogedIn.nombre));
-        localStorage.setItem('apellido', JSON.stringify(this.userLogedIn.apellido));
-        localStorage.setItem('role', JSON.stringify(this.userLogedIn.role));
-        localStorage.setItem('login', JSON.stringify('true'));
+        // localStorage.setItem('nombre', JSON.stringify(this.userLogedIn.nombre));
+        // localStorage.setItem('apellido', JSON.stringify(this.userLogedIn.apellido));
+        // localStorage.setItem('role', JSON.stringify(this.userLogedIn.role));
+        // localStorage.setItem('login', JSON.stringify('true'));
 
         // ESTO ES PARA QUE MANDE LOS ESTADOS AL LOCALSTORE Y PUEDA TOMAR LOS DATOS DESDE EL MENU. COMO PAR PROBAR QUE LOS IFS DEL MENU FUNCIONAN
 
-          // this.store.dispatch(
-          //   showUser(this.userLogedIn)
-          // )
+          this.store.dispatch(
+            showUser(this.userLogedIn)
+          )
 
         this.router.navigate(['cartelera']);
 

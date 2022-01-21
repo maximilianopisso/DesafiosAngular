@@ -19,6 +19,7 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { LoginModule } from './features/login-redux/login.module';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    LoginModule,                        //?
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],

@@ -1,0 +1,21 @@
+.nav-bar {
+    background-color: #222;
+    color: rgba( white, 0.87);
+  
+    display: flex;
+    padding-left: 30px;
+    align-items: center;
+    font-size: 20px;
+    height: 64px;
+  
+    .menu {
+      display: flex;
+      font-size: 16px;
+      margin-left: 48px;
+      a, a:visited {
+        color: yellow;
+        margin-left: 16px;
+      }
+    }
+  }
+  

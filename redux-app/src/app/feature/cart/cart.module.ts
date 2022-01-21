@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { createReducer, StoreModule } from '@ngrx/store';
 import { cartReducer } from './store/cart.reducer';
 import { CartComponent } from './cart.component';
+import { CartRoutingModule } from './cart-routing.module';
+import { StoreModule } from '@ngrx/store';
 
 
 
@@ -12,7 +13,7 @@ import { CartComponent } from './cart.component';
   ],
   imports: [
     CommonModule,
-    //CartRoutingModule,
+    CartRoutingModule,
     StoreModule.forFeature('cart',cartReducer)
   ]
 })

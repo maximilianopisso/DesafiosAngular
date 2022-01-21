@@ -11,6 +11,7 @@ export const cartInitialState: CartState = { items: [] }
 export const _cartReducer = createReducer(
 
     cartInitialState,
+
     on(cartAddItem, (state, { item }) => {
 
         const items = [...state.items];
@@ -36,7 +37,7 @@ export const _cartReducer = createReducer(
 
     on(cartClear, (state) => {
         return {
-            ...state,
+            ...state,  //porque?
             items: []
         };
     }),

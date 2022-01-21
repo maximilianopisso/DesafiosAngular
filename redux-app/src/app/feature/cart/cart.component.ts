@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppSetTitle } from 'src/app/store/app.actions';
 import { cartAddItem, cartClear, cartDeleteItem } from './store/cart.actions';
-import { CartItem } from './store/cart.model';
-import { cartItemsSelector, cartSelector } from './store/cart.selectors';
+import { cartItemsSelector } from './store/cart.selectors';
+import { CartState } from './store/cart-store.model';
+import { CartItem } from './cart.model';
+import { AppSetTitle } from 'src/app/store/app.actions';
 
 @Component({
   selector: 'app-cart',
@@ -14,13 +15,14 @@ import { cartItemsSelector, cartSelector } from './store/cart.selectors';
 export class CartComponent implements OnInit {
 
   private idSeed = 1
-  cartItems$! : Observable<CartItem[]>
-  constructor( 
-    private store: Store
+  cartItems$!: Observable<CartItem[]>
+  constructor(
+    private store: Store<CartState>
   ) { }
 
   ngOnInit(): void {
-    //this.store.dispatch(AppSetTitle({{title: 'cart'}}))
+    
+    this.store.dispatch(AppSetTitle ({title:"Cart"}))
     this.cartItems$ = this.store.pipe(
       select(cartItemsSelector)
     )
@@ -34,11 +36,14 @@ export class CartComponent implements OnInit {
     this.store.dispatch(cartAddItem({ item }))
   }
 
-  // removeItem(id: string) {
-  //   this.store.dispatch(cartDeleteItem,)
-  // }
+  removeItem(id: string) {
+    
+    this.store.dispatch(cartDeleteItem({itemId: id}))
+  }
+   
+  clearCart() {
 
-  // clearCart() {
-  //   this.store.dispatch(cartClear)
-  // }
+    this.store.dispatch(cartClear())
+  }
 }
+

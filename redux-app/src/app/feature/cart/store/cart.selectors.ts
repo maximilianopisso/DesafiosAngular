@@ -3,7 +3,6 @@ import { CartState } from "./cart-store.model";
 
 export const cartStateSelector = createFeatureSelector<CartState>('cart');
 
-
 export const cartItemsSelector = createSelector (
 
     cartStateSelector,

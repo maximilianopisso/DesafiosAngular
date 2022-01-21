@@ -1,0 +1,89 @@
+
+<div id ="login" class="container d-flex align-items-center flex-column mt-5 body">
+
+  <img class="mb-4 logo" src="../assets/movie.png" alt="Logo de Peliteka">
+
+  <h1 class="mb-3">Iniciar Sesion</h1>
+  <form [formGroup]="loginForm" class="m-3 col-lg-6">
+
+    <div class="item-form my-3 ">
+      <mat-form-field class="inputs" appearance="fill">
+        <mat-label for="email">Email</mat-label>
+        <input matInput autocomplete="on" type="text" id="email" name="email" placeholder="Write your email"
+          class="form-control" formControlName="email">
+      </mat-form-field>
+      <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)" class="alert alert-danger">
+        <div *ngIf="emailControl.hasError('required')">
+          El email es requerido
+        </div>
+        <div *ngIf="emailControl.hasError('email')">
+          El mail ingresado no cumple un formato válido de email. (ej: nombre@google.com)
+        </div>
+      </div>
+    </div>
+
+    <div class="item-form my-3">
+      <mat-form-field class="inputs" appearance="fill">
+        <mat-label for="password">Password</mat-label>
+        <input matInput autocomplete="on" type="password" id="password" name="password" class="form-control"
+          placeholder="Write your password" formControlName="password">
+      </mat-form-field>
+      <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)"
+        class="alert alert-danger">
+        <div *ngIf="passwordControl.hasError('required')">
+          La contraseña es requerida
+        </div>
+        <div *ngIf="passwordControl.hasError('minlength')">
+          La contraseña debe tener al menos 8 caracteres
+        </div>
+      </div>
+    </div>
+    <button class="btn-sesion" mat-raised-button color="primary" (click)="loginValidate()"
+      [disabled]="loginForm.invalid">Iniciar Sesion</button>
+  </form>
+</div>
+
+
+
+
+<!-- <div  id="login" class="container d-flex align align-items-center flex-column mt-5">
+
+  <img class="mb-4" src="../assets/movie.png" alt="" width="100" height="100">
+  <h1 class="h3 mb-3 fw-normal">Login Usuario</h1>
+
+  <form [formGroup]="loginForm" class="m-3 col-lg-6">
+
+    <div class="item-form my-4">
+      <label for="email">Email:</label>
+      <input type="text" id="email" placeholder="example@dominio.com" class="form-control" formControlName="email">
+      <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)" class="alert alert-danger">
+        <div *ngIf="emailControl.hasError('required')">
+          El email es requerido
+        </div>
+        <div *ngIf="emailControl.hasError('email')">
+          El mail ingresado no cumple un formato válido de email. (ej: nombre@google.com)
+        </div>
+      </div>
+    </div>
+
+    <div class="item-form my-4">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" formControlName="password">
+      <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)"
+        class="alert alert-danger">
+        <div *ngIf="passwordControl.hasError('required')">
+          La contraseña es requerida
+        </div>
+        <div *ngIf="passwordControl.hasError('minlength')">
+          La contraseña debe tener al menos 8 caracteres
+        </div>
+      </div>
+    </div>
+
+    <button class="w-50 btn btn-lg btn-primary d-block mx-auto" (click)="loginValidate()" [disabled]="loginForm.invalid">Iniciar Sesion</button>
+
+
+  </form>
+
+</div>
+<hr class="my-5" style= " color:violet; height: 10px;"> -->

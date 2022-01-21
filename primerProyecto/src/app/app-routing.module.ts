@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdmMovieListComponent } from './components/adm-movie-list/adm-movie-list.component';
 import { CartComponent } from './components/cart/cart.component';
 // import { InfoComponent } from './features/movies/components/info/info.component';
-import { LoginComponent } from './components/login/login.component';
 //import { MoviesComponent } from './features/movies/components/movies/movies.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
@@ -26,7 +25,7 @@ const routes: Routes = [
 
   {
     path: 'login',
-    component: LoginComponent
+    loadChildren: () => import('./features/login-redux/login.module').then(m => m.LoginModule)
   },
   {
     path: 'registro',

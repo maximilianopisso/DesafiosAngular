@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartComponent } from './cart.component';
+import { LoginComponent } from './login.component';
+
+
 
 
 
@@ -9,7 +11,7 @@ const routes: Routes = [
 
     {
         path: '',
-        component: CartComponent
+        component: LoginComponent
     },
 ];
 
@@ -20,4 +22,4 @@ const routes: Routes = [
         RouterModule.forChild(routes)   // importante
     ],
    })
-export class CartRoutingModule {}
+export class LoginRoutinModule {}

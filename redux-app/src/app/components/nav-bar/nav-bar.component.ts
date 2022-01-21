@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { title } from 'process';
+import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { appTitleSelector } from 'src/app/store/app.selectors';
 import {AppState} from '../../store/app-state.model'
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,9 +21,9 @@ export class NavBarComponent implements OnInit {
   
   ngOnInit(): void {
 
-    // this.title$ = this.store.pipe(
-    //   select(appTitleSelector (title))
-    // )
+    this.title$ = this.store.pipe(
+      select(appTitleSelector)
+    )
 
   }
 

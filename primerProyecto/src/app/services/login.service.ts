@@ -5,7 +5,8 @@ import { environment } from 'src/environments/environment.prod';
 import { User } from '../models/user.model'
 import { UserService } from './user.service';
 import jwt_decode from 'jwt-decode';
-import { userDisplay } from '../features/login-redux/user..model';
+import { userToDisplay } from '../models/userdisplay.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +57,8 @@ export class LoginService {
     return this.email !== '';
   }
  //  METODO QUE DEVUELVE LA INFORMACION DEL USUARIO LOGEADO -> GUARDS ADMIN
-  getUserInfo(): userDisplay {
-    let user:userDisplay ={
+  getUserInfo(): userToDisplay {
+    let user:userToDisplay ={
       email: this.email,
       apellido: this.apellido,
       nombre: this.nombre,
@@ -70,6 +71,14 @@ export class LoginService {
   getUserName(): string {
     return this.nombre
     }
+
+  signOutUser():void{
+    this.token = null;
+    this.email = '';
+    this.nombre = '';
+    this.apellido = '';
+    this.role ='';
+  }
 }
 
 

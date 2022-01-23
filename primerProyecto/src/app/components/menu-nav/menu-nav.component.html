@@ -10,23 +10,23 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
 
-       <span class="nav-link">{{title$ | async}}</span>
+       <span class="nav-link">{{response$ |async}}</span>
 
         <a class="nav-link" routerLinkActive = "active" routerLink="/cartelera">Cartelera</a>
 
-        <a *ngIf="user.role=='admin'" class="nav-link" routerLinkActive = "active" routerLink="/admin">Admin</a>
+        <!-- <a *ngIf="user.role=='admin'" class="nav-link" routerLinkActive = "active" routerLink="/admin">Admin</a> -->
 
-        <!-- <a class="nav-link" routerLinkActive = "active" routerLink="/admin">Admin</a> -->
+        <a class="nav-link" routerLinkActive = "active" routerLink="/admin">Admin</a>
 
-        <a *ngIf="user.role!=''" class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a>
+        <!-- <a *ngIf="user.role!=''" class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a> -->
 
-        <!-- <a  class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a> -->
+        <a  class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a>
 
-        <a *ngIf = "aux !== false"  class="nav-link" routerLinkActive = "active" routerLink="/login">Login</a>
+        <a  class="nav-link" routerLinkActive = "active" routerLink="/login">Login</a>
 
-        <!-- <a *ngIf="user.role !==''" class="nav-link" routerLinkActive = "active" routerLink="/signout">Cerrar Session</a> -->
+        <!-- <a class="nav-link" routerLinkActive = "active" routerLink="/registro">Registrarse</a> -->
 
-        <a class="nav-link" routerLinkActive = "active" routerLink="/registro">Registrarse</a>
+        <a class="nav-link" routerLinkActive = "active" routerLink="/signout" (click)="signOut()">Cerrar Session</a>
 
       </div>
     </div>

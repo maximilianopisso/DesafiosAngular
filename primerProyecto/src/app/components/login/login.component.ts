@@ -2,13 +2,11 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { showUser } from 'src/app/features/login-redux/store/login.actions';
-import { userDisplay } from 'src/app/features/login-redux/user..model';
-import { User } from 'src/app/models/user.model';
+import { userToDisplay } from 'src/app/models/userdisplay.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
-import { AppSetTitle } from 'src/app/store/app.actions';
+import { userDiplay } from 'src/app/store/menu-user.actions';
 import Swal from 'sweetalert2';
 import { CartComponent } from '../cart/cart.component';
 
@@ -22,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //users: User[] = [];
   login: boolean = false;  //SOLO PARA TEST UNITARIO
-  userLogedIn : userDisplay | any ;
+  userLogedIn : userToDisplay | any ;
   userDisplay: string ="";
   constructor(
     private loginService: LoginService,
@@ -93,7 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
         // ESTO ES PARA QUE MANDE LOS ESTADOS AL LOCALSTORE Y PUEDA TOMAR LOS DATOS DESDE EL MENU. COMO PAR PROBAR QUE LOS IFS DEL MENU FUNCIONAN
 
-        this.store.dispatch(AppSetTitle ({title: this.userDisplay, role: this.userLogedIn.role}))
+        this.store.dispatch(userDiplay ({username: this.userDisplay, role: this.userLogedIn.role}))
         this.router.navigate(['cartelera']);
 
       } else {

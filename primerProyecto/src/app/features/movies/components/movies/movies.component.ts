@@ -1,7 +1,9 @@
 import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
+import { userDisplaySelector } from 'src/app/store/meu-user.selectors';
 import { MovieService } from '../../services/movie.service';
 
 
@@ -19,7 +21,8 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private movieService: MovieService,
-    private router: Router
+    private router: Router,
+    private store : Store
     ) {
       console.log("MOVIES_COMPONENT - CONSTRUCTOR - CHECKED");
     }
@@ -32,6 +35,9 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
           this.moviesAPI = response
           // console.log(response)
           // console.log(this.moviesAPI)
+
+          console.log(this.store.pipe(
+            select(userDisplaySelector)));
       });
 
     }

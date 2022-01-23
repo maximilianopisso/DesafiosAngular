@@ -1,7 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 
-export const AppSetTitle = createAction(
+export const userDiplay = createAction(
   'Application Set Title',     //  String con Nombre de la Accion , debe ser unico e irrepetible
-  props<{title:string,role: string}>()
+  props<{username:string,role: string}>()
 
 );

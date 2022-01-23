@@ -19,7 +19,8 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { appReducer } from './store/app.reducer';
+import { appReducer } from './store/menu-user.reducer';
+
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { appReducer } from './store/app.reducer';
     FooterComponent,
     AdmMovieListComponent,
     AdmMovieItemComponent,
+
 
 
   ],

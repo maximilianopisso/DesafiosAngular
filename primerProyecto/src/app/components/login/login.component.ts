@@ -8,6 +8,7 @@ import { User } from 'src/app/models/user.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
+import { AppSetTitle } from 'src/app/store/app.actions';
 import Swal from 'sweetalert2';
 import { CartComponent } from '../cart/cart.component';
 
@@ -22,12 +23,13 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   //users: User[] = [];
   login: boolean = false;  //SOLO PARA TEST UNITARIO
   userLogedIn : userDisplay | any ;
+  userDisplay: string ="";
   constructor(
     private loginService: LoginService,
     private userService : UserService,
     private cartService : CartService,
-    private router :Router
-    //private store: Store
+    private router :Router,
+    private store: Store
 
     ){
       console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
@@ -76,29 +78,27 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         //  Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success"); // ACA ME TRAE EL NOMBRE UNDEFINED
         Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success");
 
-        console.log(this.loginService.getUserInfo);
+//        console.log(this.loginService.getUserInfo);
 
         this.userLogedIn= this.loginService.getUserInfo();
 
         //PARA PRESENTAR EN MENU
-        console.log(this.userLogedIn);
 
-        localStorage.setItem('nombre', JSON.stringify(this.userLogedIn.nombre));
-        localStorage.setItem('apellido', JSON.stringify(this.userLogedIn.apellido));
-        localStorage.setItem('role', JSON.stringify(this.userLogedIn.role));
-        localStorage.setItem('login', JSON.stringify('true'));
+        this.userDisplay = this.userLogedIn.nombre + ", "+ this. userLogedIn.apellido
+        //console.log(this.userLogedIn);
+        // localStorage.setItem('nombre', JSON.stringify(this.userLogedIn.nombre));
+        // localStorage.setItem('apellido', JSON.stringify(this.userLogedIn.apellido));
+        // localStorage.setItem('role', JSON.stringify(this.userLogedIn.role));
+        // localStorage.setItem('login', JSON.stringify('true'));
 
         // ESTO ES PARA QUE MANDE LOS ESTADOS AL LOCALSTORE Y PUEDA TOMAR LOS DATOS DESDE EL MENU. COMO PAR PROBAR QUE LOS IFS DEL MENU FUNCIONAN
 
-          // this.store.dispatch(
-          //   showUser(this.userLogedIn)
-          // )
-
+        this.store.dispatch(AppSetTitle ({title: this.userDisplay, role: this.userLogedIn.role}))
         this.router.navigate(['cartelera']);
 
       } else {
         this.login = false;   //SOLO PARA TEST UNITARIO
-        localStorage.setItem('login', JSON.stringify('false'));
+        //localStorage.setItem('login', JSON.stringify('false'));
         Swal.fire("ERROR", "El nombre email o la password son incorecctas", "error");
       }
     });

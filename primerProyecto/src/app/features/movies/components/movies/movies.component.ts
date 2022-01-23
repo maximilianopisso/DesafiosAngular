@@ -1,4 +1,3 @@
-import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface';
 import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';

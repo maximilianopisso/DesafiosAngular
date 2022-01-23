@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
 
-       <span class="nav-link">{{user.nombre + user.apellido}}</span>
+       <span class="nav-link">{{title$ | async}}</span>
 
         <a class="nav-link" routerLinkActive = "active" routerLink="/cartelera">Cartelera</a>
 
@@ -22,12 +22,11 @@
 
         <!-- <a  class="nav-link" routerLinkActive = "active" routerLink="/carrito">Carrito</a> -->
 
-        <a class="nav-link" routerLinkActive = "active" routerLink="/login">Login</a>
+        <a *ngIf = "aux !== false"  class="nav-link" routerLinkActive = "active" routerLink="/login">Login</a>
 
-        <a *ngIf="user.role !==''" class="nav-link" routerLinkActive = "active" routerLink="/signout">Cerrar Session</a>
+        <!-- <a *ngIf="user.role !==''" class="nav-link" routerLinkActive = "active" routerLink="/signout">Cerrar Session</a> -->
 
-        <a class="nav-link" routerLinkActive = "active" routerLink="/
-        registro">Registrarse</a>
+        <a class="nav-link" routerLinkActive = "active" routerLink="/registro">Registrarse</a>
 
       </div>
     </div>

@@ -12,7 +12,7 @@ import { MenuNavComponent } from 'src/app/components/menu-nav/menu-nav.component
   declarations: [
     MoviesComponent,
     InfoComponent,
-
+    //MenuNavComponent,
   ],
   imports: [
     CommonModule,

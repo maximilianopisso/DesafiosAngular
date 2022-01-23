@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { showUser } from 'src/app/features/login-redux/store/login.actions';
 import { userDisplay } from 'src/app/features/login-redux/user..model';
+import { appTitleSelector } from 'src/app/store/app.selectors';
 
 @Component({
   selector: 'app-menu-nav',
@@ -19,11 +20,12 @@ export class MenuNavComponent implements OnInit {
     token: ""
   }
 
+  title$: Observable<string> = of("")
   //user$!: Observable<userDisplay>;
 
   constructor(
     private store: Store
-    ) { }
+    ) {}
 
 
     ngOnInit(): void {
@@ -32,11 +34,11 @@ export class MenuNavComponent implements OnInit {
      this.user.apellido = JSON.parse(localStorage.getItem("apellido") || ""),
      this.user.nombre = JSON.parse(localStorage.getItem("nombre") || ""),
      this.user.role = JSON.parse(localStorage.getItem("role") || ""),
-
      console.log(JSON.parse(localStorage.getItem("apellido") || ""))
-    // this.user$ = this.store.pipe(
-    //   select(showUser)
-    // );
+
+    this.title$ = this.store.pipe(
+      select(appTitleSelector)
+    );
 
   }
 

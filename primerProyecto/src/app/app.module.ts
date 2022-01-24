@@ -16,6 +16,11 @@ import { MaterialModule } from './material/material.module';
 import { AdmMovieListComponent } from './components/adm-movie-list/adm-movie-list.component';
 import { AdmMovieItemComponent } from './components/adm-movie-item/adm-movie-item.component';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { appReducer } from './store/menu-user.reducer';
+
 
 
 @NgModule({
@@ -32,6 +37,7 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
     AdmMovieItemComponent,
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,8 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    StoreModule.forRoot({app: appReducer}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25}),
   ],
 
  providers: [

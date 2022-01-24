@@ -1,3 +1,4 @@
+
 <div id ="login" class="container d-flex align-items-center flex-column mt-5 body">
 
   <img class="mb-4 logo" src="../assets/movie.png" alt="Logo de Peliteka">
@@ -20,7 +21,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="item-form my-3">
       <mat-form-field class="inputs" appearance="fill">
         <mat-label for="password">Password</mat-label>
@@ -40,6 +41,7 @@
     <button class="btn-sesion" mat-raised-button color="primary" (click)="loginValidate()"
       [disabled]="loginForm.invalid">Iniciar Sesion</button>
   </form>
+  <a  class="nav-link" routerLinkActive = "active" routerLink="/registro" style="color: rgba(30, 30, 159, 0.791); font-size: 1.5rem;">¿No es te has registrado aún? Resgistrate acá.</a>
 </div>
 
 

@@ -46,14 +46,13 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
     console.log("borro cart");
 
-    this.cartService.clearCart().subscribe(response =>{
-      console.log(response);
-    });
+    // this.cartService.clearCart().subscribe(response =>{
+    //   console.log(response);
+    // });
   }
 
   ngOnDestroy(): void {
     console.log("LOGIN_COMPONENT - DESTROY - CHECKED ");
-
 
   }
 

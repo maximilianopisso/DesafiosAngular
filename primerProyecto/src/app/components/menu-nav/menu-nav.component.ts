@@ -26,8 +26,10 @@ export class MenuNavComponent implements OnInit {
     role: "",
     token: ""
   }
+  state$: Observable<userState> = of({username: "", role: ""});
+  username: string ="";
+  role: string ="";
 
-  response$: Observable<any> = of({ username: "", role: "" })
 
   constructor(
     private store: Store,
@@ -45,11 +47,16 @@ export class MenuNavComponent implements OnInit {
     //  this.user.role = JSON.parse(localStorage.getItem("role") || ""),
     //  console.log(JSON.parse(localStorage.getItem("apellido") || ""))
 
-    this.response$ = this.store.pipe(
+    this.state$ = this.store.pipe(
       select(userDisplaySelector)
-    );
 
-  }
+      );
+
+      this.state$.subscribe(state => this.username = state.username);
+      this.state$.subscribe(state => this.role = state.role);
+    }
+
+
 
 
   signOut() {

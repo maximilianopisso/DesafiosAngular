@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit, } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import Swal from 'sweetalert2';
@@ -9,12 +10,10 @@ import Swal from 'sweetalert2';
   templateUrl: './adm-movie-list.component.html',
   styleUrls: ['./adm-movie-list.component.scss']
 })
-export class AdmMovieListComponent implements OnInit, AfterViewInit {
+export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
   idValue = 0;
 
-
-  //@Input()
   movies: MovieAPI[] = [];
   emptyMovie: MovieAPI = {
     title: 'Agregar Titulo Pelicula',
@@ -50,7 +49,6 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
   }
 
   movieEditForm = new FormGroup({
-    // id: new FormControl('-',),
     title: new FormControl('-', [Validators.required]),
     poster_path: new FormControl('-', [Validators.required]),
     vote_average: new FormControl('-', [Validators.required]),
@@ -65,24 +63,28 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
   release_dateControl = this.movieEditForm.controls['release_date'];
   overviewControl = this.movieEditForm.controls['overview'];
 
+  private subscriptions: Subscription | undefined
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private movieService: MovieService,
+  ) {}
+
+
 
   ngOnInit(): void {
+
+    //Este no anda
     // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
-    this.movieService.getListAPI().subscribe(response => {
-      this.movies = response// console.log(response)
-
-      //  this.movies.forEach(movie => {
-      //    movie.poster_path = this.urlPath + movie.poster_path;    //  ESTO LO HAGO PARA COMPLETAR EN CADA PELICULA LA RUTA COMPLETA ->
-      //                                                             //  ->PARA CARGAR LAS IMAGENES Y PARA MOSTRAR EL ENLACE COMPLETO EN LA EDICION TAMBIEN
-      //  })
-
-    });
-
+    this.subscriptions = this.movieService.getListAPI().subscribe(response => {
+        this.movies = response
+      })
   }
 
   ngAfterViewInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions?.unsubscribe();
   }
 
   clickMovie(movie: MovieAPI) {
@@ -118,13 +120,13 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
       genre_ids: [],
       original_language: '',
       original_title: '',
-      overview:  this.movieEditForm.controls['overview'].value,
+      overview: this.movieEditForm.controls['overview'].value,
       popularity: 0,
-      poster_path:   this.movieEditForm.controls['poster_path'].value,   //recortar string
+      poster_path: this.movieEditForm.controls['poster_path'].value,   //recortar string
       release_date: this.movieEditForm.controls['release_date'].value,
-      title:  this.movieEditForm.controls['title'].value,
+      title: this.movieEditForm.controls['title'].value,
       video: false,
-      vote_average:  this.movieEditForm.controls['vote_average'].value,
+      vote_average: this.movieEditForm.controls['vote_average'].value,
       vote_count: 0
     }
 
@@ -132,23 +134,25 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
 
     this.movieService.addMovie(newMovie).subscribe(response => {
       this.movieService.getListAPI().subscribe(response => {
-      this.movies = response });
+        this.movies = response
+      });
       //this.movieEditForm.reset();
     });
   }
 
   deleteMovie() {
 
-    this.movieService.removeMovie(this.idValue).subscribe(response =>{
+    this.movieService.removeMovie(this.idValue).subscribe(response => {
       this.movieService.getListAPI().subscribe(response => {
-        this.movies = response });
-        Swal.fire("PELICULA ELIMINADA", "La pelicula ha sido eliminada de la cartelera", "success");
-     // this.movieEditForm.reset();
+        this.movies = response
+      });
+      Swal.fire("PELICULA ELIMINADA", "La pelicula ha sido eliminada de la cartelera", "success");
+      // this.movieEditForm.reset();
     });
 
   }
 
-  updateMovie(){
+  updateMovie() {
     let updateMovie: MovieAPI = {
       adult: false,
       backdrop_path: '',
@@ -156,21 +160,22 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit {
       genre_ids: [],
       original_language: '',
       original_title: '',
-      overview:  this.movieEditForm.controls['overview'].value,
+      overview: this.movieEditForm.controls['overview'].value,
       popularity: 0,
-      poster_path:   this.movieEditForm.controls['poster_path'].value,
+      poster_path: this.movieEditForm.controls['poster_path'].value,
       release_date: this.movieEditForm.controls['release_date'].value,
-      title:  this.movieEditForm.controls['title'].value,
+      title: this.movieEditForm.controls['title'].value,
       video: false,
-      vote_average:  this.movieEditForm.controls['vote_average'].value,
+      vote_average: this.movieEditForm.controls['vote_average'].value,
       vote_count: 0
     }
 
     this.movieService.updateMovie(updateMovie).subscribe(response => {
-        this.movieService.getListAPI().subscribe(response => {
-          this.movies = response });
-          Swal.fire("PELICULA MODIFICADA", "La pelicula seleccionada ha sido modificada", "info");
-          //this.movieEditForm.reset();
+      this.movieService.getListAPI().subscribe(response => {
+        this.movies = response
       });
+      Swal.fire("PELICULA MODIFICADA", "La pelicula seleccionada ha sido modificada", "info");
+      //this.movieEditForm.reset();
+    });
   }
 }

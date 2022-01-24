@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { userToDisplay } from 'src/app/models/userdisplay.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -18,10 +19,12 @@ import { CartComponent } from '../cart/cart.component';
 })
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  //users: User[] = [];
   login: boolean = false;  //SOLO PARA TEST UNITARIO
   userLogedIn : userToDisplay | any ;
   userDisplay: string ="";
+
+  private subscriptions: Subscription | undefined;
+
   constructor(
     private loginService: LoginService,
     private userService : UserService,
@@ -37,23 +40,19 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     console.log("LOGIN_COMPONENT - INIT - CHECKED ");
     console.log("USUARIOS DESDE LA API");
-    this.userService.getUsers().subscribe(response => console.table(response));
-  }
+    this.subscriptions= this.userService.getUsers().subscribe(response => console.table(response));
+    }
 
   ngAfterViewInit(): void {
     console.log("LOGIN_COMPONENT - AFTER VIEW INIT - CHECKED ");
     const lastElement: any = document.querySelector('.inputs');
     lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
     console.log("borro cart");
-
-    // this.cartService.clearCart().subscribe(response =>{
-    //   console.log(response);
-    // });
   }
 
   ngOnDestroy(): void {
     console.log("LOGIN_COMPONENT - DESTROY - CHECKED ");
-
+    this.subscriptions?.unsubscribe
   }
 
   loginForm = new FormGroup({
@@ -69,33 +68,17 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     this.loginService.validateCredentials(this.emailControl.value, this.passwordControl.value )
     .subscribe(valid => {
 
-
       if (valid) {
         this.login = true;    //SOLO PARA TEST UNITARIO
-        //  Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success"); // ACA ME TRAE EL NOMBRE UNDEFINED
+
         Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success");
+        this.userLogedIn= this.loginService.getUserInfo()        //PARA PRESENTAR EN MENU
 
-//        console.log(this.loginService.getUserInfo);
-
-        this.userLogedIn= this.loginService.getUserInfo();
-
-        //PARA PRESENTAR EN MENU
-
-        this.userDisplay = this.userLogedIn.nombre + ", "+ this. userLogedIn.apellido
-        //console.log(this.userLogedIn);
-        // localStorage.setItem('nombre', JSON.stringify(this.userLogedIn.nombre));
-        // localStorage.setItem('apellido', JSON.stringify(this.userLogedIn.apellido));
-        // localStorage.setItem('role', JSON.stringify(this.userLogedIn.role));
-        // localStorage.setItem('login', JSON.stringify('true'));
-
-        // ESTO ES PARA QUE MANDE LOS ESTADOS AL LOCALSTORE Y PUEDA TOMAR LOS DATOS DESDE EL MENU. COMO PAR PROBAR QUE LOS IFS DEL MENU FUNCIONAN
-
-        this.store.dispatch(userDiplay ({username: this.userDisplay, role: this.userLogedIn.role}))
+        this.store.dispatch(userDiplay ({username: this.userLogedIn.nombre + ", "+ this. userLogedIn.apellido, role: this.userLogedIn.role}))
         this.router.navigate(['cartelera']);
 
       } else {
         this.login = false;   //SOLO PARA TEST UNITARIO
-        //localStorage.setItem('login', JSON.stringify('false'));
         Swal.fire("ERROR", "El nombre email o la password son incorecctas", "error");
       }
     });

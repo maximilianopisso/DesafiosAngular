@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
@@ -12,16 +14,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
+  subscriptions: Subscription | undefined;
 
-  //private users: User[] = [];
 
-  constructor(private userService: UserService) {
-    console.log("REGISTER_COMPONENT - CONSTRUCTOR - CHECKED ");
-  }
+  constructor(
+    private userService: UserService,
+    private router : Router
+  ){}
 
 
   ngOnInit(): void {
-    console.log("REGISTER_COMPONENT - INIT - CHECKED ");
+   
   }
 
   ngAfterViewInit(): void {
@@ -30,7 +33,10 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
   }
   ngOnDestroy(): void {
-    console.log("REGISTER_COMPONENT - DESTROY - CHECKED ");
+    this.subscriptions?.unsubscribe();
+   console.log("REGISTER_COMPONENT - DESTROY - CHECKED ");
+   console.log("Desuscripcion");
+
   }
 
   registroForm = new FormGroup({
@@ -77,6 +83,7 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
       if(response.status === "OK"){
       Swal.fire("NUEVO USUARIO", "Se registro existosamente un nuevo usuario", "success");
       this.registroForm.reset();
+      this.router.navigate(['login']);
      }else{
       Swal.fire("ERROR", "No se pudo registrar nuevo usuario", "error");   //"warning", "error", "success" and "info".
      }

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -15,7 +16,10 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
   cartMovies: MovieAPI[]|any = [];
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
-  precio :number= 100;
+
+  private subscriptions: Subscription | undefined;
+
+
   constructor(
 
     private movieService : MovieService,
@@ -26,26 +30,29 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
    }
   ngOnInit(): void {
-    this.cartService.getCart().subscribe(response => this.cartMovies = response);
-    console.log("CART_COMPONENT - INIT - CHECKED ");
+   console.log("CART_COMPONENT - INIT - CHECKED ");
+   this.subscriptions = this.cartService.getCart().subscribe(response => this.cartMovies = response)
   }
   ngAfterViewInit(): void {
     console.log("CART_COMPONENT - AFTER VIEW INIT - CHECKED ");
   }
   ngOnDestroy(): void {
+    this.subscriptions?.unsubscribe();
     console.log("CART_COMPONENT - DESTROY - CHECKED ");
   }
 
-  vaciarCarrito(){    //OK
-    this.cartService.clearCart().subscribe(response =>{
+  vaciarCarrito(){   
+
+      this.cartService.clearCart().subscribe(response =>{
       console.log(response);
       this.cartService.getCart().subscribe(response => this.cartMovies = response);
-    });
+     })
 
   }
 
   removeMovieFromCart(movie : MovieAPI){
-    this.cartService.removeMovie(movie).subscribe(response => {
+
+      this.cartService.removeMovie(movie).subscribe(response => {
       console.log(response);
       if (response.status !== 'OK'){
         alert ("NO SE PUDO BORRAR LA PELICULA SELECCIONADA")

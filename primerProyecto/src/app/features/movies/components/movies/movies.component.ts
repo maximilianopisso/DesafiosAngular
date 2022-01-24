@@ -15,9 +15,9 @@ import { MovieService } from '../../services/movie.service';
 export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
-  private subcripcionMovie: Subscription | undefined;
-   moviesAPI : MovieAPI[] =[];
-   urlPath: string = 'https://image.tmdb.org/t/p/w500';
+  private subscriptionGetMovies: Subscription | undefined;
+  moviesAPI : MovieAPI[] =[];
+  urlPath: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(
     private movieService: MovieService,
@@ -31,13 +31,12 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
 
       //SE ARMA LISTADO COMPLETO DE PELICULAS TRAYENDO LAS PELICULAS DESDE LA CONSULTA A LA API DE PELICULAS
-      this.subcripcionMovie = this.movieService.getListAPI().subscribe(response => {
+
+
+      this.subscriptionGetMovies = this.movieService.getListAPI().subscribe(response => {
           this.moviesAPI = response
           // console.log(response)
           // console.log(this.moviesAPI)
-
-          console.log(this.store.pipe(
-            select(userDisplaySelector)));
       });
 
     }
@@ -47,7 +46,7 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnDestroy(): void {
-      this.subcripcionMovie?.unsubscribe();
+      this.subscriptionGetMovies?.unsubscribe();
       console.log("MOVIES_COMPONENT - DESTROY - CHECKED ");
     }
 

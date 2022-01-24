@@ -52,12 +52,11 @@ export class MenuNavComponent implements OnInit {
 
       );
 
-      this.state$.subscribe(state => this.username = state.username);
-      this.state$.subscribe(state => this.role = state.role);
+      this.state$.subscribe(state => {
+        this.username = state.username
+        this.role = state.role
+      });
     }
-
-
-
 
   signOut() {
 

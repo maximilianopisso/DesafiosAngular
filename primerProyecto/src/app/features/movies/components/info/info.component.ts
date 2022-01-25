@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { cartAddMovie } from 'src/app/features/cart/store/cart.actions';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
 import Swal from 'sweetalert2';
@@ -27,6 +29,7 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     private moviesService: MovieService,
     private cartService : CartService,
     private router: Router,
+    private store: Store
   )
     {
       console.log("INFO_COMPONENT - CONSTRUCTOR - CHECKED ");
@@ -77,23 +80,26 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addMovie(movie: MovieAPI){
 
-    this.subscrptionsInfo.add(
-      this.cartService.addMovie(movie).subscribe(response =>{
+    this.store.dispatch(cartAddMovie({movie: movie}))
+    this.router.navigate(['carrito']);
 
-        console.log(response);
-        if (response.status !== 'OK'){
-          Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
-        }else{
-          Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
-          this.router.navigate(['carrito']);
-        }
-      },(err) => {
-        console.log("Faltal Error")
-        console.log(err);
-        Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-        }
-      )
-    )
+    // this.subscrptionsInfo.add(
+    //   this.cartService.addMovie(movie).subscribe(response =>{
+
+    //     console.log(response);
+    //     if (response.status !== 'OK'){
+    //       Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
+    //     }else{
+    //       Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
+    //       this.router.navigate(['carrito']);
+    //     }
+    //   },(err) => {
+    //     console.log("Faltal Error")
+    //     console.log(err);
+    //     Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+    //     }
+    //   )
+    // )
   }
 
   returnToMovies(){

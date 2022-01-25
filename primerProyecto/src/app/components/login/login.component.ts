@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
   }
 
-  date = new Date();
+
 
 
   ngOnInit(): void {

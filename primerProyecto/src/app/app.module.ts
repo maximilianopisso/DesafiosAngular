@@ -19,7 +19,8 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { appReducer } from './store/menu-user.reducer';
+import { userReducer } from './store/menu-user.reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 
 
@@ -46,8 +47,9 @@ import { appReducer } from './store/menu-user.reducer';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    StoreModule.forRoot({user: appReducer}, {}),
+    StoreModule.forRoot({user: userReducer}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25}),
+    EffectsModule.forRoot([]),
   ],
 
  providers: [

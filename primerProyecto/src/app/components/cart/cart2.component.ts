@@ -10,8 +10,8 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  templateUrl: './cart2.component.html',
+  styleUrls: ['./cart2.component.scss']
 })
 export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 

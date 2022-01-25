@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdmMovieListComponent } from './components/adm-movie-list/adm-movie-list.component';
-import { CartComponent } from './components/cart/cart.component';
+import { CartComponent } from './components/cart/cart2.component';
 // import { InfoComponent } from './features/movies/components/info/info.component';
 import { LoginComponent } from './components/login/login.component';
 //import { MoviesComponent } from './features/movies/components/movies/movies.component';

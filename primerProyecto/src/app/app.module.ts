@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 // import { MoviesComponent } from './features/movies/components/movies/movies.component';
 // import { InfoComponent } from './features/movies/components/info/info.component';
-import { CartComponent } from './components/cart/cart2.component';
+
 import { MenuNavComponent } from './components/menu-nav/menu-nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -30,7 +30,7 @@ import { appReducer } from './store/menu-user.reducer';
     RegisterComponent,
     // MoviesComponent,
     // InfoComponent,
-    CartComponent,
+    //CartComponent,
     MenuNavComponent,
     FooterComponent,
     AdmMovieListComponent,

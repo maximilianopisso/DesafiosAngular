@@ -8,7 +8,7 @@ import { CartService } from 'src/app/services/cart.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { userDiplay } from 'src/app/store/menu-user.actions';
+import { cleanStore, userDiplay } from 'src/app/store/menu-user.actions';
 
 
 @Component({
@@ -75,7 +75,7 @@ export class MenuNavComponent implements OnInit {
           console.log(response)
         });
         this.loginService.signOutUser();
-        this.store.dispatch(userDiplay({ username: "", role: "" }))
+        this.store.dispatch(cleanStore())
         Swal.fire(
           'Tu sesion ha sido cerrada',
           'Muchas gracias por visitarnos !',

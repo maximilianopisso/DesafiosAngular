@@ -46,7 +46,7 @@ import { appReducer } from './store/menu-user.reducer';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    StoreModule.forRoot({app: appReducer}, {}),
+    StoreModule.forRoot({user: appReducer}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25}),
   ],
 

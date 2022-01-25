@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { userState } from './user-state.model';
-import { userDiplay } from './menu-user.actions';
+import { cleanStore, userDiplay } from './menu-user.actions';
 
 export const userInitialState: userState = { username: "", role: "" }
 
@@ -13,7 +13,12 @@ const _appReducer = createReducer(
       username: username,
       role: role
     };
-  })
+  }),
+
+  on(cleanStore, () => ({
+    ...userInitialState
+  }))
+
 );
 
 export function appReducer(state: any, action: any) {

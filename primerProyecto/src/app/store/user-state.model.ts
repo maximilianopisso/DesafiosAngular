@@ -1,5 +1,5 @@
 
 export interface userState {
   username: string,
-  role: string,
+  role: string
 }

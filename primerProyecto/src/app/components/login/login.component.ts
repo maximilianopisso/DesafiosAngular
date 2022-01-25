@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { userToDisplay } from 'src/app/models/userdisplay.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
+import { MetaService } from 'src/app/services/meta.service';
 import { UserService } from 'src/app/services/user.service';
 import { userDiplay } from 'src/app/store/menu-user.actions';
 import Swal from 'sweetalert2';
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     private userService: UserService,
     private cartService: CartService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private meta : MetaService
 
   ) {
     console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
@@ -42,6 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnInit(): void {
+
+    this.meta.updateTitle()
 
     console.log("LOGIN_COMPONENT - INIT - CHECKED ");
     console.log("USUARIOS DESDE LA API");

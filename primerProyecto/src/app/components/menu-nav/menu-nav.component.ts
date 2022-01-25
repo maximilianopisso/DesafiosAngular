@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { cleanStore, userDiplay } from 'src/app/store/menu-user.actions';
+import { cartClear } from 'src/app/features/cart/store/cart.actions';
 
 
 @Component({
@@ -71,11 +72,17 @@ export class MenuNavComponent implements OnInit {
 
     }).then((result) => {
       if (result.value) {
-        this.cartService.clearCart().subscribe(response => {
-          console.log(response)
-        });
+
+        // this.cartService.clearCart().subscribe(response => {
+        //   console.log(response)
+        // });
+
+        this.store.dispatch(cartClear());
+
         this.loginService.signOutUser();
+
         this.store.dispatch(cleanStore())
+
         Swal.fire(
           'Tu sesion ha sido cerrada',
           'Muchas gracias por visitarnos !',

@@ -68,7 +68,7 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
   vaciarCarrito(){
 
     this.store.dispatch(cartClear())
-    
+
     this.movieList$ = this.store.pipe(
       select(cartStateSelector)
     )

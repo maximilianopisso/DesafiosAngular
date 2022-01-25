@@ -2,5 +2,6 @@ import { MovieAPI } from "src/app/models/movieAPI.model";
 
 
 export interface CartState {
-    movies: MovieAPI[];
+    status: string,
+    movies: MovieAPI[],
 }

@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.meta.updateTitle()
+    // this.meta.updateTitle()
 
     console.log("LOGIN_COMPONENT - INIT - CHECKED ");
     console.log("USUARIOS DESDE LA API");

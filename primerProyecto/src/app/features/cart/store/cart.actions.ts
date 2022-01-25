@@ -17,5 +17,5 @@ export const cartClear = createAction(
 
 export const cartSetContent = createAction(
   'Cart - Set cart content',
-  props<{ movies: MovieAPI[] }>()
+  props<{ status: string, movies: MovieAPI[] }>()
 )

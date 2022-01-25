@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription, tap } from 'rxjs';
+import { CartState } from 'src/app/features/cart/store/cart-store.state';
 import { cartAddMovie } from 'src/app/features/cart/store/cart.actions';
+import { cartStateSelector } from 'src/app/features/cart/store/cart.selector';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
 import Swal from 'sweetalert2';
@@ -23,7 +25,8 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   halfStar:number =0;
 
   private subscrptionsInfo = new Subscription;
-
+  private movieList$!: Observable<CartState>;
+  private status:string ="";
   constructor(
     private activateRoute: ActivatedRoute,
     private moviesService: MovieService,
@@ -79,9 +82,37 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
 
   addMovie(movie: MovieAPI){
+    const date = new Date;
+    console.log(date);
 
     this.store.dispatch(cartAddMovie({movie: movie}))
-    this.router.navigate(['carrito']);
+
+    this.movieList$ = this.store.pipe(
+      select(cartStateSelector)
+    )
+    this.movieList$.subscribe(data =>{
+      console.log(data);
+     this.status = data.status
+        if (this.status !== 'OK'){
+              Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
+            }else{
+              Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
+              this.router.navigate(['carrito']);
+            }
+    })
+
+
+    // this.movieList$.subscribe(data => {
+    //   this.status = data.status
+    //   console.log(this.status);
+
+    //   if (this.status !== 'OK'){
+    //     Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
+    //   }else{
+    //     Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
+    //     this.router.navigate(['carrito']);
+    //   }
+    // })
 
     // this.subscrptionsInfo.add(
     //   this.cartService.addMovie(movie).subscribe(response =>{

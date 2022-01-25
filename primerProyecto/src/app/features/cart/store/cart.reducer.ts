@@ -7,48 +7,17 @@ import { cartSetContent } from "./cart.actions";
 
 
 
-export const cartInitialState: CartState = { movies: [] }
+export const cartInitialState: CartState = { status:"Initial", movies: [] }
 
 
 
 export const _cartReducer = createReducer(
 
-
-
-    // on(cartAddItem, (state, { item }) => {
-
-    //     const items = [...state.items];
-    //     items.push(item);
-
-    //     return {
-    //         ...state,
-    //         items
-    //     };
-    // }),
-
-    // on(cartDeleteItem, (state, { itemId }) => {
-
-    //     const items = [...state.items];
-    //     const itemIndex = items.findIndex(cartItem => cartItem.id === itemId)
-    //     items.splice(itemIndex, 1);
-
-    //     return {
-    //         ...state,
-    //         items
-    //     };
-    // }),
-
-    // on(cartClear, (state) => {
-    //     return {
-    //         ...state, 
-    //         items: []
-    //     };
-    // }),
-
-    cartInitialState,
-    on(cartSetContent, (state, {movies}) => {
+  cartInitialState,
+    on(cartSetContent, (state, {status,movies}) => {
       return{
         ...state,
+        status,
         movies,
       };
     })

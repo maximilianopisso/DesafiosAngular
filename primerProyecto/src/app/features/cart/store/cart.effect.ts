@@ -23,14 +23,14 @@ export class CartEffects {
   this.actions.pipe(
       ofType(cartAddMovie),
       switchMap(action => this.cartService.addMovie(action.movie)),
-      map(data => cartSetContent({movies: data.cartContent as MovieAPI[]})),
+      map(data => cartSetContent({status: data.status, movies: data.cartContent as MovieAPI[]})),
     )
   );
   cartDeleteItem$ = createEffect(()=>
   this.actions.pipe(
       ofType(cartDeleteMovie),
       switchMap(action => this.cartService.removeMovie(action.movie)),
-      map(data => cartSetContent({movies: data.cartContent as MovieAPI[]})),
+      map(data => cartSetContent({status: data.status,movies: data.cartContent as MovieAPI[]})),
     )
   );
 
@@ -38,7 +38,7 @@ export class CartEffects {
   this.actions.pipe(
       ofType(cartClear),
       switchMap(action => this.cartService.clearCart()),
-      map(data => cartSetContent({movies: [] as MovieAPI[]})),
+      map(data => cartSetContent({status: "Clear", movies: [] as MovieAPI[]})),
     )
   );
 

@@ -19,7 +19,7 @@ import { cartStateSelector } from '../../store/cart.selector';
 })
 export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  cartMovies: MovieAPI[]|any = [];
+  cartMovies: MovieAPI[] | any = [];
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
 
   private subscriptionsCart = new Subscription;
@@ -27,118 +27,86 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
 
-    private movieService : MovieService,
-    private cartService : CartService,
-    private router : Router,
+    private movieService: MovieService,
+    private cartService: CartService,
+    private router: Router,
     private store: Store,
-    ) {
+  ) {
     console.log("CART_COMPONENT - CONSTRUCTOR - CHECKED ");
 
-   }
+  }
   ngOnInit(): void {
-   console.log("CART_COMPONENT - INIT - CHECKED ");
+    console.log("CART_COMPONENT - INIT - CHECKED ");
 
-   this.movieList$ = this.store.pipe(
-    select(cartStateSelector)
-  )
-  this.subscriptionsCart.add(
-    this.movieList$.subscribe(data => this.cartMovies = data.movies)
-  )
+    this.movieList$ = this.store.pipe(
+      select(cartStateSelector)
+    )
+    this.subscriptionsCart.add(
+      this.movieList$.subscribe(data => {
+        this.cartMovies = data.movies
+      }, (err) => {
+          console.log("Faltal Error")
+          console.log(err);
+          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+      })
+    )
+  }
+ngAfterViewInit(): void {
+  console.log("CART_COMPONENT - AFTER VIEW INIT - CHECKED ");
+}
+ngOnDestroy(): void {
+  this.subscriptionsCart.unsubscribe();
+  console.log("CART_COMPONENT - DESTROY - CHECKED ");
+}
+
+vaciarCarrito(){
+
+  this.store.dispatch(cartClear())
+
+  // this.movieList$ = this.store.pipe(
+  //   select(cartStateSelector)
+  // )
+  // this.subscriptionsCart.add(
+  //   this.movieList$.subscribe(data => this.cartMovies = data.movies)
+  // )
+
+}
+
+removeMovieFromCart(movie : MovieAPI){
+
+  this.cartService.removeMovie(movie).subscribe(response => console.log(response));
+  this.store.dispatch(cartDeleteMovie({ movie: movie }))
 
 
-   //  this.subscriptionsCart.add(
-  //     this.cartService.getCart().subscribe(response => {
-  //       this.cartMovies = response
-  //     }, (err) => {
-  //       console.log("Faltal Error")
-  //       console.log(err);
-  //       Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-  //       }
-  //     )
+  
+  // this.subscriptionsCart.add(
+  //     this.cartService.removeMovie(movie).subscribe(response => {
+  //     console.log(response);
+
+  //     if (response.status !== 'OK'){
+  //       alert ("NO SE PUDO BORRAR LA PELICULA SELECCIONADA")
+  //     }else{
+  //       this.subscriptionsCart.add(
+  //         this.cartService.getCart().subscribe(response => this.cartMovies = response)
+  //       );
+  //     }
+  //   },(err) => {
+  //     console.log("Faltal Error")
+  //     console.log(err);
+  //     Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+  //     }
   //   )
-  }
-  ngAfterViewInit(): void {
-    console.log("CART_COMPONENT - AFTER VIEW INIT - CHECKED ");
-  }
-  ngOnDestroy(): void {
-    this.subscriptionsCart.unsubscribe();
-    console.log("CART_COMPONENT - DESTROY - CHECKED ");
-  }
+  // )
+}
 
-  vaciarCarrito(){
+volverCartelera(){
+  this.router.navigate(['cartelera']);
+}
 
-    this.store.dispatch(cartClear())
+returnToDetailMovie(movie: MovieAPI){
+  this.router.navigate(['cartelera', movie.id]);
 
-    this.movieList$ = this.store.pipe(
-      select(cartStateSelector)
-    )
-    this.subscriptionsCart.add(
-      this.movieList$.subscribe(data => this.cartMovies = data.movies)
-    )
-
-
-    // this.subscriptionsCart.add(
-    //   this.cartService.clearCart().subscribe(response =>{
-    //     console.log(response);
-    //     this.subscriptionsCart.add(
-    //       this.cartService.getCart().subscribe(response => this.cartMovies = response)
-    //     )
-    //   },(err) => {
-    //     console.log("Faltal Error")
-    //     console.log(err);
-    //     Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-    //     }
-    //   )
-    // )
-  }
-
-  removeMovieFromCart(movie : MovieAPI){
-
-    this.store.dispatch(cartDeleteMovie({movie:movie}))
-    this.movieList$ = this.store.pipe(
-      select(cartStateSelector)
-    )
-    this.subscriptionsCart.add(
-      this.movieList$.subscribe(data => this.cartMovies = data.movies)
-    )
-
-
-    //,(err) => {
-      //     console.log("Faltal Error")
-      //     console.log(err);
-      //     Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-      //     }
-      //   )
-
-
-    // this.subscriptionsCart.add(
-    //     this.cartService.removeMovie(movie).subscribe(response => {
-    //     console.log(response);
-
-    //     if (response.status !== 'OK'){
-    //       alert ("NO SE PUDO BORRAR LA PELICULA SELECCIONADA")
-    //     }else{
-    //       this.subscriptionsCart.add(
-    //         this.cartService.getCart().subscribe(response => this.cartMovies = response)
-    //       );
-    //     }
-    //   },(err) => {
-    //     console.log("Faltal Error")
-    //     console.log(err);
-    //     Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-    //     }
-    //   )
-    // )
-  }
-
-  volverCartelera(){
-    this.router.navigate(['cartelera']);
-  }
-
-  returnToDetailMovie(movie: MovieAPI){
-    this.router.navigate(['cartelera', movie.id]);
-
-  }
+}
 }
 
 

@@ -20,14 +20,14 @@ const routes: Routes = [
     path: '',
     //redirectTo: 'cartelera',
     redirectTo: 'login',
-    pathMatch: 'full',
-    data:{title:"Login"}
+    pathMatch: 'full'
+    //data:{title:"Login"}
   },
 
   {
     path: 'login',
     component: LoginComponent,
-    data:{title:"Login"}
+   // data:{title:"Login"}
   },
   {
     path: 'registro',

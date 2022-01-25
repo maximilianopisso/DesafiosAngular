@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
 
-        <span class="nav-link">{{username}}</span>
+        <span *ngIf="username!==''" class="nav-link">{{username}}</span>
 
         <a *ngIf="username!==''" class="nav-link" routerLinkActive="active" routerLink="/cartelera">Cartelera</a>
 

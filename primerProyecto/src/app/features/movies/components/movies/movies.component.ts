@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
-import { userDisplaySelector } from 'src/app/store/meu-user.selectors';
+import Swal from 'sweetalert2';
 import { MovieService } from '../../services/movie.service';
 
 
@@ -15,7 +15,8 @@ import { MovieService } from '../../services/movie.service';
 export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
-  private subscriptionGetMovies: Subscription | undefined;
+  private subscriptionsMovies = new Subscription;
+
   moviesAPI : MovieAPI[] =[];
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
 
@@ -33,12 +34,17 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
       //SE ARMA LISTADO COMPLETO DE PELICULAS TRAYENDO LAS PELICULAS DESDE LA CONSULTA A LA API DE PELICULAS
 
 
-      this.subscriptionGetMovies = this.movieService.getListAPI().subscribe(response => {
-          this.moviesAPI = response
-          // console.log(response)
-          // console.log(this.moviesAPI)
-      });
-
+      this.subscriptionsMovies?.add(
+        this.movieService.getListAPI().subscribe(response => {
+            this.moviesAPI = response
+            // console.log(response)
+            // console.log(this.moviesAPI)
+        },(err) => {
+          console.log("Faltal Error")
+          console.log(err);
+          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+        })
+      );
     }
 
     ngAfterViewInit(): void {
@@ -46,7 +52,7 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnDestroy(): void {
-      this.subscriptionGetMovies?.unsubscribe();
+      this.subscriptionsMovies?.unsubscribe();
       console.log("MOVIES_COMPONENT - DESTROY - CHECKED ");
     }
 

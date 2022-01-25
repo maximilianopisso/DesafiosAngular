@@ -5,6 +5,7 @@ import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-adm-movie-list',
   templateUrl: './adm-movie-list.component.html',
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
   idValue = 0;
+  date = new Date
 
   movies: MovieAPI[] = [];
   emptyMovie: MovieAPI = {
@@ -26,7 +28,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
     original_title: '',
     overview: 'Agregar Descripcion de tu Pelicula',
     popularity: 0,
-    release_date: '',
+    release_date: '2022-01-01',
     video: false,
     vote_average: 0,
     vote_count: 0
@@ -51,7 +53,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   movieEditForm = new FormGroup({
     title: new FormControl('-', [Validators.required]),
     poster_path: new FormControl('-', [Validators.required]),
-    vote_average: new FormControl('-', [Validators.required]),
+    vote_average: new FormControl('-', [Validators.required,Validators.max(10),Validators.min(0)]),
     release_date: new FormControl('-', [Validators.required]),
     overview: new FormControl('-', [Validators.required]),
   });
@@ -63,7 +65,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   release_dateControl = this.movieEditForm.controls['release_date'];
   overviewControl = this.movieEditForm.controls['overview'];
 
-  private subscriptions: Subscription | undefined
+  private subscriptionsAdmMovie= new Subscription
 
   constructor(
     private movieService: MovieService,
@@ -73,18 +75,25 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
 
+
     //Este no anda
     // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
-    this.subscriptions = this.movieService.getListAPI().subscribe(response => {
+    this.subscriptionsAdmMovie.add( this.movieService.getListAPI().subscribe(response => {
         this.movies = response
-      })
+      },(err)=>{
+          console.log("Faltal Error")
+          console.log(err);
+          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+        }
+      )
+    )
   }
 
   ngAfterViewInit(): void {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions?.unsubscribe();
+    this.subscriptionsAdmMovie.unsubscribe();
   }
 
   clickMovie(movie: MovieAPI) {
@@ -130,29 +139,43 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
       vote_count: 0
     }
 
-
-
-    this.movieService.addMovie(newMovie).subscribe(response => {
-      this.movieService.getListAPI().subscribe(response => {
-        this.movies = response
-      });
-      //this.movieEditForm.reset();
-    });
+    this.subscriptionsAdmMovie.add(
+      this.movieService.addMovie(newMovie).subscribe(response => {
+        this.subscriptionsAdmMovie.add(
+          this.movieService.getListAPI().subscribe(response => {
+          this.movies = response
+         })
+        );
+        this.newMovie();
+      },(err)=>{
+          console.log("Faltal Error")
+          console.log(err);
+          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+        }
+      )
+    )
   }
 
   deleteMovie() {
-
-    this.movieService.removeMovie(this.idValue).subscribe(response => {
-      this.movieService.getListAPI().subscribe(response => {
-        this.movies = response
-      });
-      Swal.fire("PELICULA ELIMINADA", "La pelicula ha sido eliminada de la cartelera", "success");
-      // this.movieEditForm.reset();
-    });
-
+    this.subscriptionsAdmMovie.add(
+      this.movieService.removeMovie(this.idValue).subscribe(response => {
+        this.subscriptionsAdmMovie.add(
+          this.movieService.getListAPI().subscribe(response => {
+            this.movies = response
+          })
+        );
+        Swal.fire("PELICULA ELIMINADA", "La pelicula ha sido eliminada de la cartelera", "success");
+        this.movieEditForm.reset();
+      },(err)=>{
+        console.log("Faltal Error")
+        console.log(err);
+        Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+      })
+    )
   }
 
   updateMovie() {
+
     let updateMovie: MovieAPI = {
       adult: false,
       backdrop_path: '',
@@ -169,13 +192,22 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
       vote_average: this.movieEditForm.controls['vote_average'].value,
       vote_count: 0
     }
+    this.subscriptionsAdmMovie.add(
+      this.movieService.updateMovie(updateMovie).subscribe(response => {
+        this.subscriptionsAdmMovie.add(
+          this.movieService.getListAPI().subscribe(response => {
+            this.movies = response
+          })
+        );
+        Swal.fire("PELICULA MODIFICADA", "La pelicula seleccionada ha sido modificada", "info");
 
-    this.movieService.updateMovie(updateMovie).subscribe(response => {
-      this.movieService.getListAPI().subscribe(response => {
-        this.movies = response
-      });
-      Swal.fire("PELICULA MODIFICADA", "La pelicula seleccionada ha sido modificada", "info");
-      //this.movieEditForm.reset();
-    });
+      },(err)=>{
+        console.log("Faltal Error")
+        console.log(err);
+        Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error")
+      })
+    )
   }
+
+
 }

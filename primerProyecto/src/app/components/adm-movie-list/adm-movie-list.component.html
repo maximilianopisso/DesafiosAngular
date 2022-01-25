@@ -69,6 +69,9 @@
               <div *ngIf="vote_averageControl.hasError('required')">
                 La popularidad es un campo requerido.
               </div>
+              <div *ngIf="vote_averageControl.hasError('max')||vote_averageControl.hasError('min')">
+                La popularidad es un numero entre 0 y 10
+              </div>
             </div>
           </div>
 

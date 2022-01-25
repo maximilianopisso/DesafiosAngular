@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
-  subscriptions: Subscription | undefined;
+  private subscriptionsRegister = new Subscription
 
 
   constructor(
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnInit(): void {
-   
+
   }
 
   ngAfterViewInit(): void {
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
   }
   ngOnDestroy(): void {
-    this.subscriptions?.unsubscribe();
+    this.subscriptionsRegister.unsubscribe();
    console.log("REGISTER_COMPONENT - DESTROY - CHECKED ");
    console.log("Desuscripcion");
 
@@ -75,21 +75,25 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("Datos de Usuario a Registrar");
     console.table(newUser);
 
-    this.userService.addUser(newUser).subscribe(response => {
-      console.log("Datos Registrados:");
-      console.log(response);
-      console.log(response.status);
+    this.subscriptionsRegister.add(
+        this.userService.addUser(newUser).subscribe(response => {
+        console.log("Datos Registrados:");
+        console.log(response);
+        console.log(response.status);
 
-      if(response.status === "OK"){
-      Swal.fire("NUEVO USUARIO", "Se registro existosamente un nuevo usuario", "success");
-      this.registroForm.reset();
-      this.router.navigate(['login']);
-     }else{
-      Swal.fire("ERROR", "No se pudo registrar nuevo usuario", "error");   //"warning", "error", "success" and "info".
-     }
-    });
-
-
+        if(response.status === "OK"){
+        Swal.fire("NUEVO USUARIO", "Se registro existosamente un nuevo usuario", "success");
+        this.registroForm.reset();
+        this.router.navigate(['login']);
+      }else{
+        Swal.fire("ERROR", "No se pudo registrar nuevo usuario", "error");   //"warning", "error", "success" and "info".
+      }
+      }, (err) => {
+        console.log("Faltal Error")
+        console.log(err);
+        Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+        })
+    )
   }
 
 }

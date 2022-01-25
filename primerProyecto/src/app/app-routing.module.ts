@@ -33,13 +33,13 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'carrito',
-    canActivate: [UserLoginGuard],
-    component: CartComponent
-
     // path: 'carrito',
     // canActivate: [UserLoginGuard],
-    // loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule)
+    // component: CartComponent
+
+    path: 'carrito',
+    canActivate: [UserLoginGuard],
+    loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule)
   },
 
   {

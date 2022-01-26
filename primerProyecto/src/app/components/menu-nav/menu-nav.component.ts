@@ -50,6 +50,10 @@ export class MenuNavComponent implements OnInit {
 
       this.state$ = this.store.pipe(
         select(userDisplaySelector),
+        tap(data=>{
+          console.log("DESDE MENU:")
+          console.log(data)
+        }),
       );
 
       this.state$.subscribe(state => {

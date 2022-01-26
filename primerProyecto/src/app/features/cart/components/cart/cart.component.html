@@ -29,7 +29,7 @@
 </table>
 <div class="d-flex justify-content-around">
   <button type="button" class="btn btn-success m-5" style="font-size: 1.5rem; width: 20%; height: 100px;" (click)="volverCartelera()">Volver a Cartelera</button>
-  <button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem; width: 20%; height: 100px;" (click)="vaciarCarrito()">Vaciar Carrito</button>
+  <button type="button" class="btn btn-danger m-5 " style="font-size: 1.5rem; width: 20%; height: 100px;" [disabled]="cartMovies.length==0"(click)="vaciarCarrito()">Vaciar Carrito</button>
 </div>
 </div>
 

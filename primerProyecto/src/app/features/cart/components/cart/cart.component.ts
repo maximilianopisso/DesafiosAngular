@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable, ObservedValueOf, Subscription, tap } from 'rxjs';
+import { distinct, distinctUntilChanged, Observable, ObservedValueOf, Subscription, tap } from 'rxjs';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -25,6 +25,7 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
   //private subscriptionsCart = new Subscription;
 
   movieList$!: Observable<CartState>
+  status: string ="";
 
   constructor(
 
@@ -40,20 +41,32 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
     console.log("CART_COMPONENT - INIT - CHECKED ");
 
-    this.movieList$ = this.store.pipe(
+   this.store.pipe(
       select(cartStateSelector),
-      )
+     // distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
+      tap(data =>{
+          console.log("CART");
+          if (data.status=="OK"){
+            console.log("agrega ok");
 
-    this.movieList$.subscribe(data => {
-      this.cartMovies = data.movies
-      console.log(data.status);
+          console.log(data);
+          }else {
+            console.log("No agrega");
+          }
+      })
+      ).subscribe(data => {
+        this.cartMovies = data.movies
+        this.status = data.status
+        if (this.status !== 'OK'){
+          Swal.fire("ACCION RECHAZADA","", "error");
 
-      //  if (data.status !== 'OK'){
-      //   Swal.fire("ACCION RECHAZADA","", "error");
-      // }else{
-      //   Swal.fire("ACCION APROBADA", "", "success");
-      // }
-    })
+        }else{
+          Swal.fire("ACCION APROBADA", "", "success");
+        }
+        console.log("movie list subscribe",data);
+
+
+      })
   }
 ngAfterViewInit(): void {
   console.log("CART_COMPONENT - AFTER VIEW INIT - CHECKED ");

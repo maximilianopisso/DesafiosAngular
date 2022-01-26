@@ -15,6 +15,8 @@ export const _cartReducer = createReducer(
 
   cartInitialState,
     on(cartSetContent, (state, {status,movies}) => {
+      console.log("reducer:",status,movies);
+
       return{
         ...state,
         status,

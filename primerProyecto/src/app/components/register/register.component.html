@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <div class="item-form my-3 ">
+    <div class="item-form mt-3 ">
       <mat-form-field class="inputs" appearance="fill">
         <mat-label for="password">Password</mat-label>
         <input matInput autocomplete="on" type="password" id="password" name="password" placeholder=""
@@ -108,122 +108,10 @@
         </div>
       </div>
     </div>
-    <div class="d-flex jutstify-content-center">
-    <button class="btn-sesion btn btn-lg btn-primary mx-auto" [disabled]="registroForm.invalid"
-      (click)="registroUser()">Registrarme</button>
-    <!-- <button class="btn-sesion btn btn-lg btn-success mx-3" (click)="loginRoute()">Volver a Login</button> -->
-    </div>
 
+      <a class="nav-link mt-1 mb-4 " routerLinkActive = "active" routerLink="/login" style="color: rgba(30, 30, 159, 0.791); font-size: 1.5rem; text-align: center; display: block;">¿Ya estas registrado? Inicia sesion acá.</a>
+      <button class="btn-sesion btn btn-lg btn-primary mx-auto" [disabled]="registroForm.invalid" (click)="registroUser()">Registrarme</button>
   </form>
-
 </div>
-
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-
-<!-- <div class="item-form my-4">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" placeholder="Nombre" class="form-control" formControlName="nombre">
-      <div *ngIf="nombreControl.invalid && (nombreControl.dirty || nombreControl.touched)" class="alert alert-danger">
-        <div *ngIf="nombreControl.hasError('required')">
-          El nombre es un campo requerido.
-        </div>
-        <div *ngIf="nombreControl.hasError('maxlength')">
-          La cantidad de caracteres no puede ser mayor que 25.
-        </div>
-      </div>
-    </div> -->
-
-<!-- <div class="item-form my-4">
-      <label for="apellido">Apellido:</label>
-      <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido">
-      <div *ngIf="apellidoControl.invalid && (apellidoControl.dirty || apellidoControl.touched)"
-        class="alert alert-danger">
-        <div *ngIf="apellidoControl.hasError('required')">
-          El apellido es requerido.
-        </div>
-        <div *ngIf="apellidoControl.hasError('maxlength')">
-          La cantidad de caracteres no puede ser mayor que 25.
-        </div>
-      </div>
-    </div> -->
-
-<!-- <div class="item-form my-4">
-      <label for="movil">Movil:</label>
-      <input type="text" id="movil" placeholder="+54 341 123456" class="form-control" formControlName="movil">
-      <div *ngIf="movilControl.invalid && (movilControl.dirty || movilControl.touched)" class="alert alert-danger">
-        <div *ngIf="movilControl.hasError('required')">
-          El movil es requerido.
-        </div>
-        <div *ngIf="movilControl.hasError('pattern')">
-          El numero ingresado no es un numero valido
-        </div>
-      </div>
-    </div> -->
-
-<!-- <div class="item-form my-4">
-      <label for="address">Direccion:</label>
-      <input type="text" id="address" placeholder="Calle 1234" class="form-control" formControlName="address">
-      <div *ngIf="addressControl.invalid && (addressControl.dirty || addressControl.touched)"
-        class="alert alert-danger">
-        <div *ngIf="addressControl.hasError('required')">
-          La direccion es requerida.
-        </div>
-        <div *ngIf="addressControl.hasError('pattern')">
-          La direccion ingresada no es una direccion válida.
-        </div>
-      </div>
-    </div> -->
-
-<!-- <div class="item-form my-4">
-      <label for="email">Email:</label>
-      <input type="text" id="email" placeholder="example@dominio.com" class="form-control" formControlName="email">
-      <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)" class="alert alert-danger">
-        <div *ngIf="emailControl.hasError('required')">
-          El email es requerido
-        </div>
-        <div *ngIf="emailControl.hasError('email')">
-          El mail ingresado no cumple un formato válido de email. (ej: nombre@google.com)
-        </div>
-      </div>
-    </div> -->
-
-<!-- <div class="item-form my-4">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" class="form-control" placeholder="Password"
-        formControlName="password">
-      <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)"
-        class="alert alert-danger">
-        <div *ngIf="passwordControl.hasError('required')">
-          La contraseña es requerida
-        </div>
-        <div *ngIf="passwordControl.hasError('minlength')">
-          La contraseña debe tener al menos 8 caracteres
-        </div>
-      </div>
-    </div> -->
-
-<!-- <div class="item-form my-4">
-      <label for="passwordConfirm">Password2:</label>
-
-      <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control"
-        placeholder="Confirmar Password" formControlName="passwordConfirm">
-
-      <div *ngIf="passwordConfirmControl.invalid && (passwordConfirmControl.dirty || passwordConfirmControl.touched)"
-        class="alert alert-danger">
-          <div *ngIf="passwordConfirmControl.hasError('required')">
-            La contraseña es requerida
-          </div>
-          <div *ngIf="passwordConfirmControl.hasError('minlength')">
-            La contraseña debe tener al menos 8 caracteres
-          </div>
-          <div *ngIf="(passwordConfirmControl.value !== passwordConfirmControl.value)">
-            La contraseñas no coinciden
-          </div>
-      </div>
-    </div> -->
-
-
-<!-- <hr class="my-5" style= " color:violet; height: 10px;"> -->
 
 

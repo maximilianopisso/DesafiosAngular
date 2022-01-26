@@ -4,7 +4,6 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription, tap } from 'rxjs';
 import { CartState } from 'src/app/features/cart/store/cart-store.state';
 import { cartAddMovie } from 'src/app/features/cart/store/cart.actions';
-import { cartStateSelector } from 'src/app/features/cart/store/cart.selector';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
 import Swal from 'sweetalert2';
@@ -84,7 +83,7 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   addMovie(movie: MovieAPI){
 
     this.store.dispatch(cartAddMovie({movie: movie}))
-    this.router.navigate(['carrito']);
+    //this.router.navigate(['carrito']);
 
     // this.movieList$ = this.store.pipe(
     //   select(cartStateSelector)

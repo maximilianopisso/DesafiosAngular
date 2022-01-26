@@ -11,19 +11,12 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-
         <span *ngIf="username!==''" class="nav-link">{{username}}</span>
-
         <a *ngIf="username!==''" class="nav-link" routerLinkActive="active" routerLink="/cartelera">Cartelera</a>
-
         <a *ngIf="role==='admin'" class="nav-link" routerLinkActive="active" routerLink="/admin">Admin</a>
-
         <a *ngIf="username!==''" class="nav-link" routerLinkActive="active" routerLink="/carrito">Carrito</a> -->
-
         <a *ngIf="username!=='' " class="nav-link" routerLinkActive="active" routerLink="/signout"
           (click)="signOut()">Cerrar Sesion</a>
-
-
       </div>
     </div>
   </div>

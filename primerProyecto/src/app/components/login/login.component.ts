@@ -46,12 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.store.dispatch(userClear())                                  //SE BORRA DATOS DEL USUARIO DESDE EL STORE
-    this.store.dispatch(cartClear())                                  //SE BORRA DATOS DEL CART DESDE EL STORE
-    this.cartService.clearCart().subscribe(response => {              //SE BORRA DATOS DEL CART EN LA API
-      console.log(response)
-    });
-
+    this.clearStore()   //BORRO STORE DE USUARIOS Y CARRITO
 
     console.log("LOGIN_COMPONENT - INIT - CHECKED ");
     console.log("USUARIOS DESDE LA API");
@@ -93,10 +88,11 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
           if (valid) {
             this.login = true;    //SOLO PARA TEST UNITARIO
-            this.userLogedIn = this.loginService.getUserInfo()        //PARA PRESENTAR EN MENU
+            this.userLogedIn = this.loginService.getUserInfo()        //OBTENGO DATOS PARA  PRESENTAR EN EL
 
             Swal.fire("BIENVIENIDO/A", this.userLogedIn.nombre +" "+this.userLogedIn.apellido, "success");
 
+            //DISPARO ACCION PARA CAMBIAR LA VISTA DEL MENU-NAV
             this.store.dispatch(userDiplay({ username: this.userLogedIn.nombre + ", " + this.userLogedIn.apellido, role: this.userLogedIn.role }))
             this.router.navigate(['cartelera']);
 
@@ -110,8 +106,11 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
           Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
         })
     );
+  }
 
-
+  clearStore(){
+    this.store.dispatch(cartClear());
+    this.store.dispatch(userClear());
   }
 }
 

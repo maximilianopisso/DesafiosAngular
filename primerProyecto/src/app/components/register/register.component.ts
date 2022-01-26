@@ -96,6 +96,10 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   }
 
+  loginRoute(){
+    this.router.navigate(['login']);
+  }
+
 }
 
 

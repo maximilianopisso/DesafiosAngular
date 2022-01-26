@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { userToDisplay } from 'src/app/models/userdisplay.model';
 import { userState } from 'src/app/store/user-state.model';
-import { userDisplaySelector } from 'src/app/store/meu-user.selectors';
+import { userDisplaySelector } from 'src/app/store/menu-user.selectors';
 import { CartService } from 'src/app/services/cart.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { cleanStore, userDiplay } from 'src/app/store/menu-user.actions';
+import { userClear, userDiplay } from 'src/app/store/menu-user.actions';
 import { cartClear } from 'src/app/features/cart/store/cart.actions';
 
 
@@ -48,9 +48,8 @@ export class MenuNavComponent implements OnInit {
     //  this.user.role = JSON.parse(localStorage.getItem("role") || ""),
     //  console.log(JSON.parse(localStorage.getItem("apellido") || ""))
 
-    this.state$ = this.store.pipe(
-      select(userDisplaySelector)
-
+      this.state$ = this.store.pipe(
+        select(userDisplaySelector),
       );
 
       this.state$.subscribe(state => {
@@ -73,15 +72,12 @@ export class MenuNavComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        // this.cartService.clearCart().subscribe(response => {
-        //   console.log(response)
-        // });
-
-        this.store.dispatch(cartClear());
-
-        this.loginService.signOutUser();
-
-        this.store.dispatch(cleanStore())
+        this.cartService.clearCart().subscribe(response => {              //SE BORRA EL CARRO EN LA API
+          console.log(response)
+        });
+        this.store.dispatch(cartClear());                                 //SE BORRA EL ESTADO DEL CARRO EN EL STORE
+        this.loginService.signOutUser();                                  //SE INICIALIZA LOS DATOS DEL USUARIO EN BLANCO
+        this.store.dispatch(userClear())                                 //SE BORRA EL ESTADO DEL USUARIO EN EL STORE
 
         Swal.fire(
           'Tu sesion ha sido cerrada',

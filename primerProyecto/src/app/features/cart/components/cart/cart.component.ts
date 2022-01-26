@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable, ObservedValueOf, Subscription } from 'rxjs';
+import { Observable, ObservedValueOf, Subscription, tap } from 'rxjs';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -22,8 +22,9 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
   cartMovies: MovieAPI[] | any = [];
   urlPath: string = 'https://image.tmdb.org/t/p/w500';
 
-  private subscriptionsCart = new Subscription;
-  private movieList$!: Observable<CartState>;
+  //private subscriptionsCart = new Subscription;
+
+  movieList$!: Observable<CartState>
 
   constructor(
 
@@ -36,49 +37,43 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   ngOnInit(): void {
+
     console.log("CART_COMPONENT - INIT - CHECKED ");
 
     this.movieList$ = this.store.pipe(
-      select(cartStateSelector)
-    )
-    this.subscriptionsCart.add(
-      this.movieList$.subscribe(data => {
-        this.cartMovies = data.movies
-      }, (err) => {
-          console.log("Faltal Error")
-          console.log(err);
-          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-      })
-    )
+      select(cartStateSelector),
+      )
+
+    this.movieList$.subscribe(data => {
+      this.cartMovies = data.movies
+      console.log(data.status);
+
+      //  if (data.status !== 'OK'){
+      //   Swal.fire("ACCION RECHAZADA","", "error");
+      // }else{
+      //   Swal.fire("ACCION APROBADA", "", "success");
+      // }
+    })
   }
 ngAfterViewInit(): void {
   console.log("CART_COMPONENT - AFTER VIEW INIT - CHECKED ");
 }
 ngOnDestroy(): void {
-  this.subscriptionsCart.unsubscribe();
+ // this.subscriptionsCart.unsubscribe();
   console.log("CART_COMPONENT - DESTROY - CHECKED ");
 }
 
 vaciarCarrito(){
-
   this.store.dispatch(cartClear())
-
-  // this.movieList$ = this.store.pipe(
-  //   select(cartStateSelector)
-  // )
-  // this.subscriptionsCart.add(
-  //   this.movieList$.subscribe(data => this.cartMovies = data.movies)
-  // )
-
 }
 
 removeMovieFromCart(movie : MovieAPI){
-
-  this.cartService.removeMovie(movie).subscribe(response => console.log(response));
   this.store.dispatch(cartDeleteMovie({ movie: movie }))
 
+//  this.cartService.removeMovie(movie).subscribe(response => console.log(response));
 
-  
+
+
   // this.subscriptionsCart.add(
   //     this.cartService.removeMovie(movie).subscribe(response => {
   //     console.log(response);

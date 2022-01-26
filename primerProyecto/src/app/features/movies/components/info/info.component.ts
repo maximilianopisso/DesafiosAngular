@@ -82,24 +82,23 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
   // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
 
   addMovie(movie: MovieAPI){
-    const date = new Date;
-    console.log(date);
 
     this.store.dispatch(cartAddMovie({movie: movie}))
+    this.router.navigate(['carrito']);
 
-    this.movieList$ = this.store.pipe(
-      select(cartStateSelector)
-    )
-    this.movieList$.subscribe(data =>{
-      console.log(data);
-     this.status = data.status
-        if (this.status !== 'OK'){
-              Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
-            }else{
-              Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
-              this.router.navigate(['carrito']);
-            }
-    })
+    // this.movieList$ = this.store.pipe(
+    //   select(cartStateSelector)
+    // )
+    // this.movieList$.subscribe(data =>{
+    //   console.log(data);
+    //  this.status = data.status
+    //     if (this.status !== 'OK'){
+    //           Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
+    //         }else{
+    //           Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
+    //           this.router.navigate(['carrito']);
+    //         }
+    // })
 
 
     // this.movieList$.subscribe(data => {

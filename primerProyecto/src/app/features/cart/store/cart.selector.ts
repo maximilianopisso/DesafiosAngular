@@ -7,5 +7,5 @@ export const cartStateSelector = createFeatureSelector<CartState>('cart');
 
 export const cartItemsSelector = createSelector (
     cartStateSelector,
-    (state: CartState) => state.movies
+    (state: CartState) => state
 );

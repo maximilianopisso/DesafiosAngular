@@ -3,12 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { cartClear } from 'src/app/features/cart/store/cart.actions';
 import { userToDisplay } from 'src/app/models/userdisplay.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MetaService } from 'src/app/services/meta.service';
 import { UserService } from 'src/app/services/user.service';
-import { userDiplay } from 'src/app/store/menu-user.actions';
+import { userClear, userDiplay } from 'src/app/store/menu-user.actions';
 import Swal from 'sweetalert2';
 
 
@@ -45,7 +46,12 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
 
-    // this.meta.updateTitle()
+    this.store.dispatch(userClear())                                  //SE BORRA DATOS DEL USUARIO DESDE EL STORE
+    this.store.dispatch(cartClear())                                  //SE BORRA DATOS DEL CART DESDE EL STORE
+    this.cartService.clearCart().subscribe(response => {              //SE BORRA DATOS DEL CART EN LA API
+      console.log(response)
+    });
+
 
     console.log("LOGIN_COMPONENT - INIT - CHECKED ");
     console.log("USUARIOS DESDE LA API");
@@ -87,9 +93,9 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
           if (valid) {
             this.login = true;    //SOLO PARA TEST UNITARIO
-
-            Swal.fire("BIENVIENIDO/A", this.loginService.getUserName(), "success");
             this.userLogedIn = this.loginService.getUserInfo()        //PARA PRESENTAR EN MENU
+
+            Swal.fire("BIENVIENIDO/A", this.userLogedIn.nombre +" "+this.userLogedIn.apellido, "success");
 
             this.store.dispatch(userDiplay({ username: this.userLogedIn.nombre + ", " + this.userLogedIn.apellido, role: this.userLogedIn.role }))
             this.router.navigate(['cartelera']);

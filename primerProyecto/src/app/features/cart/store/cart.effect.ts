@@ -26,6 +26,7 @@ export class CartEffects {
       map(data => cartSetContent({status: data.status, movies: data.cartContent as MovieAPI[]})),
     )
   );
+
   cartDeleteItem$ = createEffect(()=>
   this.actions.pipe(
       ofType(cartDeleteMovie),

@@ -12,10 +12,10 @@
   padding: 2vh 0vw;
   border-top: 5px wheat solid;
   display: flex;
-  //flex-wrap: wrap;
- // justify-content: space-between;
- // align-items: center;
- // height: 50px;
+  flex-wrap: wrap;
+ justify-content: space-between;
+ align-items: center;
+ height: 50px;
 
   .nombre-brand {
     font-size: 1rem;
@@ -25,22 +25,7 @@
   }
   .text-muted {
     color: wheat !important;
+    
   }
-  #social{
-    ul {
-      padding-right: 4vw;
-      li {
-        .fa {
-          color: wheat;
-          text-decoration: none;
-          font-size: 30px;
-          padding-right: 2vw;
 
-          &:hover {
-            color: white;
-          }
-        }
-      }
-    }
-  }
 }

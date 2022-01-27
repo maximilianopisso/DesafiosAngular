@@ -18,8 +18,7 @@ const routes: Routes = [
 
   {
     path: '',
-    //redirectTo: 'cartelera',
-    redirectTo: 'admin',
+    redirectTo: 'login',
     pathMatch: 'full'
     //data:{title:"Login"}
   },
@@ -34,10 +33,6 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    // path: 'carrito',
-    // canActivate: [UserLoginGuard],
-    // component: CartComponent
-
     path: 'carrito',
     canActivate: [UserLoginGuard],
     loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule)
@@ -45,7 +40,7 @@ const routes: Routes = [
 
   {
     path:'admin',
-    //canActivate: [AdminRoleGuard],
+    canActivate: [AdminRoleGuard],
     component: AdmMovieListComponent
   },
 

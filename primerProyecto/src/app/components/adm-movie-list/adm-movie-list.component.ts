@@ -27,7 +27,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
     genre_ids: [],
     original_language: '',
     original_title: '',
-    overview: 'Agregar Descripcion de tu Pelicula',
+    overview: 'Agregar Descripción de tu Película',
     popularity: 0,
     release_date: '2022-01-01',
     video: false,
@@ -55,7 +55,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
     title: new FormControl('-', [Validators.required]),
     poster_path: new FormControl('-', [Validators.required]),
     vote_average: new FormControl('-', [Validators.required,Validators.max(10),Validators.min(0)]),
-    release_date: new FormControl('-', [Validators.required]),
+    release_date: new FormControl('', [Validators.required]),
     overview: new FormControl('-', [Validators.required]),
   });
 
@@ -76,10 +76,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
 
-
-    //Este no anda
-    // Esto me arma el arreglo de moviesAPI con las peliculas que trae desde la API y me las muestra en consola.
-    this.subscriptionsAdmMovie.add( this.movieService.getListAPI().subscribe(response => {
+       this.subscriptionsAdmMovie.add( this.movieService.getListAPI().subscribe(response => {
         this.movies = response
       },(err)=>{
           console.log("Faltal Error")
@@ -109,6 +106,8 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   newMovie() {
+    // const selectedItem: any = document.querySelector('.selected');
+    // selectedItem.classname = "";
     this.idValue = this.emptyMovie.id;
     this.movieEditForm.controls['title'].setValue(this.emptyMovie.title)
     this.movieEditForm.controls['poster_path'].setValue(this.emptyMovie.poster_path)

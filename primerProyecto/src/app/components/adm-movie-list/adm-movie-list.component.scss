@@ -19,6 +19,7 @@
 
   #list-items-movies{
 
+
     .btn-addMovie{
       width: 100%;
       font-size: 1.1rem;
@@ -33,7 +34,9 @@
     text-align: center;
   }
 
+
   .edition-movie-container {
+
     display: block;
     text-align: center;
     justify-content: center;
@@ -42,14 +45,22 @@
       display: block;
       padding: 0px auto;
       width: 100%;
+      padding-top: 40px;
 
+      .alert{
+        width: 70%;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: block;
+        margin: 10px auto;
+      }
       .btn-actions{
         font-size: 1.3rem;
-        width: 20%;
-        padding: 10px;
+        padding: 5px 25px;
         margin: 0px 35px;
 
       }
+
 
       mat-form-field {
         width: 70%;
@@ -68,7 +79,10 @@
           font-size: 1rem;
           font-weight: 500;
         }
+      }
 
+      .btn-actions-container{
+        margin-top: 20px;
       }
     }
   }

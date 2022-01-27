@@ -1,9 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdmMovieListComponent } from './components/adm-movie-list/adm-movie-list.component';
-// import { InfoComponent } from './features/movies/components/info/info.component';
 import { LoginComponent } from './components/login/login.component';
-//import { MoviesComponent } from './features/movies/components/movies/movies.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
 import { UserLoginGuard } from './guards/user-login.guard';
@@ -18,15 +16,15 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'cartelera',
+    redirectTo: 'login',
     pathMatch: 'full'
-    //data:{title:"Login"}
+    
   },
 
   {
     path: 'login',
     component: LoginComponent,
-   // data:{title:"Login"}
+
   },
   {
     path: 'registro',

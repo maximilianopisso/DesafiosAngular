@@ -1,39 +1,33 @@
 <div id="info" class="container">
-  <h1 class="my-4 text-center">Info Section</h1>
+  <h1 class="movie-title">{{movie.title}}</h1>
+  <div class="row movie-info-conteiner">
 
-
-  <section class="py-2">
-    <div class="container my-3">
-        <div class="row gx-5 align-items-center">
-            <div class="col-md-6">
-              <img style=" display:block; width: 60%; margin: 0px auto;" class="card-img-top mb-5 mb-md-0" [src]= "urlPath+movie.poster_path" alt="#Imagen" />
-            </div>
-            <div class="col-md-6">
-                <h1 class="display-5 fw-bolder mb-5">{{movie.title}}</h1>
-                <h3>Descripcion</h3>
-                <p class="">{{movie.overview}}</p>
-                <h3>Popularidad</h3>
-
-            <!-- <span ngFor = "popularidad"><i>{{movie.vote_average}} pts</i></span> -->
-                <span *ngFor="let i of popularidad_full_star"><img class="star" src="../../../../../assets/estrella.png" width="30px" height="30px"></span>
-                <span *ngFor="let i of popularidad_half_star"><img class="star" src="../../../../../assets/estrella_half.png" width="30px" height="30px"></span>
-
-                <h3 class="mt-3">Fecha Lanzamiento</h3>
-                <p class="">{{movie.release_date}}</p>
-                <div class="d-flex mt-5">
-                    <!-- <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" /> -->
-                    <button class="btn btn-primary flex-shrink-0" type="button" style="height: 60px; width: 150px;" (click)="addMovie(movie)">
-                        <i class="bi-cart-fill me-1" ></i>
-                        Add to Cart
-                    </button>
-                    <button class="btn btn-secondary flex-shrink-0 mx-5" type="button" style="height: 60px; width: 150px;" (click)="returnToMovies()">
-                      <i class="bi-cart-fill me-1 " ></i>
-                      Volver a Cartelera
-                  </button>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-6 ">
+      <img class="poster" [src]="urlPath+movie.poster_path" alt=">Poster de la movie seleccionada" />
     </div>
-</section>
+
+    <div class="col-md-6 movie-description">
+
+      <h3>Descripcion</h3>
+      <p>{{movie.overview}}</p>
+
+      <h3>Popularidad</h3>
+      <div class="stars-container">
+        <span *ngFor="let i of popularidad_full_star"><img class="star" src="../../../../../assets/estrella.png"></span>
+        <span *ngFor="let i of popularidad_half_star"><img class="star" src="../../../../../assets/estrella_half.png"></span>
+      </div>
+
+      <h3>Fecha Lanzamiento</h3>
+      <p>{{movie.release_date}}</p>
+
+
+    <div class="btn-action-container">
+
+      <button mat-raised-button color="primary" class="btn-action" (click)="addMovie(movie)">+ Agregar</button>
+
+      <button mat-raised-button color="accent" class="btn-action" (click)="returnToMovies()"> Volver a Cartelera</button>
+
+      </div>
+    </div>
+  </div>
 </div>
-<!-- <hr class="my-5" style=" color:violet; height: 10px;"> -->

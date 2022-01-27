@@ -41,12 +41,6 @@ export class MenuNavComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("INICIA COMPONENTE MENU");
-
-    //  this.user.apellido = JSON.parse(localStorage.getItem("apellido") || ""),
-    //  this.user.nombre = JSON.parse(localStorage.getItem("nombre") || ""),
-    //  this.user.role = JSON.parse(localStorage.getItem("role") || ""),
-    //  console.log(JSON.parse(localStorage.getItem("apellido") || ""))
 
       this.state$ = this.store.pipe(
         select(userDisplaySelector),

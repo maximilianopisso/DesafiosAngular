@@ -33,13 +33,10 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log("MOVIES_COMPONENT - INIT - CHECKED ");
 
       //SE ARMA LISTADO COMPLETO DE PELICULAS TRAYENDO LAS PELICULAS DESDE LA CONSULTA A LA API DE PELICULAS
-
-
       this.subscriptionsMovies?.add(
         this.movieService.getListAPI().subscribe(response => {
             this.moviesAPI = response
-            // console.log(response)
-            // console.log(this.moviesAPI)
+
         },(err) => {
           console.log("Faltal Error")
           console.log(err);

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
+import { environment } from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
 import { MovieService } from '../../services/movie.service';
 
@@ -18,7 +19,7 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscriptionsMovies = new Subscription;
 
   moviesAPI : MovieAPI[] =[];
-  urlPath: string = 'https://image.tmdb.org/t/p/w500';
+  urlPath: string = environment.urlPathImage;
 
   constructor(
     private movieService: MovieService,

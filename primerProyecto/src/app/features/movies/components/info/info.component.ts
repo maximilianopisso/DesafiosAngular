@@ -6,6 +6,7 @@ import { CartState } from 'src/app/features/cart/store/cart-store.state';
 import { cartAddMovie } from 'src/app/features/cart/store/cart.actions';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
 import { MovieService } from '../../services/movie.service';
 
@@ -17,7 +18,7 @@ import { MovieService } from '../../services/movie.service';
 export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   movie: MovieAPI | any;
-  urlPath: string = 'https://image.tmdb.org/t/p/w500';
+  urlPath: string = environment.urlPathImage
   popularidad_full_star : number[] =[];
   popularidad_half_star : number[] =[];
   fullStar:number =0;

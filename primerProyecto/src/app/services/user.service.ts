@@ -10,8 +10,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  private urlMockApi = environment.urlUsersAPI;
-  private urlLocalUserApi = environment.urlLocalLogin;
+   private urlLocalUserApi = environment.urlLocalLogin;
   private users: User[] = [];
   constructor(private httpClient : HttpClient) {}
 

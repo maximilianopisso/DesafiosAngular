@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
+import { environment } from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
 
 
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./adm-movie-list.component.scss']
 })
 export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
-  urlPath: string = 'https://image.tmdb.org/t/p/w500';
+  urlPath: string = environment.urlPathImage;
   idValue = 0;
   date = new Date
 

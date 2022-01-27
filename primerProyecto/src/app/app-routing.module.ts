@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: '',
     //redirectTo: 'cartelera',
-    redirectTo: 'login',
+    redirectTo: 'admin',
     pathMatch: 'full'
     //data:{title:"Login"}
   },
@@ -45,7 +45,7 @@ const routes: Routes = [
 
   {
     path:'admin',
-    canActivate: [AdminRoleGuard],
+    //canActivate: [AdminRoleGuard],
     component: AdmMovieListComponent
   },
 

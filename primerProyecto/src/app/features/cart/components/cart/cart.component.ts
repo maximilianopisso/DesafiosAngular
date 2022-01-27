@@ -5,6 +5,7 @@ import { distinct, distinctUntilChanged, Observable, ObservedValueOf, Subscripti
 import { MovieService } from 'src/app/features/movies/services/movie.service';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
 import { CartState } from '../../store/cart-store.state';
 import { cartClear, cartDeleteMovie } from '../../store/cart.actions';
@@ -20,7 +21,7 @@ import { cartStateSelector } from '../../store/cart.selector';
 export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
 
   cartMovies: MovieAPI[] | any = [];
-  urlPath: string = 'https://image.tmdb.org/t/p/w500';
+  urlPath: string = environment.urlPathImage
 
   //private subscriptionsCart = new Subscription;
 

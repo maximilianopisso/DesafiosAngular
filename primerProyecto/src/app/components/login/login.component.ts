@@ -22,12 +22,10 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   login: boolean = false;  //SOLO PARA TEST UNITARIO
+
   userLogedIn: userToDisplay | any;
   userDisplay: string = "";
-
   private subscriptionsLogin = new Subscription;
-
-
 
   constructor(
     private loginService: LoginService,
@@ -37,9 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     private store: Store,
     private meta : MetaService
 
-  ) {
-    console.log("LOGIN_COMPONENT - CONSTRUCTOR - CHECKED ");
-  }
+  ) { }
 
 
 
@@ -48,7 +44,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.clearStore()   //BORRO STORE DE USUARIOS Y CARRITO
 
-    console.log("LOGIN_COMPONENT - INIT - CHECKED ");
     console.log("USUARIOS DESDE LA API");
     this.subscriptionsLogin.add(
       this.userService.getUsers().subscribe(response => {
@@ -63,13 +58,11 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log("LOGIN_COMPONENT - AFTER VIEW INIT - CHECKED ");
     const lastElement: any = document.querySelector('.inputs');
     lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
   }
 
   ngOnDestroy(): void {
-    console.log("LOGIN_COMPONENT - DESTROY - CHECKED ");
     this.subscriptionsLogin?.unsubscribe
   }
 

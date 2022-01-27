@@ -1,32 +1,42 @@
-#login {
-  padding: 18vh 0px;
+#carrito {
+  padding: 20vh 0px;
 
-
-  .logo{
-    width:150px;
-    height: 150px;
+  h1 {
+    color: rgb(14, 2, 65) !important;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bolder;
   }
 
-   mat-form-field {
-        width: 80%;
-        display: block;
-        margin: 10px auto;
-        font-size: 1rem;
-        font-weight: bold;
+  .btn-actions-container {
+    display: flex;
+    justify-content: space-between;
 
-        input{
+    .btn-action {
+      display: inline;
+      margin: 30px 20px 30px 0px;
+      font-size: 1.2rem;
+      padding: 10px 40px;
+    }
+  }
 
-          font-size: 1.5rem;
-          font-weight: 500;
-        }
+  .table {
+    .row-header {
+      padding-top: 20px;
+    }
+
+    .row-body {
+      margin: 20px !important;
+      padding: 20px !important;
+
+      .text-item-cart {
+        font-size: 1.5rem;
+        font-weight: 500;
       }
-
-  .btn-sesion{
-    width: 350px;
-    height: 70px;
-    display: block;
-    margin: 0px auto;
-    font-size: 1.5rem;
+      img {
+        height: 150px;
+        width: 100px;
+      }
+    }
   }
-
-  }
+}

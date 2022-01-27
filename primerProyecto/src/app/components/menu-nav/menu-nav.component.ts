@@ -27,9 +27,9 @@ export class MenuNavComponent implements OnInit {
     role: "",
     token: ""
   }
-  state$: Observable<userState> = of({username: "", role: ""});
-  username: string ="";
-  role: string ="";
+  state$: Observable<userState> = of({ username: "", role: "" });
+  username: string = "";
+  role: string = "";
 
 
   constructor(
@@ -42,30 +42,30 @@ export class MenuNavComponent implements OnInit {
 
   ngOnInit(): void {
 
-      this.state$ = this.store.pipe(
-        select(userDisplaySelector),
-        tap(data=>{
-          console.log("DESDE MENU:")
-          console.log(data)
-        }),
-      );
+    this.state$ = this.store.pipe(
+      select(userDisplaySelector),
+      // tap(data => {
+      //   console.log("DESDE MENU:")
+      //   console.log(data)
+      // }),
+    );
 
-      this.state$.subscribe(state => {
-        this.username = state.username
-        this.role = state.role
-      });
-    }
+    this.state$.subscribe(state => {
+      this.username = state.username
+      this.role = state.role
+    });
+  }
 
   signOut() {
 
     Swal.fire({
       title: 'ATENCION',
-      text: "Estas por cerrar tu sesion y perderas todas las operaciones efectuadas sin guardar",
-      icon: 'warning',
+      text: "¿Deseas cerrar tu sesion? Perderás todas las operaciones efectuadas sin guardar",
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Cerrar Sesion'
+      confirmButtonText: 'Si, Cerrar Sesion'
 
     }).then((result) => {
       if (result.value) {

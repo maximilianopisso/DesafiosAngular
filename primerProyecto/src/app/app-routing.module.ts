@@ -10,7 +10,7 @@ const routes: Routes = [
 
   {
     path: 'cartelera',
-    //canActivate: [UserLoginGuard],
+    canActivate: [UserLoginGuard],
     loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule)
   },
 
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-    
+
   },
 
   {

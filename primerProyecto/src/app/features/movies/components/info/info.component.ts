@@ -63,14 +63,9 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   }
 
+   ngAfterViewInit(): void {}
 
-   ngAfterViewInit(): void {
-    console.log("INFO_COMPONENT - AFTER VIEW INIT - CHECKED ");
-  }
-
-  ngOnDestroy(): void {
-    console.log("INFO_COMPONENT - DESTROY - CHECKED ");
-  }
+   ngOnDestroy(): void {}
 
   // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
 

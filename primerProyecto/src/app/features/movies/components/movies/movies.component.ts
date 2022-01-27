@@ -25,12 +25,10 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
     private movieService: MovieService,
     private router: Router,
     private store : Store
-    ) {
-      console.log("MOVIES_COMPONENT - CONSTRUCTOR - CHECKED");
-    }
+    ) {}
+
 
     ngOnInit(): void {
-      console.log("MOVIES_COMPONENT - INIT - CHECKED ");
 
       //SE ARMA LISTADO COMPLETO DE PELICULAS TRAYENDO LAS PELICULAS DESDE LA CONSULTA A LA API DE PELICULAS
       this.subscriptionsMovies?.add(
@@ -45,13 +43,10 @@ export class MoviesComponent implements OnInit, OnDestroy, AfterViewInit {
       );
     }
 
-    ngAfterViewInit(): void {
-      console.log("MOVIES_COMPONENT - AFTER VIEW INIT - CHECKED ");
-    }
+    ngAfterViewInit(): void {}
 
     ngOnDestroy(): void {
       this.subscriptionsMovies?.unsubscribe();
-      console.log("MOVIES_COMPONENT - DESTROY - CHECKED ");
     }
 
     // METODO QUE ME PERMITE NAVEGAR A LA INFORMACION DE LA PELICULA SELECCIONADA

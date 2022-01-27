@@ -3,7 +3,7 @@
   <h1>Cartelera</h1>
   <div class="movies-container ">
     <mat-card class="card-item" *ngFor="let movie of moviesAPI">
-      <img mat-card-image [src]= "urlPath+movie.poster_path" alt='Poster de la pelicula {{movie.title}}'>
+      <img mat-card-image [src]= "urlPath+movie.poster_path" alt="Poster de la pelicula">
       <mat-card-actions>
         <button  mat-raised-button color="primary"  class="btn-infomovie" (click)="navigateToDetail(movie.id)">+ Info</button>
       </mat-card-actions>

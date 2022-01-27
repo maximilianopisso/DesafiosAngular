@@ -42,7 +42,7 @@ export class CartEffects {
   this.actions.pipe(
       ofType(cartClear),
       switchMap(action => this.cartService.clearCart()),
-      map(data => cartSetContent({status: "Clear", movies: [] as MovieAPI[]})),
+      map(data => cartSetContent({status: "CLEAN", movies: [] as MovieAPI[]})),
     )
   );
 

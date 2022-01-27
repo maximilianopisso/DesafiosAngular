@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CartEffects } from './store/cart.effect';
 import { cartReducer } from './store/cart.reducer';
 import { StoreModule } from '@ngrx/store';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 
@@ -17,6 +18,7 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     CommonModule,
     CartRoutingModule,
+    MaterialModule,
     HttpClientModule,
     EffectsModule.forFeature([CartEffects]),
     // EffectsModule.forRoot([]),

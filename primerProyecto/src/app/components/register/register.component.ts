@@ -23,20 +23,15 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   ){}
 
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    console.log("REGISTER_COMPONENT - AFTER VIEW INIT - CHECKED ");
+
     const lastElement: any = document.querySelector('.logo');
     lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
   }
   ngOnDestroy(): void {
     this.subscriptionsRegister.unsubscribe();
-   console.log("REGISTER_COMPONENT - DESTROY - CHECKED ");
-   console.log("Desuscripcion");
-
   }
 
   registroForm = new FormGroup({

@@ -23,8 +23,6 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
   cartMovies: MovieAPI[] | any = [];
   urlPath: string = environment.urlPathImage
 
-  //private subscriptionsCart = new Subscription;
-
   movieList$!: Observable<CartState>
   status: string ="";
 
@@ -34,48 +32,43 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
     private cartService: CartService,
     private router: Router,
     private store: Store,
-  ) {
-    console.log("CART_COMPONENT - CONSTRUCTOR - CHECKED ");
+  ) {}
 
-  }
   ngOnInit(): void {
-
-    console.log("CART_COMPONENT - INIT - CHECKED ");
 
    this.store.pipe(
       select(cartStateSelector),
      // distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
       tap(data =>{
-          console.log("CART");
-          if (data.status=="OK"){
-            console.log("agrega ok");
-
-          console.log(data);
-          }else {
-            console.log("No agrega");
-          }
+        console.log("Respuesta desde API",data);
       })
       ).subscribe(data => {
         this.cartMovies = data.movies
         this.status = data.status
-        if (this.status !== 'OK'){
-          Swal.fire("ACCION RECHAZADA","", "error");
 
-        }else{
-          Swal.fire("ACCION APROBADA", "", "success");
+        switch(this.status) {
+
+          case "OK-ADDED": {
+            Swal.fire("PELICULA AGREGADA", "Se agrego una nueva pelicula a tu seleccion", "success");
+             break;
+          }
+          case "OK-DELETED": {
+            Swal.fire("PELICULA ELIMINADA", "Se elimino la pelicula de tu seleccion", "warning");
+             break;
+          }
+          case "CLEAN": {
+             break;
+          }
+          default: {
+            Swal.fire("ACCION RECHAZADA","No se pudo realizar la operacion solicitada", "error");
+             break;
+          }
         }
-        console.log("movie list subscribe",data);
-
-
       })
   }
-ngAfterViewInit(): void {
-  console.log("CART_COMPONENT - AFTER VIEW INIT - CHECKED ");
-}
-ngOnDestroy(): void {
- // this.subscriptionsCart.unsubscribe();
-  console.log("CART_COMPONENT - DESTROY - CHECKED ");
-}
+ngAfterViewInit(): void {}
+
+ngOnDestroy(): void {}
 
 vaciarCarrito(){
   this.store.dispatch(cartClear())
@@ -83,29 +76,6 @@ vaciarCarrito(){
 
 removeMovieFromCart(movie : MovieAPI){
   this.store.dispatch(cartDeleteMovie({ movie: movie }))
-
-//  this.cartService.removeMovie(movie).subscribe(response => console.log(response));
-
-
-
-  // this.subscriptionsCart.add(
-  //     this.cartService.removeMovie(movie).subscribe(response => {
-  //     console.log(response);
-
-  //     if (response.status !== 'OK'){
-  //       alert ("NO SE PUDO BORRAR LA PELICULA SELECCIONADA")
-  //     }else{
-  //       this.subscriptionsCart.add(
-  //         this.cartService.getCart().subscribe(response => this.cartMovies = response)
-  //       );
-  //     }
-  //   },(err) => {
-  //     console.log("Faltal Error")
-  //     console.log(err);
-  //     Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-  //     }
-  //   )
-  // )
 }
 
 volverCartelera(){

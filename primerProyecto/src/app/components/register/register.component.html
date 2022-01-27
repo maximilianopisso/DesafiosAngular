@@ -1,13 +1,12 @@
-<div id="register" class="container d-flex align align-items-center flex-column mt-5">
+<div id="register" class="container">
 
 
-  <img id="logo" class="mb-4 logo" src="../assets/movie.png" alt="" width="100" height="100">
-  <h1 class="h3 mb-3 fw-normal">Registro Nuevo Usuario</h1>
+  <img id="logo" class="logo" src="../assets/movie.png" alt="Logo de Peliteka">
+  <h1>Registro Nuevo Usuario</h1>
 
-  <form [formGroup]="registroForm" class="m-3 col-lg-6">
+  <form [formGroup]="registroForm" class="col-lg-6 register-container">
 
-
-    <div class="item-form my-3">
+    <div class="item-form">
       <mat-form-field class="inputs" appearance="fill">
         <mat-label for="nombre">Nombre</mat-label>
         <input matInput autocomplete="on" type="text" id="nombre" name="nombre" placeholder="Nombre"
@@ -109,8 +108,8 @@
       </div>
     </div>
 
-      <a class="nav-link mt-1 mb-4 " routerLinkActive = "active" routerLink="/login" style="color: rgba(30, 30, 159, 0.791); font-size: 1.5rem; text-align: center; display: block;">¿Ya estas registrado? Inicia sesion acá.</a>
-      <button class="btn-sesion btn btn-lg btn-primary mx-auto" [disabled]="registroForm.invalid" (click)="registroUser()">Registrarme</button>
+      <a class="link" routerLinkActive = "active" routerLink="/login" >¿Ya estas registrado? Inicia sesion acá.</a>
+      <button class="btn-register" mat-raised-button color="primary" (click)="registroUser()" [disabled]="registroForm.invalid">Registrarme</button>
   </form>
 </div>
 

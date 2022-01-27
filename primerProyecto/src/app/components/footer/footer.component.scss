@@ -4,40 +4,41 @@
   left: 0;
   width: 100%;
 }
-footer {
+#contacto {
   background-color: rgb(14, 2, 65) !important;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin-top: 5vh;
   padding: 2vh 0vw;
-  border-top: 10px wheat solid;
-
-  #logo {
-    width: 30px;
-    height: 30px;
-    margin: 0px 1vw 0px 2vw;
-  }
+  border-top: 5px wheat solid;
+  display: flex;
+  //flex-wrap: wrap;
+ // justify-content: space-between;
+ // align-items: center;
+ // height: 50px;
 
   .nombre-brand {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: aliceblue !important;
     font-weight: 500;
+    padding: 0px 20px;
   }
   .text-muted {
     color: wheat !important;
   }
+  #social{
+    ul {
+      padding-right: 4vw;
+      li {
+        .fa {
+          color: wheat;
+          text-decoration: none;
+          font-size: 30px;
+          padding-right: 2vw;
 
-  ul {
-    padding-right: 4vw;
-    li {
-      a {
-        color: wheat;
-        text-decoration: none;
-        font-size: 30px;
-        padding-right: 2vw;
-
-        &:hover {
-          color: white;
+          &:hover {
+            color: white;
+          }
         }
       }
     }

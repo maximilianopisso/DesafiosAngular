@@ -1,14 +1,14 @@
 
-<div id="cartelera"class="conteiner ">
-  <h1 class="pb-3" style="text-align: center;font-size: 4rem; font-weight: bolder;">Cartelera</h1>
-  <div class="movie-container d-flex flex-wrap justify-content-center">
-    <mat-card class="example-card m-5" *ngFor="let movie of moviesAPI"  style="width: 18rem;">
-      <mat-card-header style="display: flex; justify-content: center;align-items: center;height: 50px; text-align: center;">
-        <h3 class="card-title" style="font-weight: bolder;">{{movie.title}}</h3>
-      </mat-card-header>
-      <img mat-card-image [src]= "urlPath+movie.poster_path" alt="" style="height: 400px;">
+<div id="cartelera"class="conteiner-fluid">
+  <h1>Cartelera</h1>
+  <div class="movies-container ">
+    <mat-card class="card-item" *ngFor="let movie of moviesAPI">
+      <!-- <mat-card-header>
+        <span class="card-title">{{movie.title}}</span>
+      </mat-card-header> -->
+      <img mat-card-image [src]= "urlPath+movie.poster_path" alt='Poster de la pelicula {{movie.title}}'>
       <mat-card-actions>
-        <button  mat-raised-button color="primary" style="display:block; margin: 0px auto; width: 95%;" (click)="navigateToDetail(movie.id)">+ Info</button>
+        <button  mat-raised-button color="primary"  class="btn-infomovie" (click)="navigateToDetail(movie.id)">+ Info</button>
       </mat-card-actions>
       <mat-card-content>
         <p class="card-text">{{movie.overview}}</p>
@@ -16,35 +16,3 @@
     </mat-card>
   </div>
 
-
-
-<!-- <div id="cartelera"class="conteiner ">
-  <h1 class="pb-3" style="text-align: center;">Cartelera</h1>
-  <div class="movie-container d-flex flex-wrap justify-content-center">
-    <mat-card class="example-card m-5" *ngFor="let movie of movies"  style="width: 18rem;">
-      <mat-card-header>
-        <h5 class="card-title">{{movie.title}}</h5>
-      </mat-card-header>
-      <img mat-card-image [src]="movie.image.url" alt="foto de la pelicula" style="height: 400px;">
-      <mat-card-content>
-        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ad fugit deserunt aliquid suscipit natus repellendus, excepturi rem molestiae saepe quisquam, porro neque omnis, architecto cumque laudantium ipsum? A, ipsam!</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="navigateToDetail(movie.id)">+ Info</button>
-      </mat-card-actions>
-    </mat-card>
-  </div> -->
-
-
- <!-- /* <div class="movie-container d-flex flex-wrap justify-content-center">
-    <div *ngFor="let movie of movies; let i =index" class="card p-1 m-4" style="width: 18rem;">
-      <img [src]="movie.image.url" class="card-img-top" style="height: 350px;" alt="">
-      <div [class.ultima-movie]="(movies.length-1) === i" class="card-body">
-        <h5 class="card-title">{{ movie.title }}</h5>
-        <p class="card-text" style="height: 150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, accusantium? Amet iste illo, labore repellendus </p>
-        <a class="btn btn-primary d-block" (click)="navigatetoDetail(movie.id)"> + Ver Detalle</a>
-      </div>
-    </div>
-  </div> -->
-  <!-- <hr class="my-5" style=" color:violet; height: 10px;">
-</div>-->

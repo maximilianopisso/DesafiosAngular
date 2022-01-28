@@ -15,66 +15,61 @@ import { MovieService } from '../../services/movie.service';
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })
-export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
+export class InfoComponent implements OnInit {
 
   movie: MovieAPI | any;
   urlPath: string = environment.urlPathImage
-  popularidad_full_star : number[] =[];
-  popularidad_half_star : number[] =[];
-  fullStar:number =0;
-  halfStar:number =0;
+  popularidad_full_star: number[] = [];
+  popularidad_half_star: number[] = [];
+  fullStar: number = 0;
+  halfStar: number = 0;
 
   private subscrptionsInfo = new Subscription;
   private movieList$!: Observable<CartState>;
-  private status:string ="";
+  private status: string = "";
   constructor(
     private activateRoute: ActivatedRoute,
     private moviesService: MovieService,
-    private cartService : CartService,
+    private cartService: CartService,
     private router: Router,
     private store: Store
-  ){}
+  ) { }
 
   ngOnInit(): void {
 
     this.subscrptionsInfo.add(
 
       this.moviesService.getDetailAPI(this.activateRoute.snapshot.params['id'])
-      .subscribe(respose => {
-        //ME TRAIGO DESDE LA API, LA MOVIE CON EL ID SOLICITADO
-        this.movie = respose
+        .subscribe(respose => {
+          //ME TRAIGO DESDE LA API, LA MOVIE CON EL ID SOLICITADO
+          this.movie = respose
 
-        //CALCULO DE ESTRELLAS COMPLETAS Y MEDIAS ESTRELLAS PARA MOSTRAR EN POPULARIDAD DE LA MOVIE SELECCIONADA
-        this.fullStar = Math.floor(Math.round(this.movie.vote_average)/2);
-        this.halfStar = this.fullStar%2;
-        for(let i=1; i<=this.fullStar; i++){
-          this.popularidad_full_star.push(1);
-        }
-        if (this.halfStar === 1){
-          this.popularidad_half_star.push(1);
-        }
+          //CALCULO DE ESTRELLAS COMPLETAS Y MEDIAS ESTRELLAS PARA MOSTRAR EN POPULARIDAD DE LA MOVIE SELECCIONADA
+          this.fullStar = Math.floor(Math.round(this.movie.vote_average) / 2);
+          this.halfStar = this.fullStar % 2;
+          for (let i = 1; i <= this.fullStar; i++) {
+            this.popularidad_full_star.push(1);
+          }
+          if (this.halfStar === 1) {
+            this.popularidad_half_star.push(1);
+          }
 
-      },(err) => {
-        console.log("Faltal Error")
-        console.log(err);
-        Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+        }, (err) => {
+          console.log("Faltal Error")
+          console.log(err);
+          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
         }
-      )
+        )
     )
   }
 
-   ngAfterViewInit(): void {}
-
-   ngOnDestroy(): void {}
-
-  // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
-
-  addMovie(movie: MovieAPI){
-    this.store.dispatch(cartAddMovie({movie: movie}))
+  addMovie(movie: MovieAPI) {
+    // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
+    this.store.dispatch(cartAddMovie({ movie: movie }))
   }
 
-  // METODO PARA REDIGIR LA NAVEGACON HACIA LA CARTELERA (BOTON VOLVER A CARTELERA)
-  returnToMovies(){
+  returnToMovies() {
+    // METODO PARA REDIGIR LA NAVEGACON HACIA LA CARTELERA (BOTON VOLVER A CARTELERA)
     this.router.navigate(['cartelera']);
   }
 

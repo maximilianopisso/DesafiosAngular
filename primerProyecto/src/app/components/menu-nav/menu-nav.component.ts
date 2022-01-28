@@ -41,15 +41,12 @@ export class MenuNavComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    //ESCUCHO LOS CAMBIOS EN EL STORE SOBRE EL SELECTOR QUE SE DISPARA AL LOGEAR UN USUARIO VALIDO
     this.state$ = this.store.pipe(
       select(userDisplaySelector),
-      // tap(data => {
-      //   console.log("DESDE MENU:")
-      //   console.log(data)
-      // }),
     );
 
+    //SEPARO LO QUE VIENE DEL STORE PARA MOSTAR DE FORMA SEPARADA EL NOMBRE DEL USUARIO Y SU ROL ASOCIADO
     this.state$.subscribe(state => {
       this.username = state.username
       this.role = state.role

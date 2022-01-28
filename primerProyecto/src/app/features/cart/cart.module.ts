@@ -21,7 +21,6 @@ import { MaterialModule } from 'src/app/material/material.module';
     MaterialModule,
     HttpClientModule,
     EffectsModule.forFeature([CartEffects]),
-    // EffectsModule.forRoot([]),
     StoreModule.forFeature('cart',cartReducer),
   ]
 })

@@ -7,26 +7,21 @@
     </div>
 
     <div class="col-md-6 movie-description">
-
       <h3>Descripcion</h3>
       <p>{{movie.overview}}</p>
-
       <h3>Popularidad</h3>
       <div class="stars-container">
         <span *ngFor="let i of popularidad_full_star"><img class="star" src="../../../../../assets/estrella.png"></span>
-        <span *ngFor="let i of popularidad_half_star"><img class="star" src="../../../../../assets/estrella_half.png"></span>
+        <span *ngFor="let i of popularidad_half_star"><img class="star"
+            src="../../../../../assets/estrella_half.png"></span>
       </div>
-
       <h3>Fecha Lanzamiento</h3>
       <p>{{movie.release_date}}</p>
 
-
-    <div class="btn-action-container">
-
-      <button mat-raised-button color="primary" class="btn-action" (click)="addMovie(movie)">+ Agregar</button>
-
-      <button mat-raised-button color="accent" class="btn-action" (click)="returnToMovies()"> Volver a Cartelera</button>
-
+      <div class="btn-action-container">
+        <button mat-raised-button color="primary" class="btn-action" (click)="addMovie(movie)">+ Agregar</button>
+        <button mat-raised-button color="accent" class="btn-action" (click)="returnToMovies()"> Volver a
+          Cartelera</button>
       </div>
     </div>
   </div>

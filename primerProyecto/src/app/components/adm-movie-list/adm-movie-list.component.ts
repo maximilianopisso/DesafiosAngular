@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MovieService } from 'src/app/features/movies/services/movie.service';
@@ -12,28 +12,13 @@ import Swal from 'sweetalert2';
   templateUrl: './adm-movie-list.component.html',
   styleUrls: ['./adm-movie-list.component.scss']
 })
-export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdmMovieListComponent implements OnInit, OnDestroy {
+
   urlPath: string = environment.urlPathImage;
   idValue = 0;
-  date = new Date
 
   movies: MovieAPI[] = [];
-  emptyMovie: MovieAPI = {
-    title: 'Agregar Titulo Pelicula',
-    poster_path: '/endpoint',
-    adult: false,
-    backdrop_path: '',
-    id: 0,
-    genre_ids: [],
-    original_language: '',
-    original_title: '',
-    overview: 'Agregar Descripción de tu Película',
-    popularity: 0,
-    release_date: '2022-01-01',
-    video: false,
-    vote_average: 0,
-    vote_count: 0
-  };
+
   selectedMovie: MovieAPI = {
     adult: false,
     backdrop_path: '',
@@ -54,7 +39,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   movieEditForm = new FormGroup({
     title: new FormControl('-', [Validators.required]),
     poster_path: new FormControl('-', [Validators.required]),
-    vote_average: new FormControl('-', [Validators.required,Validators.max(10),Validators.min(0)]),
+    vote_average: new FormControl('-', [Validators.required, Validators.max(10), Validators.min(0)]),
     release_date: new FormControl('', [Validators.required]),
     overview: new FormControl('-', [Validators.required]),
   });
@@ -66,28 +51,22 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   release_dateControl = this.movieEditForm.controls['release_date'];
   overviewControl = this.movieEditForm.controls['overview'];
 
-  private subscriptionsAdmMovie= new Subscription
+  private subscriptionsAdmMovie = new Subscription
 
   constructor(
     private movieService: MovieService,
-  ) {}
-
-
+  ) { }
 
   ngOnInit(): void {
-
-       this.subscriptionsAdmMovie.add( this.movieService.getListAPI().subscribe(response => {
-        this.movies = response
-      },(err)=>{
-          console.log("Faltal Error")
-          console.log(err);
-          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-        }
-      )
+    this.subscriptionsAdmMovie.add(this.movieService.getListAPI().subscribe(response => {
+      this.movies = response
+    }, (err) => {
+      console.log("Faltal Error")
+      console.log(err);
+      Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+    }
     )
-  }
-
-  ngAfterViewInit(): void {
+    )
   }
 
   ngOnDestroy(): void {
@@ -95,7 +74,9 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   clickMovie(movie: MovieAPI) {
-    this.selectedMovie.id = movie.id
+    this.selectedMovie.id = movie.id  //ES PARA PODER ASIGANRLE A LA PELICULA CLICKEADA LA CLASE SELECTED
+
+    // SE COMPLETA EL FORMULARIO DE EDICION, CON LA INFORMACION DE LA PELICULA SELECCIONADA
     this.idValue = movie.id;
     this.movieEditForm.controls['title'].setValue(movie.title);
     this.movieEditForm.controls['poster_path'].setValue(movie.poster_path);
@@ -106,14 +87,15 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   newMovie() {
-    // const selectedItem: any = document.querySelector('.selected');
-    // selectedItem.classname = "";
-    this.idValue = this.emptyMovie.id;
-    this.movieEditForm.controls['title'].setValue(this.emptyMovie.title)
-    this.movieEditForm.controls['poster_path'].setValue(this.emptyMovie.poster_path)
-    this.movieEditForm.controls['vote_average'].setValue(this.emptyMovie.vote_average)
-    this.movieEditForm.controls['release_date'].setValue(this.emptyMovie.release_date)
-    this.movieEditForm.controls['overview'].setValue(this.emptyMovie.overview)
+    this.selectedMovie.id = 0;   //ELIMINA SI LLEGARA HABER UNA PELICULA PREVIAMENTE SELECCIONADA
+    this.idValue = 0;   // SE SETEA 0 PERO CUANDO SE REGISTRE, LA PROPIA API LE ASIGA EL ID FINAL
+
+    // SE AUTOCOMPLETA EL FORMULARIO CON INFORMACION DE REFERENCIA
+    this.movieEditForm.controls['title'].setValue('Agregar Titulo Pelicula')
+    this.movieEditForm.controls['poster_path'].setValue('/endpoint')
+    this.movieEditForm.controls['vote_average'].setValue(0)
+    this.movieEditForm.controls['release_date'].setValue('2022-01-01')
+    this.movieEditForm.controls['overview'].setValue('Agregar Descripción de tu Película')
   }
 
   isSelected(movie: MovieAPI): boolean {
@@ -121,7 +103,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addMovie() {
-
+    //METODO PARA AGREGAR UNA NUEVA PELICULA EN LA API
     let newMovie: MovieAPI = {
       adult: false,
       backdrop_path: '',
@@ -143,20 +125,21 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.movieService.addMovie(newMovie).subscribe(response => {
         this.subscriptionsAdmMovie.add(
           this.movieService.getListAPI().subscribe(response => {
-          this.movies = response
-         })
+            this.movies = response
+          })
         );
         this.newMovie();
-      },(err)=>{
-          console.log("Faltal Error")
-          console.log(err);
-          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-        }
+      }, (err) => {
+        console.log("Faltal Error")
+        console.log(err);
+        Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+      }
       )
     )
   }
 
   deleteMovie() {
+    //METODO PARA ELIMINAR UNA PELICULA DE LA API, TOMANDO EL ID DE LA PELICULA SELECCIONADA
     this.subscriptionsAdmMovie.add(
       this.movieService.removeMovie(this.idValue).subscribe(response => {
         this.subscriptionsAdmMovie.add(
@@ -166,7 +149,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
         );
         Swal.fire("PELICULA ELIMINADA", "La pelicula ha sido eliminada de la cartelera", "success");
         this.movieEditForm.reset();
-      },(err)=>{
+      }, (err) => {
         console.log("Faltal Error")
         console.log(err);
         Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
@@ -175,7 +158,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateMovie() {
-
+    //METODO PARA MODIFICAR UNA PELICULA DE LA API, TOMANDO EL ID DE LA PELICULA SELECCIONADA
     let updateMovie: MovieAPI = {
       adult: false,
       backdrop_path: '',
@@ -201,7 +184,7 @@ export class AdmMovieListComponent implements OnInit, AfterViewInit, OnDestroy {
         );
         Swal.fire("PELICULA MODIFICADA", "La pelicula seleccionada ha sido modificada", "info");
 
-      },(err)=>{
+      }, (err) => {
         console.log("Faltal Error")
         console.log(err);
         Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error")

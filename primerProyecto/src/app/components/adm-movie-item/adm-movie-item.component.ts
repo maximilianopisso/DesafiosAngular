@@ -11,11 +11,8 @@ export class AdmMovieItemComponent implements OnInit {
   urlPath: string = environment.urlPathImage
   @Input() index: number | any;
   @Input() movie: MovieAPI | any
-  @Output() selected = new EventEmitter<MovieAPI>();
-
 
   constructor() { }
-
   ngOnInit(): void { }
 
 }

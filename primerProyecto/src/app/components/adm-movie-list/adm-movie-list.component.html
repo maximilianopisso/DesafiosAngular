@@ -1,12 +1,8 @@
 <div id="lista" class="container-fluid">
-
   <div class="row">
-
     <div class="col-5" id="list-items-movies">
       <h2>Listado de Peliculas</h2>
-
       <button type="button" class="btn btn-success btn-addMovie" (click)="newMovie()">Agregar Nueva Pelicula</button>
-
       <app-adm-movie-item *ngFor="let movie of movies; let i = index" [movie]=movie [index]=i+1
         [class.selected]="isSelected(movie)" (click)="clickMovie(movie)">
       </app-adm-movie-item>
@@ -14,13 +10,9 @@
     </div>
 
     <div class="col-7 edition-movie-container">
-
       <h2>ABM Movies</h2>
-
       <div class="form-container">
-
         <form [formGroup]="movieEditForm" class="">
-
           <div class="item-form">
             <mat-form-field class="inputs" appearance="fill">
               <mat-label for="nombre">Id</mat-label>
@@ -109,10 +101,7 @@
             <button type="button" class="btn btn-danger btn-actions " [disabled]="idValue==0 || movieEditForm.invalid"
               (click)="deleteMovie()">Eliminar</button>
           </div>
-
         </form>
-
       </div>
     </div>
-
   </div>

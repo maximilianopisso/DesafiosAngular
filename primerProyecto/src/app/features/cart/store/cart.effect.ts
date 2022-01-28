@@ -16,33 +16,33 @@ export class CartEffects {
   constructor(
 
     private actions: Actions,
-    private cartService : CartService,
-    private router : Router
-  ){}
+    private cartService: CartService,
+    private router: Router
+  ) { }
 
 
-  cartAddItem$ = createEffect(()=>
-  this.actions.pipe(
+  cartAddItem$ = createEffect(() =>
+    this.actions.pipe(
       ofType(cartAddMovie),
       switchMap(action => this.cartService.addMovie(action.movie)),
-      map(data => cartSetContent({status: data.status, movies: data.cartContent as MovieAPI[]})),
-      tap(()=>this.router.navigate(['carrito']))
+      map(data => cartSetContent({ status: data.status, movies: data.cartContent as MovieAPI[] })),
+      tap(() => this.router.navigate(['carrito']))
     )
   );
 
-  cartDeleteItem$ = createEffect(()=>
-  this.actions.pipe(
+  cartDeleteItem$ = createEffect(() =>
+    this.actions.pipe(
       ofType(cartDeleteMovie),
       switchMap(action => this.cartService.removeMovie(action.movie)),
-      map(data => cartSetContent({status: data.status,movies: data.cartContent as MovieAPI[]})),
+      map(data => cartSetContent({ status: data.status, movies: data.cartContent as MovieAPI[] })),
     )
   );
 
-  cartClean$ = createEffect(()=>
-  this.actions.pipe(
+  cartClean$ = createEffect(() =>
+    this.actions.pipe(
       ofType(cartClear),
       switchMap(action => this.cartService.clearCart()),
-      map(data => cartSetContent({status: "CLEAN", movies: [] as MovieAPI[]})),
+      map(data => cartSetContent({ status: "CLEAN", movies: [] as MovieAPI[] })),
     )
   );
 

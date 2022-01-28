@@ -18,13 +18,13 @@ import { cartStateSelector } from '../../store/cart.selector';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CartComponent implements OnInit {
 
   cartMovies: MovieAPI[] | any = [];
   urlPath: string = environment.urlPathImage
 
   movieList$!: Observable<CartState>
-  status: string ="";
+  status: string = "";
 
   constructor(
 
@@ -32,60 +32,61 @@ export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
     private cartService: CartService,
     private router: Router,
     private store: Store,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-
-   this.store.pipe(
+    //ESCUCHO LOS CAMBIOS EN EL STORE SOBRE EL SELECTOR QUE SE ACTUALIZA CON CADA ACCCION SOBRE EL CARRITO
+    this.store.pipe(
       select(cartStateSelector),
-     // distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
-      tap(data =>{
-        console.log("Respuesta desde API",data);
+      tap(data => {
+        console.log("Respuesta desde API", data);
       })
-      ).subscribe(data => {
-        this.cartMovies = data.movies
-        this.status = data.status
+    ).subscribe(data => {
+      this.cartMovies = data.movies
+      this.status = data.status
 
-        switch(this.status) {
 
-          case "OK-ADDED": {
-            Swal.fire("PELICULA AGREGADA", "Se agrego una nueva pelicula a tu seleccion", "success");
-             break;
-          }
-          case "OK-DELETED": {
-            Swal.fire("PELICULA ELIMINADA", "Se elimino la pelicula de tu seleccion", "warning");
-             break;
-          }
-          case "CLEAN": {
-             break;
-          }
-          default: {
-            Swal.fire("ACCION RECHAZADA","No se pudo realizar la operacion solicitada", "error");
-             break;
-          }
+      //EN FUNCION DEL ESTADO QUE VIENE DE LA API, MUESTRO EL MODAL CON LA OPERACION REALIZADA Y SU ESTADO
+      switch (this.status) {
+
+        case "OK-ADDED": {
+          Swal.fire("PELICULA AGREGADA", "Se agrego una nueva pelicula a tu seleccion", "success");
+          break;
         }
-      })
+        case "OK-DELETED": {
+          Swal.fire("PELICULA ELIMINADA", "Se elimino la pelicula de tu seleccion", "warning");
+          break;
+        }
+        case "CLEAN": {
+          break;
+        }
+        default: {
+          Swal.fire("ACCION RECHAZADA", "No se pudo realizar la operacion solicitada", "error");
+          break;
+        }
+      }
+    })
   }
-ngAfterViewInit(): void {}
 
-ngOnDestroy(): void {}
+  vaciarCarrito() {
+    this.store.dispatch(cartClear())
+  }
 
-vaciarCarrito(){
-  this.store.dispatch(cartClear())
-}
+  removeMovieFromCart(movie: MovieAPI) {
+    //REMUEVO LA PELICULA PASADA COMO PARAMETRO DEL CARRITO
+    this.store.dispatch(cartDeleteMovie({ movie: movie }))
+  }
 
-removeMovieFromCart(movie : MovieAPI){
-  this.store.dispatch(cartDeleteMovie({ movie: movie }))
-}
+  volverCartelera() {
+    // METODO PARA REDIRIGIR A LA CARTELERA
+    this.router.navigate(['cartelera']);
+  }
 
-volverCartelera(){
-  this.router.navigate(['cartelera']);
-}
+  returnToDetailMovie(movie: MovieAPI) {
+    // METODO PARA REDIRIGIR AL DETALLE DE LA PELICULA PASADA COMO PARAMETRO
+    this.router.navigate(['cartelera', movie.id]);
 
-returnToDetailMovie(movie: MovieAPI){
-  this.router.navigate(['cartelera', movie.id]);
-
-}
+  }
 }
 
 

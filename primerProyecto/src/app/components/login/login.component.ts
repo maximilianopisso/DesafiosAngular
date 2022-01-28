@@ -7,7 +7,6 @@ import { cartClear } from 'src/app/features/cart/store/cart.actions';
 import { userToDisplay } from 'src/app/models/userdisplay.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
-import { MetaService } from 'src/app/services/meta.service';
 import { UserService } from 'src/app/services/user.service';
 import { userClear, userDiplay } from 'src/app/store/menu-user.actions';
 import Swal from 'sweetalert2';
@@ -33,7 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     private cartService: CartService,
     private router: Router,
     private store: Store,
-    private meta : MetaService
 
   ) { }
 
@@ -52,14 +50,15 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log("Faltal Error")
         console.log(err);
         Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
-        }
+      }
       )
     );
   }
 
   ngAfterViewInit(): void {
+    //PARA REDIRIGIR LA CARGA DE LA PAGINA A AL INPUT DE INGRESO DEL USUARIO Y LA PASS.
     const lastElement: any = document.querySelector('.inputs');
-    lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
+    lastElement?.scrollIntoView();
   }
 
   ngOnDestroy(): void {
@@ -75,15 +74,16 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   passwordControl = this.loginForm.controls['password'];
 
   loginValidate() {
+    //MUESTRA LOS USUARIOS POR CONSOLA PARA SABER LOS USUARIOS HABILITADOS PARA LOGIN
     this.subscriptionsLogin.add(
       this.loginService.validateCredentials(this.emailControl.value, this.passwordControl.value)
         .subscribe(valid => {
 
           if (valid) {
             this.login = true;    //SOLO PARA TEST UNITARIO
-            this.userLogedIn = this.loginService.getUserInfo()        //OBTENGO DATOS PARA  PRESENTAR EN EL
+            this.userLogedIn = this.loginService.getUserInfo()        //OBTENGO DATOS PARA PRESENTAR EN EL MENU-NAV
 
-            Swal.fire("BIENVIENIDO/A", this.userLogedIn.nombre +" "+this.userLogedIn.apellido, "success");
+            Swal.fire("BIENVIENIDO/A", this.userLogedIn.nombre + " " + this.userLogedIn.apellido, "success");
 
             //DISPARO ACCION PARA CAMBIAR LA VISTA DEL MENU-NAV
             this.store.dispatch(userDiplay({ username: this.userLogedIn.nombre + ", " + this.userLogedIn.apellido, role: this.userLogedIn.role }))
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
             this.login = false;   //SOLO PARA TEST UNITARIO
             Swal.fire("ERROR", "El nombre email o la password son incorecctas", "error");
           }
-        },(err)=>{
+        }, (err) => {
           console.log("Faltal Error")
           console.log(err);
           Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  clearStore(){
+  clearStore() {
     this.store.dispatch(cartClear());
     this.store.dispatch(userClear());
   }

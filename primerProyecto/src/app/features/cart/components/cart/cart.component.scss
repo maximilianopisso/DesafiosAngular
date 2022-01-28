@@ -1,0 +1,42 @@
+#carrito {
+  padding: 20vh 0px;
+
+  h1 {
+    color: rgb(14, 2, 65) !important;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+
+  .btn-actions-container {
+    display: flex;
+    justify-content: space-between;
+
+    .btn-action {
+      display: inline;
+      margin: 30px 20px 30px 0px;
+      font-size: 1.2rem;
+      padding: 10px 40px;
+    }
+  }
+
+  .table {
+    .row-header {
+      padding-top: 20px;
+    }
+
+    .row-body {
+      margin: 20px !important;
+      padding: 20px !important;
+
+      .text-item-cart {
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+      img {
+        height: 150px;
+        width: 100px;
+      }
+    }
+  }
+}

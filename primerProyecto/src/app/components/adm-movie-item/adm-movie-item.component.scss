@@ -4,13 +4,31 @@
   margin: 5px 0px;
   padding: 0px 5px;
   width: 100%;
-
   }
 
-// &:hover{
-//   border: 5px wheat solid;
-//   background-color:  rgb(14, 2, 65);
-//   color: wheat;
+.items-container{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 15px 0px;
+
+  .item-position{
+    width: 60px;
+    margin-right: 10px;
 
 
+  }
+  .item-poster{
+    height: 120px;
+    width: 80px;
+  }
+
+  .item-title{
+    padding: 0px 20px;
+    width: 100%;
+
+  }
+}
 

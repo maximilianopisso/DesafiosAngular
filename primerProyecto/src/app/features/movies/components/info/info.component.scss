@@ -1,18 +1,54 @@
 #info {
   padding: 20vh 0px;
 
-  h1{
+  .movie-title {
     font-weight: bolder;
     font-size: 2.5rem;
+    text-align: center;
   }
-  h3 {
-    font-weight: 700;
-    font-size: 1.5rem;
+
+  .poster {
+    display:block;
+    width: 50%;
+    margin: 0px auto;
+
   }
-  p{
-    font-size: 1.2rem;
-    line-height: 2rem;
-    color: rgb(44, 44, 44);
+  .movie-info-conteiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+
+    .movie-description {
+
+      h3 {
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+      p {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5rem;
+        color: rgb(44, 44, 44);
+      }
+      .stars-container{
+        margin-bottom: 12px;
+        .star{
+          height: 30px;
+          width: 30px;
+        }
+      }
+
+      .btn-action-container{
+
+        .btn-action{
+          display: inline;
+          margin: 30px 20px 0px 20px;
+          font-size: 1rem;
+          padding: 5px 40px;
+
+        }
+      }
+    }
   }
 }
-

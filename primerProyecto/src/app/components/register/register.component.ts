@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
-
 
 
 @Component({
@@ -12,34 +13,33 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
-
-  //private users: User[] = [];
-
-  constructor(private userService: UserService) {
-    console.log("REGISTER_COMPONENT - CONSTRUCTOR - CHECKED ");
-  }
+  private subscriptionsRegister = new Subscription
 
 
-  ngOnInit(): void {
-    console.log("REGISTER_COMPONENT - INIT - CHECKED ");
-  }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
+
+
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
-    console.log("REGISTER_COMPONENT - AFTER VIEW INIT - CHECKED ");
+    //PARA REDIRIGIR LA CARGA DE LA PAGINA A LOS INPUTS DE REGISTRO DE UN NUEVO USUARIO
     const lastElement: any = document.querySelector('.logo');
     lastElement?.scrollIntoView();    //me redirije hacia la entrada de los campos despues que se inicia el componente.
   }
   ngOnDestroy(): void {
-    console.log("REGISTER_COMPONENT - DESTROY - CHECKED ");
+    this.subscriptionsRegister.unsubscribe();
   }
 
   registroForm = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.maxLength(25)]),
     apellido: new FormControl('', [Validators.required, Validators.maxLength(25)]),
-    movil: new FormControl('', [Validators.required, Validators.pattern ('[+0-9 ]{10,20}')]),
+    movil: new FormControl('', [Validators.required, Validators.pattern('[+0-9 ]{10,20}')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    address : new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 ]* [0-9]{1,4}')]),
+    address: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 ]* [0-9]{1,4}')]),
 
   });
 
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
     let newUser: User =
     {
-      id:  undefined,
+      id: undefined,
       nombre: this.nombreControl.value,
       apellido: this.apellidoControl.value,
       direccion: this.addressControl.value,
@@ -65,24 +65,32 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
       role: "user"
     }
 
-
     console.log("Datos de Usuario a Registrar");
     console.table(newUser);
 
-    this.userService.addUser(newUser).subscribe(response => {
-      console.log("Datos Registrados:");
-      console.log(response);
-      console.log(response.status);
+    this.subscriptionsRegister.add(
+      this.userService.addUser(newUser).subscribe(response => {
+        console.log("Datos Registrados:");
+        console.log(response);
+        console.log(response.status);
 
-      if(response.status === "OK"){
-      Swal.fire("NUEVO USUARIO", "Se registro existosamente un nuevo usuario", "success");
-      this.registroForm.reset();
-     }else{
-      Swal.fire("ERROR", "No se pudo registrar nuevo usuario", "error");   //"warning", "error", "success" and "info".
-     }
-    });
+        if (response.status === "OK") {
+          Swal.fire("NUEVO USUARIO", "Se registro existosamente un nuevo usuario", "success");
+          this.registroForm.reset();
+          this.router.navigate(['login']);
+        } else {
+          Swal.fire("ERROR", "No se pudo registrar nuevo usuario", "error");   //"warning", "error", "success" and "info".
+        }
+      }, (err) => {
+        console.log("Faltal Error")
+        console.log(err);
+        Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+      })
+    )
+  }
 
-
+  loginRoute() {
+    this.router.navigate(['login']);
   }
 
 }

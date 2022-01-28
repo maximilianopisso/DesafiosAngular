@@ -1,7 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription, tap } from 'rxjs';
+import { CartState } from 'src/app/features/cart/store/cart-store.state';
+import { cartAddMovie } from 'src/app/features/cart/store/cart.actions';
 import { MovieAPI } from 'src/app/models/movieAPI.model';
 import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
 import { MovieService } from '../../services/movie.service';
 
@@ -10,78 +15,61 @@ import { MovieService } from '../../services/movie.service';
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })
-export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
+export class InfoComponent implements OnInit {
 
   movie: MovieAPI | any;
-  urlPath: string = 'https://image.tmdb.org/t/p/w500';
-  popularidad_full_star : number[] =[];
-  popularidad_half_star : number[] =[];
-  fullStar:number =0;
-  halfStar:number =0;
+  urlPath: string = environment.urlPathImage
+  popularidad_full_star: number[] = [];
+  popularidad_half_star: number[] = [];
+  fullStar: number = 0;
+  halfStar: number = 0;
 
+  private subscrptionsInfo = new Subscription;
+  private movieList$!: Observable<CartState>;
+  private status: string = "";
   constructor(
     private activateRoute: ActivatedRoute,
     private moviesService: MovieService,
-    private cartService : CartService,
+    private cartService: CartService,
     private router: Router,
-  )
-    {
-      console.log("INFO_COMPONENT - CONSTRUCTOR - CHECKED ");
-
-    }
+    private store: Store
+  ) { }
 
   ngOnInit(): void {
 
-    console.log("INFO_COMPONENT - INIT - CHECKED ");
+    this.subscrptionsInfo.add(
 
-    this.moviesService.getDetailAPI(this.activateRoute.snapshot.params['id'])  //obtiene el id desde la ruta url a la llamada al componente
-    .subscribe(respose => {this.movie = respose
-      console.log(this.movie);
-      //console.log("valoracion original",this.movie.vote_average);
+      this.moviesService.getDetailAPI(this.activateRoute.snapshot.params['id'])
+        .subscribe(respose => {
+          //ME TRAIGO DESDE LA API, LA MOVIE CON EL ID SOLICITADO
+          this.movie = respose
 
-      this.fullStar = Math.floor(Math.round(this.movie.vote_average)/2);
-      this.halfStar = this.fullStar%2;
+          //CALCULO DE ESTRELLAS COMPLETAS Y MEDIAS ESTRELLAS PARA MOSTRAR EN POPULARIDAD DE LA MOVIE SELECCIONADA
+          this.fullStar = Math.floor(Math.round(this.movie.vote_average) / 2);
+          this.halfStar = this.fullStar % 2;
+          for (let i = 1; i <= this.fullStar; i++) {
+            this.popularidad_full_star.push(1);
+          }
+          if (this.halfStar === 1) {
+            this.popularidad_half_star.push(1);
+          }
 
-      console.log(` Valoracion Original: ${this.movie.vote_average} \n Valoracion Redondeada : ${Math.round((this.movie.vote_average))} \n Cantidad Estrellas Completas:  ${this.fullStar} \n Cantidad Mitad-Estrellas : ${this.halfStar}`);
-
-      for(let i=1; i<=this.fullStar; i++){
-        this.popularidad_full_star.push(1);
-      }
-
-      if (this.halfStar === 1){
-        this.popularidad_half_star.push(1);
-      }
-
-   }); // obtiene el detalle de la pelicula y la carga en el campo movie del componente local.
+        }, (err) => {
+          console.log("Faltal Error")
+          console.log(err);
+          Swal.fire("ALGO SALIO MAL", "Error en conexion con datos", "error");
+        }
+        )
+    )
   }
 
-
-   ngAfterViewInit(): void {
-    console.log("INFO_COMPONENT - AFTER VIEW INIT - CHECKED ");
+  addMovie(movie: MovieAPI) {
+    // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
+    this.store.dispatch(cartAddMovie({ movie: movie }))
   }
 
-  ngOnDestroy(): void {
-    console.log("INFO_COMPONENT - DESTROY - CHECKED ");
-  }
-
-  // METODO PARA AGREGA UNA NUEVA PELICULA AL CARRO, SI EXISTE NO LA AGREGA NUEVAMENTE
-
-  addMovie(movie: MovieAPI){
-
-    this.cartService.addMovie(movie).subscribe(response =>{
-
-      console.log(response);
-      if (response.status !== 'OK'){
-        Swal.fire("NO SE AGREGO PELICULA", "La pelicula seleccionada, ya ha sido agregada anteriormente a tu carrito", "error");
-      }else{
-        Swal.fire("NUEVA PELICULA AGREGADA", "La pelicula seleccionada, fue agregada a tu carrito", "success");
-        this.router.navigate(['carrito']);
-      }
-    });
-
-  }
-
-  returnToMovies(){
+  returnToMovies() {
+    // METODO PARA REDIGIR LA NAVEGACON HACIA LA CARTELERA (BOTON VOLVER A CARTELERA)
     this.router.navigate(['cartelera']);
   }
 

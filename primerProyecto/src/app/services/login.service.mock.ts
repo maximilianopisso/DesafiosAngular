@@ -2,7 +2,7 @@ import { environment } from "src/environments/environment.prod";
 import { User } from 'src/app/models/user.model';
 import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { userDisplay } from "../features/login-redux/user..model";
+import { userToDisplay } from "../models/userdisplay.model";
 
 export const LoginServiceMock = {
 
@@ -24,7 +24,7 @@ export const LoginServiceMock = {
     return true;
   },
 
-  getUserInfo(): userDisplay{
+  getUserInfo(): userToDisplay{
     return {
       "email": "maximiliano.pisso@gmail.com",
       "nombre": "Admin",
@@ -38,3 +38,4 @@ export const LoginServiceMock = {
       return "Pruebas Unitarias"
     },
 }
+

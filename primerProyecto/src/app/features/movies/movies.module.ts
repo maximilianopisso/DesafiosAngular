@@ -4,7 +4,7 @@ import { MoviesComponent } from './components/movies/movies.component';
 import { InfoComponent } from './components/info/info.component';
 import { MoviesRoutingModule } from './movies-routing.module';
 import { MaterialModule } from 'src/app/material/material.module';
-import { MenuNavComponent } from 'src/app/components/menu-nav/menu-nav.component';
+import { CartModule } from '../cart/cart.module';
 
 
 
@@ -12,12 +12,12 @@ import { MenuNavComponent } from 'src/app/components/menu-nav/menu-nav.component
   declarations: [
     MoviesComponent,
     InfoComponent,
-    //MenuNavComponent,
   ],
   imports: [
     CommonModule,
     MoviesRoutingModule,
     MaterialModule,
+    CartModule,
   ]
 })
 export class MoviesModule { }

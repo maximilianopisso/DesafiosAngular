@@ -1,4 +1,39 @@
 #cartelera {
-padding: 20vh 0px;
+  padding: 20vh 2vw;
 
+  h1 {
+    color: rgb(14, 2, 65) !important;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+
+  .movies-container {
+    margin-top: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .card-item {
+      width: 275px;
+      margin: 20px 20px;
+      border-radius: 10px;
+      border: 1px rgba(14, 2, 65, 0.326) solid;
+
+      img {
+        height: 400px;
+      }
+
+      .btn-infomovie {
+        display: block;
+        margin: 0px auto;
+        width: 95%;
+      }
+      .card-text {
+        font-weight: 500;
+        font-size: 0.8rem;
+        color: rgb(49, 49, 65);
+      }
+    }
+  }
 }

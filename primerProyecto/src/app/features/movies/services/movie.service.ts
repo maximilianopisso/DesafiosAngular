@@ -23,17 +23,16 @@ export class MovieService {
 
   }
 
-
- // METODO QUE DEVUELVE UN OBSERVABLE QUE NOS TREA LA RESPUESTA DE LAS API CON TODAS LAS PELICULAS
+  // METODO QUE DEVUELVE UN OBSERVABLE QUE NOS TREA LA RESPUESTA DE LAS API CON TODAS LAS PELICULAS
   getListAPI(): Observable<MovieAPI[]> {
     return this.httpClient.get<MovieAPI[]>(this.urlMockApiMovies);
   }
-// METODO QUE ME DEVUELVE UN OBSERVABLE CON LA PELICULA QUE COINCIDE CON EL ID PASADO COMO PARAMETRO.
+  // METODO QUE ME DEVUELVE UN OBSERVABLE CON LA PELICULA QUE COINCIDE CON EL ID PASADO COMO PARAMETRO.
   getDetailAPI(id: string): Observable<MovieAPI> {
     return this.httpClient.get<MovieAPI>(`${this.urlMockApiMovies}/${id}`);
   }
-// NETODO PARA INCORPORAR UNA NUEVA PELICULA A CARTELERA -> PARA ELLO SE AGREGA LA PELICULA PASADA POR PARAMETRO A LA API UTILIZADA, SE VALIDA QUE YA NO EXISTE EL TITULO PREVIAMENTE
-  addMovie(movie: MovieAPI): Observable<MovieAPI|String> {
+  // NETODO PARA INCORPORAR UNA NUEVA PELICULA A CARTELERA -> PARA ELLO SE AGREGA LA PELICULA PASADA POR PARAMETRO A LA API UTILIZADA, SE VALIDA QUE YA NO EXISTE EL TITULO PREVIAMENTE
+  addMovie(movie: MovieAPI): Observable<MovieAPI | String> {
     if (!this.moviesAPI.find((element) => element.title === movie.title)) {
 
       Swal.fire("NUEVA PELICULA", "La pelicula ha sido ingresada a la cartelera", "success");
@@ -52,7 +51,7 @@ export class MovieService {
   }
 
   // METODO PARA ELIMINAR UNA PELICULA DE LA CARTEPERA -> PARA ELLO SE ELIMINA LA PELICULA PASANDO SU ID COMO ARGUMENTO DESDE LA API
-   removeMovie(id: Number): Observable<MovieAPI> {
+  removeMovie(id: Number): Observable<MovieAPI> {
     return this.httpClient.delete<MovieAPI>(`${this.urlMockApiMovies}/${id}`);
   }
 

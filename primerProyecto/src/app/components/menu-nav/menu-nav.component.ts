@@ -67,12 +67,9 @@ export class MenuNavComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        this.cartService.clearCart().subscribe(response => {              //SE BORRA EL CARRO EN LA API
-          console.log(response)
-        });
         this.store.dispatch(cartClear());                                 //SE BORRA EL ESTADO DEL CARRO EN EL STORE
-        this.loginService.signOutUser();                                  //SE INICIALIZA LOS DATOS DEL USUARIO EN BLANCO
         this.store.dispatch(userClear())                                 //SE BORRA EL ESTADO DEL USUARIO EN EL STORE
+        this.loginService.signOutUser();                                  //SE INICIALIZA LOS DATOS DEL USUARIO EN BLANCO
 
         Swal.fire(
           'Tu sesion ha sido cerrada',

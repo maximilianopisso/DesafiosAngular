@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.clearStore()   //BORRO STORE DE USUARIOS Y CARRITO
+    this.clearStoreApp()   //BORRO STORE DE USUARIOS Y CARRITO
 
     console.log("USUARIOS DESDE LA API");
     this.subscriptionsLogin.add(
@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  clearStore() {
+  clearStoreApp() {
     this.store.dispatch(cartClear());
     this.store.dispatch(userClear());
   }
